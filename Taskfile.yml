@@ -12,4 +12,4 @@ tasks:
       cd book
       ./build_pdf
       osascript -e 'display notification "Finished building"'
-    # silent: true
+    silent: true

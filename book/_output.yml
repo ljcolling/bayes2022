@@ -1,0 +1,2 @@
+bookdown::pdf_book:
+  latex_engine: xelatex

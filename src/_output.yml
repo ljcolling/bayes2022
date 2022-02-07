@@ -6,4 +6,5 @@ bookdown::gitbook:
         <li><a href="./">Bayesian Stats</a></li>
       after: |
         <li><a href="./">Lincoln Colling</a></li>
-    download: ["pdf"]
+    download:
+      - ["bayes_notes.pdf","pdf"]
