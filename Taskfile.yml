@@ -1,0 +1,15 @@
+# https://taskfile.dev
+
+version: '3'
+
+tasks:
+  default:
+    cmds: 
+    - | 
+      cd src
+      R -e "bookdown::render_book()"
+      cd ..
+      cd book
+      ./build_pdf
+      osascript -e 'display notification "Finished building"'
+    # silent: true

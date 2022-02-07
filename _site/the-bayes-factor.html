@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 The Bayes factor | Advanced Statistical Methods</title>
+  <meta name="description" content="An introduction to Bayesian Statistics" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 The Bayes factor | Advanced Statistical Methods" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="An introduction to Bayesian Statistics" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 The Bayes factor | Advanced Statistical Methods" />
+  
+  <meta name="twitter:description" content="An introduction to Bayesian Statistics" />
+  
+
+<meta name="author" content="Dr Lincoln Colling" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="an-alternative-to-p-values.html"/>
+
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Bayesian Stats</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#how-to-use-this-book"><i class="fa fa-check"></i>How to use this book</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#outline"><i class="fa fa-check"></i>Outline</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="null-hypothesis-significance-testing.html"><a href="null-hypothesis-significance-testing.html"><i class="fa fa-check"></i><b>1</b> Null-hypothesis significance testing</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="null-hypothesis-significance-testing.html"><a href="null-hypothesis-significance-testing.html#probability"><i class="fa fa-check"></i><b>1.1</b> Probability</a></li>
+<li class="chapter" data-level="1.2" data-path="null-hypothesis-significance-testing.html"><a href="null-hypothesis-significance-testing.html#probability-and-p-values"><i class="fa fa-check"></i><b>1.2</b> Probability and <em>p</em> values</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="null-hypothesis-significance-testing.html"><a href="null-hypothesis-significance-testing.html#understanding-the-p-through-simulation"><i class="fa fa-check"></i><b>1.2.1</b> Understanding the <em>p</em> through simulation</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="null-hypothesis-significance-testing.html"><a href="null-hypothesis-significance-testing.html#summary"><i class="fa fa-check"></i><b>1.3</b> Summary</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="null-hypothesis-significance-testing.html"><a href="null-hypothesis-significance-testing.html#a-short-note-on-confidence-intervals"><i class="fa fa-check"></i><b>1.3.1</b> A short note on confidence intervals</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="criticisms-of-p-values.html"><a href="criticisms-of-p-values.html"><i class="fa fa-check"></i><b>2</b> Criticisms of <em>p</em> values</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="criticisms-of-p-values.html"><a href="criticisms-of-p-values.html#same-measurements-from-different-devices"><i class="fa fa-check"></i><b>2.1</b> Same measurements from different devices</a></li>
+<li class="chapter" data-level="2.2" data-path="criticisms-of-p-values.html"><a href="criticisms-of-p-values.html#the-universe-of-possible-events"><i class="fa fa-check"></i><b>2.2</b> The universe of possible events</a></li>
+<li class="chapter" data-level="2.3" data-path="criticisms-of-p-values.html"><a href="criticisms-of-p-values.html#summary-1"><i class="fa fa-check"></i><b>2.3</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="an-alternative-to-p-values.html"><a href="an-alternative-to-p-values.html"><i class="fa fa-check"></i><b>3</b> An alternative to <em>p</em> values</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="an-alternative-to-p-values.html"><a href="an-alternative-to-p-values.html#doing-inference-with-likelihoods"><i class="fa fa-check"></i><b>3.1</b> Doing inference with likelihoods</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="an-alternative-to-p-values.html"><a href="an-alternative-to-p-values.html#a-brief-detour-back-to-sampling-rules"><i class="fa fa-check"></i><b>3.1.1</b> A brief detour back to sampling rules</a></li>
+<li class="chapter" data-level="3.1.2" data-path="an-alternative-to-p-values.html"><a href="an-alternative-to-p-values.html#the-likelihood-ratio"><i class="fa fa-check"></i><b>3.1.2</b> The likelihood ratio</a></li>
+<li class="chapter" data-level="3.1.3" data-path="an-alternative-to-p-values.html"><a href="an-alternative-to-p-values.html#a-note-about-likelihood-functions-and-probability-distributions"><i class="fa fa-check"></i><b>3.1.3</b> A note about likelihood functions and probability distributions</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="an-alternative-to-p-values.html"><a href="an-alternative-to-p-values.html#testing-more-complex-hypotheses"><i class="fa fa-check"></i><b>3.2</b> Testing more complex hypotheses</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="an-alternative-to-p-values.html"><a href="an-alternative-to-p-values.html#theres-more-than-one-way-to-average"><i class="fa fa-check"></i><b>3.2.1</b> There’s more than one way to average</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="the-bayes-factor.html"><a href="the-bayes-factor.html"><i class="fa fa-check"></i><b>4</b> The Bayes factor</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="the-bayes-factor.html"><a href="the-bayes-factor.html#computing-bayes-factors-with-bayesplay"><i class="fa fa-check"></i><b>4.1</b> Computing Bayes factors with <code>bayesplay</code></a></li>
+<li class="chapter" data-level="4.2" data-path="the-bayes-factor.html"><a href="the-bayes-factor.html#computing-bayes-factors-with-bayesplay-web"><i class="fa fa-check"></i><b>4.2</b> Computing Bayes factors with Bayesplay-Web</a></li>
+<li class="chapter" data-level="4.3" data-path="the-bayes-factor.html"><a href="the-bayes-factor.html#moving-beyond-coin-flips"><i class="fa fa-check"></i><b>4.3</b> Moving beyond coin flips</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="./">Lincoln Colling</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Advanced Statistical Methods</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="the-bayes-factor" class="section level1" number="4">
+<h1><span class="header-section-number">Chapter 4</span> The Bayes factor</h1>
+<p><a href="data:text/x-markdown;base64,LS0tCnRpdGxlOiAiQmF5ZXMgcnVsZSIKb3V0cHV0OiBodG1sX2RvY3VtZW50Ci0tLQoKYGBge3Igc2V0dXAsIGVjaG89RkFMU0V9CmtuaXRyOjpvcHRzX2NodW5rJHNldChlY2hvID0gRkFMU0UpCnN1cHByZXNzTWVzc2FnZXMoZXhwciA9ICB7CiAgaWYgKCJwYXRjaHdvcmsiICVpbiUgcm93Lm5hbWVzKGluc3RhbGxlZC5wYWNrYWdlcygpKSA9PSBGQUxTRSkgewogICAgaW5zdGFsbC5wYWNrYWdlcygicGF0Y2h3b3JrIikKICB9CiAgaWYgKCJiYXllc3BsYXkiICVpbiUgcm93Lm5hbWVzKGluc3RhbGxlZC5wYWNrYWdlcygpKSA9PSBGQUxTRSkgewogICAgaW5zdGFsbC5wYWNrYWdlcygiYmF5ZXNwbGF5IikKICB9CiAgaWYgKCJwb2xzcGxpbmUiICVpbiUgcm93Lm5hbWVzKGluc3RhbGxlZC5wYWNrYWdlcygpKSA9PSBGQUxTRSkgewogICAgaW5zdGFsbC5wYWNrYWdlcygicG9sc3BsaW5lIikKICB9CgogIGlmICgiSVJkaXNwbGF5IiAlaW4lIHJvdy5uYW1lcyhpbnN0YWxsZWQucGFja2FnZXMoKSkgPT0gVFJVRSkgewogICAgZGlzcGxheV9tYXJrZG93biA8PC0gXCh4KSBJUmRpc3BsYXk6OmRpc3BsYXlfbWFya2Rvd24oYXMuY2hhcmFjdGVyKHgpKQogICAgZGlzcGxheV9odG1sIDw8LSBcKHgpIElSZGlzcGxheTo6ZGlzcGxheV9odG1sKGFzLmNoYXJhY3Rlcih4KSkKICB9IGVsc2UgewogICAgZGlzcGxheV9tYXJrZG93biA8PC0ga25pdHI6OmFzaXNfb3V0cHV0CiAgICBkaXNwbGF5X2h0bWwgPDwtIGtuaXRyOjphc2lzX291dHB1dAogIH0KCiAgbGlicmFyeSh0aWR5dmVyc2UpCiAgbGlicmFyeShwb2xzcGxpbmUpCiAgbGlicmFyeShwYXRjaHdvcmspCiAgbGlicmFyeShtYWdyaXR0cikKICBsaWJyYXJ5KGJheWVzcGxheSkKfSkKCnRhYmxlX2Zvcm1hdCA8LSAiaHRtbCIKCmBgYAojIFRoZSBCYXllcyBmYWN0b3IKClRoZSBwcmltYXJ5IGFpbSBvZiB0aGlzIGNvdXJzZSBpcyB0byBsZWFybiBob3cgdG8gY29tcHV0ZSBhbmQgaW50ZXJwcmV0IEJheWVzCmZhY3RvcnMuIEJ1dCB3aGF0IGlzIGEgQmF5ZXMgZmFjdG9yPyBXZWxsIGl0IHR1cm5zIG91dCB0aGF0IHdlJ3ZlIGFscmVhZHkKY29tcHV0ZWQgYSBCYXllcyBmYWN0b3IuIFRoZSBCYXllcyBmYWN0b3IgaXMganVzdCB0aGUgcmF0aW8gdGhhdCB3ZSBjb21wdXRlZCBpbgp0aGUgcHJldmlvdXMgc2VjdGlvbi4gVGhlIEJheWVzIGZhY3RvciBpcyBhIG1ldHJpYyB0aGF0IGNvbXBhcmVzIHRoZSByZWxhdGl2ZQpwcm9iYWJpbGl0eSBvZiBvYnRhaW5pbmcgb3VyIGRhdGEgdW5kZXIgb25lIG1vZGVsIGNvbXBhcmVkIHRvIGFub3RoZXIuIAoKV2hlbiB3ZSBjb21wdXRlZCB0aGVzZSByYXRpb3MsIHRoZSBCYXllcyBmYWN0b3IsIGluIHRoZSBwcmV2aW91cyBzZWN0aW9uLCBpdCB3YXMKbWFkZSB1cCBvZiB0d28gaW5ncmVkaWVudHMuIAoKMS4gV2UgaGFkIG91ciBsaWtlbGlob29kIHRoYXQgcmVsYXRlZCBwYXJhbWV0ZXIgdmFsdWVzIHRvIG91ciBkYXRhLiBJdCB0b2xkCnVzIHRoZSByZWxhdGl2ZSBwcm9iYWJpbGl0eSBvZiBvYnRhaW5pbmcgb3VyIGRhdGEgdW5kZXIgZGlmZmVyZW50IHZhbHVlcyBvZiB0aGUKdGhlIHBhcmFtZXRlciAodGhlIGNvaW4gYmlhcykKCjIuIFdlIGhhZCBwcmlvcnMsIHdoaWNoIGFzc2lnbmVkIGRpZmZlcmVudCBwcm9iYWJpbGl0aWVzIHRvIHRoZSBkaWZmZXJlbnQgdmFsdWVzCm9mIHRoZSBwYXJhbWV0ZXIuIFRoZXNlIHNlcnZlZCBhcyBvdXIgaHlwb3RoZXNlcyBhYm91dCB0aGUgcGFyYW1ldGVyICh0aGUgY29pbgpiaWFzKSwgYW5kIHRoZXkgc2VydmVkIGFzIHRoZSAqd2VpZ2h0cyogZm9yIG91ciBhdmVyYWdlIG9mIHRoZSBsaWtlbGlob29kLiAKV2UgaGFkIG9uZSBwcmlvciBmb3IgZWFjaCBoeXBvdGhlc2lzLgoKVG8gcGVyZm9ybSB0aGUgY29tcHV0YXRpb24gaXRzZWxmLCB3ZSBtdWx0aXBsaWVkIHRoZSBwcmlvciBieSB0aGUgbGlrZWxpaG9vZCwKYW5kIHRvb2sgdGhlIHdlaWdodGVkIGF2ZXJhZ2UsIGJ5IHRha2luZyB0aGUgaW50ZWdyYWwuIE1hdGhlbWF0aWNhbGx5LCB3ZSBkaWQKdGhlIGZvbGxvd2luZzoKCiQkXG1hdGhjYWx7TX1fSCA9IFxpbnRfe1x0aGV0YVxpblxUaGV0YV9IfVxtYXRoY2Fse0x9X0goXHRoZXRhfFxtYXRoYmZ7eX0pcChcdGhldGEpZFx0aGV0YSQkCgpXZSBkaWQgdGhpcyBmb3IgZWFjaCBoeXBvdGhlc2lzIChlLmcuLCAkXG1hdGhjYWx7TX1fMCQgYW5kICRcbWF0aGNhbHtNfV8xJCksCmFuZCB0aGVuIHRvb2sgdGhlIHJhdGlvICRcZnJhY3tcbWF0aGNhbHtNfV8wfXtcbWF0aGNhbHtNfV8xfSQuIEFuZCB0aGlzIHJhdGlvCndhcyB0aGUgQmF5ZXMgZmFjdG9yLgoKJCRcbWF0aHJte0JGfV97MDF9ID0gXGZyYWN7XG1hdGhjYWx7TX1fMH17XG1hdGhjYWx7TV8xfX0kJAoKIyMgQ29tcHV0aW5nIEJheWVzIGZhY3RvcnMgd2l0aCBgYmF5ZXNwbGF5YAoKVG8gYWN0dWFsbHkgY29tcHV0ZSBCYXllcyBmYWN0b3JzIHdlJ3JlIGdvaW5nIHRvIHVzZSBhbiBgUmAgcGFja2FnZSBjYWxsZWQgCmBiYXllc3BsYXlgLiBUaGUgYGJheWVzcGxheWAgcGFja2FnZSBhbGxvd3MgeW91IHRvIHNwZWNpZnkgbGlrZWxpaG9vZHMgYW5kIApwcmlvcnMsIGFuZCB0byBwZXJmb3JtIHNvbWUgb3BlcmF0aW9ucyBvbiB0aGVtLiBUaGUgb3BlcmF0aW9ucywgZGVzY3JpYmVkIGFib3ZlLgoKTGV0J3Mgc3RlcCB0aHJvdWdoIHNvbWUgYFJgIHRvIHNlZSBob3cgd2Ugd291bGQgYWN0dWFsbHkgZG8gaXQ6CgoKRmlyc3QsIHdlIHNwZWNpZnkgdGhlIGxpa2VsaWhvb2QuIFdlJ2xsIHNwZWNpZnkgYSBsaWtlbGlob29kIG9mIHRoZSAqKmJpbm9taWFsKioKZmFtaWx5LiBJdCByZXF1aXJlcyAyIGlucHV0cy4gVGhlIG51bWJlciBvZiBoZWFkcywgYW5kIHRoZSBudW1iZXIgb2YgZmxpcHMuCgpgYGB7cn0KI3wgaW5jbHVkZTogVFJVRQojfCBlY2hvOiBUUlVFCmRhdGFfbW9kZWwgPC0gbGlrZWxpaG9vZChmYW1pbHkgPSAiYmlub21pYWwiLCBzdWNjZXNzZXMgPSA4LCB0cmlhbHMgPSAxMCkKYGBgCgpTZWNvbmQsIHdlJ2xsIHNwZWNpZnkgdGhlIHR3byBwcmlvcnMuIEZvciB0aGUgZmlyc3QsIHdlJ2xsIHNldCBhICoqcG9pbnQqKiBwcmlvcgphdCAwLjUgdG8gcmVwcmVzZW50IG91ciBmYWlyIGNvaW4gaHlwb3RoZXNpcy4KCmBgYHtyfQojfCBpbmNsdWRlOiBUUlVFCiN8IGVjaG86IFRSVUUKZmFpcl9jb2luIDwtIHByaW9yKGZhbWlseSA9ICJwb2ludCIsIHBvaW50ID0gMC41KQpgYGAKCk5leHQsIHdlJ2xsIHVzZSBhICoqdW5pZm9ybSoqIHByaW9yIHRvIHJlcHJlc2VudCBlcXVhbCB3ZWlnaHRzIGZvciBhbGwgdmFsdWVzIApiZXR3ZWVuIDAgYW5kIDEuIFRoZXJlJ3MgdHdvIHdheXMgd2UgY2FuIGRvIHRoaXMuIEZpcnN0LCB3ZSBjYW4gdXNlIHRoZSAKKip1bmlmb3JtKiogZmFtaWx5LgoKYGBge3J9CiN8IGluY2x1ZGU6IFRSVUUKI3wgZWNobzogVFJVRQp1bmZhaXJfY29pbiA8LSBwcmlvcihmYW1pbHkgPSAidW5pZm9ybSIsIG1pbiA9IDAsIG1heCA9IDEpCmBgYAoKQnV0IHdlIGNhbiBhbHNvIHVzZSB0aGUgKipiZXRhKiogZmFtaWx5LiBUaGUgcmVzdWx0IHdpbGwgYmUgdGhlIHNhbWUgaW4gZWl0aGVyCmNhc2UuCgpgYGB7cn0KI3wgaW5jbHVkZTogVFJVRQojfCBlY2hvOiBUUlVFCnVuZmFpcl9jb2luIDwtIHByaW9yKGZhbWlseSA9ICJiZXRhIiwgYWxwaGEgPSAxLCBiZXRhID0gMSkKYGBgCgoKU2luY2Ugd2UndmUgYmVlbiB2aXN1YWxpemluZyBldmVyeXRoaW5nIHNvIGZhciwgd2UgY2FuIGFsc28gdmlzdWFsaXNlIHRoZSAKbGlrZWxpaG9vZCBhbmQgcHJpb3JzIHdlJ3ZlIGp1c3QgZGVmaW5lZC4gVG8gZG8gdGhpcywgd2UganVzdCB1c2UgdGhlIGBwbG90KClgCmZ1bmN0aW9uLgoKCmBgYHtyfQojfCBpbmNsdWRlOiBUUlVFCiN8IGVjaG86IFRSVUUKcGxvdChkYXRhX21vZGVsKSArCiAgdGhlbWVfbWluaW1hbCgxNCkKYGBgCgpgYGB7cn0KI3wgaW5jbHVkZTogVFJVRQojfCBlY2hvOiBUUlVFCnBsb3QoZmFpcl9jb2luKSArCiAgdGhlbWVfbWluaW1hbCgxNCkKYGBgCmBgYHtyfQojfCBpbmNsdWRlOiBUUlVFCiN8IGVjaG86IFRSVUUKcGxvdCh1bmZhaXJfY29pbikgKwogIHRoZW1lX21pbmltYWwoMTQpCmBgYAoKVGhlIG5leHQgc3RlcCB3YXMgdG8gbXVsdGlwbHkgdGhlIGxpa2VsaWhvb2QgYnkgdGhlIHByaW9yLiBXZSdsbCBkbyB0aGlzIGZvcgpvdXIgbGlrZWxpaG9vZCBhbmQgZWFjaCBvZiB0aGUgcHJpb3IuCgpgYGB7cn0KI3wgaW5jbHVkZTogVFJVRQojfCBlY2hvOiBUUlVFCm0wIDwtIGRhdGFfbW9kZWwgKiBmYWlyX2NvaW4KbTEgPC0gZGF0YV9tb2RlbCAqIHVuZmFpcl9jb2luCmBgYAoKUGxvdHRpbmcgdGhlc2UgaXNuJ3Qgc3VwZXIgaW5mb3JtYXRpdmUsIGJ1dCB3ZSBjYW4gZG8gaXQgYW55d2F5LgoKYGBge3J9CiN8IGluY2x1ZGU6IFRSVUUKI3wgZWNobzogVFJVRQpwbG90KG0wKSArCiAgdGhlbWVfbWluaW1hbCgxNCkKYGBgCgpgYGB7cn0KI3wgaW5jbHVkZTogVFJVRQojfCBlY2hvOiBUUlVFCnBsb3QobTEpICsKICB0aGVtZV9taW5pbWFsKDE0KQpgYGAKCgpUaGUgbmV4dCBzdGVwIGlzIHRvIHdvcmsgb3VyIHRoZSBhcmVhIHVuZGVyIGVhY2ggb2YgdGhlc2UgY3VydmVzLiBUaGF0IGlzLCB3b3JrIApvdXQgdGhhdCBpbnRlZ3JhbC4gVG8gZG8gdGhpcywgd2UganVzdCB1c2UgdGhlIGBpbnRlZ3JhbCgpYCBmdW5jdGlvbi4KCmBgYHtyfQojfCBpbmNsdWRlOiBUUlVFCiN8IGVjaG86IFRSVUUKaW50X20wIDwtIGludGVncmFsKG0wKQppbnRfbTEgPC0gaW50ZWdyYWwobTEpCmBgYAoKCkFuZCBmaW5hbGx5LCB3ZSBqdXN0IHRha2UgdGhlIHJhdGlvIG9mIHRoZXNlIHR3byB2YWx1ZXMgdG8gZ2V0IHRoZSBCYXllcyBmYWN0b3IuCgpgYGB7cn0KI3wgaW5jbHVkZTogVFJVRQojfCBlY2hvOiBUUlVFCmJmIDwtIGludF9tMSAvIGludF9tMApgYGAKCmBgYHtyfQpnbHVlOjpnbHVlKCJUaGUgYmF5ZXMgZmFjdG9yIGlzIHtyb3VuZChiZiwzKX0iKSAlPiUKICBkaXNwbGF5X21hcmtkb3duKCkKYGBgCgpBbmQgdGhhdCdzIGFsbCB0aGVyZSBpcyB0byBpdC4gCgpIb3dldmVyLCB3ZSBjYW4gZG8gYSBsaXR0bGUgbW9yZS4gSW4gdGhlIHByZXZpb3VzIHNlY3Rpb24gd2Ugc2F3IHBsb3RzIHRoYXQgc2hvd2VkCnRoZSBwcmVkaWN0aW9ucyBvZiBlYWNoIG1vZGVsIGFuZCBoaWdobGlnaHRlZCBvdXIgc3BlY2lmaWMgb2JzZXJ2YXRpb24uIFdlIGNhbgphbHNvIGdlbmVyYXRlIHRoZXNlIGVhc2lseSB3aXRoIGBiYXllc3BsYXlgLiBXZSBzaW1wbHkgdXNlIHRoZSBgdmlzdWFsX2NvbXBhcmUoKWAKZnVuY3Rpb24sIGFuZCBnaXZlIHRoZSB0d28gbW9kZWxzICh0aGUgbGlrZWxpaG9vZCAkXHRpbWVzJCB0aGUgcHJpb3IpIGFzIGlucHV0cy4KCmBgYHtyfQojfCBpbmNsdWRlOiBUUlVFCiN8IGVjaG86IFRSVUUKCnZpc3VhbF9jb21wYXJlKG0xLCBtMCkgKwogIHRoZW1lX21pbmltYWwoMTQpCmBgYAoKCiMjIENvbXB1dGluZyBCYXllcyBmYWN0b3JzIHdpdGggQmF5ZXNwbGF5LVdlYgoKSWYgeW91J3JlIG5vdCBzdXBlciBwcm9maWNpZW50IHdpdGggYFJgLCB0aGVuIHlvdSBjYW4gdXNlIHRoZSAqKkJheWVzcGxheS1XZWIqKgphcHAgdG8gY29tcHV0ZSBCYXllcyBmYWN0b3JzLiBUaGUgKipCYXllc3BsYXktV2ViKiogd2lsbCBldmVuIGdlbmVyYXRlIHRoZSBgUmAKY29kZSBmb3IgeW91LiBUbyBhY2Nlc3MgdGhlIHdlYi1hcHAgZ28gdG8KW2JheWVzcGxheS5taW5kc2NpLm5ldF0oaHR0cHM6Ly9iYXllc3BsYXkubWluZHNjaS5uZXQpLgoKQmVsb3cgaXMgYW4gaW1hZ2Ugb2YgdGhlICoqQmF5ZXNwbGF5LVdlYioqIGludGVyZmFjZS4gCgohW10oaHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL2xqY29sbGluZy9iYXllczIwMjIvbWFpbi9fc2l0ZS9iYXllc3BsYXlfaW50ZXJmYWNlLnBuZykKCgohW10oaHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL2xqY29sbGluZy9iYXllczIwMjIvbWFpbi9fc2l0ZS9kZWZpbmVfbGlrZWxpaG9vZC5wbmcpCgpUaGVuIHdlIGRlZmluZSB0aGUgcHJpb3IgZm9yIHVuZmFpciBjb2luLgoKIVtdKGh0dHBzOi8vcmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbS9samNvbGxpbmcvYmF5ZXMyMDIyL21haW4vX3NpdGUvYWx0X3ByaW9yLnBuZykKCgpBbmQgdGhlbiB0aGUgcHJpb3IgZm9yIHRoZSBmYWlyIGNvaW4uCgohW10oaHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL2xqY29sbGluZy9iYXllczIwMjIvbWFpbi9fc2l0ZS9udWxsX3ByaW9yLnBuZykKCkFuZCB0aGVuIHdlIGNsaWNrICoqQ2FsY3VsYXRlKiogdG8gZ2V0IG91ciBhbnN3ZXIuCgoKIVtdKGh0dHBzOi8vcmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbS9samNvbGxpbmcvYmF5ZXMyMDIyL21haW4vX3NpdGUvY2FsY3VsYXRlLnBuZykKClRoZSBCRjEwIHZhbHVlIHNob3dzIHRoZSBldmlkZW5jZSBmb3IgdGhlIGFsdGVybmF0aXZlIG1vZGVsIG92ZXIgdGhlIG51bGwKbW9kZWwuIFRoZSBCRjAxIHZhbHVlIGlzIHRoZSBpbnZlcnNlLCBhbmQgc2hvd3MgdGhlIGV2aWRlbmNlIGZvciB0aGUgbnVsbCBtb2RlbApvdmVyIHRoZSBhbHRlcm5hdGl2ZSBtb2RlbCIKClRvZ2dsaW5nIHRoZSAqKlNob3cgUiBDb2RlKiogYnV0dG9uIHdpbGwgc2hvdyB5b3UgdGhlIGBSYCBjb2RlIHlvdSBuZWVkIHRvIGNvbXB1dGUKdGhlIG1vZGVsLgoKIVtdKGh0dHBzOi8vcmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbS9samNvbGxpbmcvYmF5ZXMyMDIyL21haW4vX3NpdGUvc2hvd19yY29kZS5wbmcpCgpBbmQgZmluYWxseSwgY2xpY2tpbmcgb24gKipWaWV3IGFkdmFuY2VkIG91dHB1dCoqIHdpbGwgdGFrZSB5b3UgdG8gYSBuZXcgc2NyZWVuCndoZXJlIHlvdSBjYW4gdmlldyBzb21lIGFkZGl0aW9uYWwgb3V0cHV0IGluY2x1ZGluZyB0aGUgbW9kZWwgcHJlZGljdGlvbnMuIAoKCiFbXShodHRwczovL3Jhdy5naXRodWJ1c2VyY29udGVudC5jb20vbGpjb2xsaW5nL2JheWVzMjAyMi9tYWluL19zaXRlL21vZGVsX3ByZWRpY3Rpb25zLnBuZykKCiMjIE1vdmluZyBiZXlvbmQgY29pbiBmbGlwcwoKSW4gdGhlIG5leHQgc2VjdGlvbiwgd2UnbGwgbGVhcm4gaG93IHRvIGNhbGN1bGF0ZSBCYXllcyBmYWN0b3JzIHdpdGggZGlmZmVyZW50IApraW5kcyBvZiBsaWtlbGlob29kcyBmb3IgZGlmZmVyZW50IGtpbmRzIG9mIGRhdGEgdGhhdCB3ZSBtaWdodCBlbmNvdW50ZXIuIFdlJ2xsCmFsc28gZ28gaW4gdG8gbW9yZSBkZXRhaWwgYWJvdXQgZGlmZmVyZW50IGtpbmRzIG9mIHByaW9ycyB3ZSBtaWdodCB3YW50IHRvIHVzZQphbmQgd2h5IHdlIG1pZ2h0IHdhbnQgdG8gdXNlIHRoZW0uCgpJbiB0aGUgbWVhbnRpbWUsIHlvdSBjYW4gcGxheSBhcm91bmQgd2l0aCB0aGUgKip3ZWItYXBwKiogYW5kIGhhdmUgYSBsb29rCnRocm91Z2ggdGhlIGRvY3VtZW50YXRpb24gZm9yIHRoZSBgUmAgcGFja2FnZSAoYXZhaWxhYmxlIGF0CltiYXllc3BsYXkuZ2l0aHViLmlvL2JheWVzcGxheS9dKGh0dHBzOi8vYmF5ZXNwbGF5LmdpdGh1Yi5pby9iYXllc3BsYXkvKSkuCllvdSdsbCBoYXZlIHRvIHN1Ym1pdCBgUmAgY29kZSBmb3IgdGhlIGFzc2Vzc21lbnQgKGVpdGhlciB3cml0dGVuIHlvdXJzZWxmIG9yCmdlbmVyYXRlZCB3aXRoIHRoZSB3ZWItYXBwKSBzbyBpdCBwYXlzIHRvIGZhbWlsaWFyaXNlIHlvdXJzZWxmIHdpdGggaXQuIAoKCgoK" download="04-bayes.Rmd"><img src="https://img.shields.io/badge/.Rmd-Download-blue"></a>
+<a href="https://colab.research.google.com/github/ljcolling/bayes2022/blob/main/_notebooks/04-bayes.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" /></a></p>
+<p>The primary aim of this course is to learn how to compute and interpret Bayes
+factors. But what is a Bayes factor? Well it turns out that we’ve already
+computed a Bayes factor. The Bayes factor is just the ratio that we computed in
+the previous section. The Bayes factor is a metric that compares the relative
+probability of obtaining our data under one model compared to another.</p>
+<p>When we computed these ratios, the Bayes factor, in the previous section, it was
+made up of two ingredients.</p>
+<ol style="list-style-type: decimal">
+<li><p>We had our likelihood that related parameter values to our data. It told
+us the relative probability of obtaining our data under different values of the
+the parameter (the coin bias)</p></li>
+<li><p>We had priors, which assigned different probabilities to the different values
+of the parameter. These served as our hypotheses about the parameter (the coin
+bias), and they served as the <em>weights</em> for our average of the likelihood.
+We had one prior for each hypothesis.</p></li>
+</ol>
+<p>To perform the computation itself, we multiplied the prior by the likelihood,
+and took the weighted average, by taking the integral. Mathematically, we did
+the following:</p>
+<p><span class="math display">\[\mathcal{M}_H = \int_{\theta\in\Theta_H}\mathcal{L}_H(\theta|\mathbf{y})p(\theta)d\theta\]</span></p>
+<p>We did this for each hypothesis (e.g., <span class="math inline">\(\mathcal{M}_0\)</span> and <span class="math inline">\(\mathcal{M}_1\)</span>),
+and then took the ratio <span class="math inline">\(\frac{\mathcal{M}_0}{\mathcal{M}_1}\)</span>. And this ratio
+was the Bayes factor.</p>
+<p><span class="math display">\[\mathrm{BF}_{01} = \frac{\mathcal{M}_0}{\mathcal{M_1}}\]</span></p>
+<div id="computing-bayes-factors-with-bayesplay" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Computing Bayes factors with <code>bayesplay</code></h2>
+<p>To actually compute Bayes factors we’re going to use an <code>R</code> package called
+<code>bayesplay</code>. The <code>bayesplay</code> package allows you to specify likelihoods and
+priors, and to perform some operations on them. The operations, described above.</p>
+<p>Let’s step through some <code>R</code> to see how we would actually do it:</p>
+<p>First, we specify the likelihood. We’ll specify a likelihood of the <strong>binomial</strong>
+family. It requires 2 inputs. The number of heads, and the number of flips.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="the-bayes-factor.html#cb1-1" aria-hidden="true" tabindex="-1"></a>data_model <span class="ot">&lt;-</span> <span class="fu">likelihood</span>(<span class="at">family =</span> <span class="st">&quot;binomial&quot;</span>, <span class="at">successes =</span> <span class="dv">8</span>, <span class="at">trials =</span> <span class="dv">10</span>)</span></code></pre></div>
+<p>Second, we’ll specify the two priors. For the first, we’ll set a <strong>point</strong> prior
+at 0.5 to represent our fair coin hypothesis.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="the-bayes-factor.html#cb2-1" aria-hidden="true" tabindex="-1"></a>fair_coin <span class="ot">&lt;-</span> <span class="fu">prior</span>(<span class="at">family =</span> <span class="st">&quot;point&quot;</span>, <span class="at">point =</span> <span class="fl">0.5</span>)</span></code></pre></div>
+<p>Next, we’ll use a <strong>uniform</strong> prior to represent equal weights for all values
+between 0 and 1. There’s two ways we can do this. First, we can use the
+<strong>uniform</strong> family.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="the-bayes-factor.html#cb3-1" aria-hidden="true" tabindex="-1"></a>unfair_coin <span class="ot">&lt;-</span> <span class="fu">prior</span>(<span class="at">family =</span> <span class="st">&quot;uniform&quot;</span>, <span class="at">min =</span> <span class="dv">0</span>, <span class="at">max =</span> <span class="dv">1</span>)</span></code></pre></div>
+<p>But we can also use the <strong>beta</strong> family. The result will be the same in either
+case.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="the-bayes-factor.html#cb4-1" aria-hidden="true" tabindex="-1"></a>unfair_coin <span class="ot">&lt;-</span> <span class="fu">prior</span>(<span class="at">family =</span> <span class="st">&quot;beta&quot;</span>, <span class="at">alpha =</span> <span class="dv">1</span>, <span class="at">beta =</span> <span class="dv">1</span>)</span></code></pre></div>
+<p>Since we’ve been visualizing everything so far, we can also visualise the
+likelihood and priors we’ve just defined. To do this, we just use the <code>plot()</code>
+function.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="the-bayes-factor.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(data_model) <span class="sc">+</span></span>
+<span id="cb5-2"><a href="the-bayes-factor.html#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="dv">14</span>)</span></code></pre></div>
+<p><img src="04-bayes_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="the-bayes-factor.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fair_coin) <span class="sc">+</span></span>
+<span id="cb6-2"><a href="the-bayes-factor.html#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="dv">14</span>)</span></code></pre></div>
+<p><img src="04-bayes_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="the-bayes-factor.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(unfair_coin) <span class="sc">+</span></span>
+<span id="cb7-2"><a href="the-bayes-factor.html#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="dv">14</span>)</span></code></pre></div>
+<p><img src="04-bayes_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>The next step was to multiply the likelihood by the prior. We’ll do this for
+our likelihood and each of the prior.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="the-bayes-factor.html#cb8-1" aria-hidden="true" tabindex="-1"></a>m0 <span class="ot">&lt;-</span> data_model <span class="sc">*</span> fair_coin</span>
+<span id="cb8-2"><a href="the-bayes-factor.html#cb8-2" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> data_model <span class="sc">*</span> unfair_coin</span></code></pre></div>
+<p>Plotting these isn’t super informative, but we can do it anyway.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="the-bayes-factor.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m0) <span class="sc">+</span></span>
+<span id="cb9-2"><a href="the-bayes-factor.html#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="dv">14</span>)</span></code></pre></div>
+<p><img src="04-bayes_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="the-bayes-factor.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m1) <span class="sc">+</span></span>
+<span id="cb10-2"><a href="the-bayes-factor.html#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="dv">14</span>)</span></code></pre></div>
+<p><img src="04-bayes_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>The next step is to work our the area under each of these curves. That is, work
+out that integral. To do this, we just use the <code>integral()</code> function.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="the-bayes-factor.html#cb11-1" aria-hidden="true" tabindex="-1"></a>int_m0 <span class="ot">&lt;-</span> <span class="fu">integral</span>(m0)</span>
+<span id="cb11-2"><a href="the-bayes-factor.html#cb11-2" aria-hidden="true" tabindex="-1"></a>int_m1 <span class="ot">&lt;-</span> <span class="fu">integral</span>(m1)</span></code></pre></div>
+<p>And finally, we just take the ratio of these two values to get the Bayes factor.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="the-bayes-factor.html#cb12-1" aria-hidden="true" tabindex="-1"></a>bf <span class="ot">&lt;-</span> int_m1 <span class="sc">/</span> int_m0</span></code></pre></div>
+<p>The bayes factor is 2.069</p>
+<p>And that’s all there is to it.</p>
+<p>However, we can do a little more. In the previous section we saw plots that showed
+the predictions of each model and highlighted our specific observation. We can
+also generate these easily with <code>bayesplay</code>. We simply use the <code>visual_compare()</code>
+function, and give the two models (the likelihood <span class="math inline">\(\times\)</span> the prior) as inputs.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="the-bayes-factor.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">visual_compare</span>(m1, m0) <span class="sc">+</span></span>
+<span id="cb13-2"><a href="the-bayes-factor.html#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="dv">14</span>)</span></code></pre></div>
+<p><img src="04-bayes_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+</div>
+<div id="computing-bayes-factors-with-bayesplay-web" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Computing Bayes factors with Bayesplay-Web</h2>
+<p>If you’re not super proficient with <code>R</code>, then you can use the <strong>Bayesplay-Web</strong>
+app to compute Bayes factors. The <strong>Bayesplay-Web</strong> will even generate the <code>R</code>
+code for you. To access the web-app go to
+<a href="https://bayesplay.mindsci.net">bayesplay.mindsci.net</a>.</p>
+<p>Below is an image of the <strong>Bayesplay-Web</strong> interface.</p>
+<p><img src="https://raw.githubusercontent.com/ljcolling/bayes2022/main/_site/bayesplay_interface.png" /></p>
+<p><img src="https://raw.githubusercontent.com/ljcolling/bayes2022/main/_site/define_likelihood.png" /></p>
+<p>Then we define the prior for unfair coin.</p>
+<p><img src="https://raw.githubusercontent.com/ljcolling/bayes2022/main/_site/alt_prior.png" /></p>
+<p>And then the prior for the fair coin.</p>
+<p><img src="https://raw.githubusercontent.com/ljcolling/bayes2022/main/_site/null_prior.png" /></p>
+<p>And then we click <strong>Calculate</strong> to get our answer.</p>
+<p><img src="https://raw.githubusercontent.com/ljcolling/bayes2022/main/_site/calculate.png" /></p>
+<p>The BF10 value shows the evidence for the alternative model over the null
+model. The BF01 value is the inverse, and shows the evidence for the null model
+over the alternative model”</p>
+<p>Toggling the <strong>Show R Code</strong> button will show you the <code>R</code> code you need to compute
+the model.</p>
+<p><img src="https://raw.githubusercontent.com/ljcolling/bayes2022/main/_site/show_rcode.png" /></p>
+<p>And finally, clicking on <strong>View advanced output</strong> will take you to a new screen
+where you can view some additional output including the model predictions.</p>
+<p><img src="https://raw.githubusercontent.com/ljcolling/bayes2022/main/_site/model_predictions.png" /></p>
+</div>
+<div id="moving-beyond-coin-flips" class="section level2" number="4.3">
+<h2><span class="header-section-number">4.3</span> Moving beyond coin flips</h2>
+<p>In the next section, we’ll learn how to calculate Bayes factors with different
+kinds of likelihoods for different kinds of data that we might encounter. We’ll
+also go in to more detail about different kinds of priors we might want to use
+and why we might want to use them.</p>
+<p>In the meantime, you can play around with the <strong>web-app</strong> and have a look
+through the documentation for the <code>R</code> package (available at
+<a href="https://bayesplay.github.io/bayesplay/">bayesplay.github.io/bayesplay/</a>).
+You’ll have to submit <code>R</code> code for the assessment (either written yourself or
+generated with the web-app) so it pays to familiarise yourself with it.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="an-alternative-to-p-values.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

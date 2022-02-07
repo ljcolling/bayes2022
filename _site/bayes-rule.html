@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 Bayes rule | Advanced Statistical Methods</title>
+  <meta name="description" content="An introduction to Bayesian Statistics" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 Bayes rule | Advanced Statistical Methods" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="An introduction to Bayesian Statistics" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Bayes rule | Advanced Statistical Methods" />
+  
+  <meta name="twitter:description" content="An introduction to Bayesian Statistics" />
+  
+
+<meta name="author" content="Dr Lincoln Colling" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="an-alternative-to-p-values.html"/>
+
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#how-to-use-this-book"><i class="fa fa-check"></i>How to use this book</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#outline"><i class="fa fa-check"></i>Outline</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="null-hypothesis-significance-testing.html"><a href="null-hypothesis-significance-testing.html"><i class="fa fa-check"></i><b>1</b> Null-hypothesis significance testing</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="null-hypothesis-significance-testing.html"><a href="null-hypothesis-significance-testing.html#probability"><i class="fa fa-check"></i><b>1.1</b> Probability</a></li>
+<li class="chapter" data-level="1.2" data-path="null-hypothesis-significance-testing.html"><a href="null-hypothesis-significance-testing.html#probability-and-p-values"><i class="fa fa-check"></i><b>1.2</b> Probability and <em>p</em> values</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="null-hypothesis-significance-testing.html"><a href="null-hypothesis-significance-testing.html#understanding-the-p-through-simulation"><i class="fa fa-check"></i><b>1.2.1</b> Understanding the <em>p</em> through simulation</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="null-hypothesis-significance-testing.html"><a href="null-hypothesis-significance-testing.html#summary"><i class="fa fa-check"></i><b>1.3</b> Summary</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="null-hypothesis-significance-testing.html"><a href="null-hypothesis-significance-testing.html#a-short-note-on-confidence-intervals"><i class="fa fa-check"></i><b>1.3.1</b> A short note on confidence intervals</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="criticisms-of-p-values.html"><a href="criticisms-of-p-values.html"><i class="fa fa-check"></i><b>2</b> Criticisms of <em>p</em> values</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="criticisms-of-p-values.html"><a href="criticisms-of-p-values.html#same-measurements-from-different-devices"><i class="fa fa-check"></i><b>2.1</b> Same measurements from different devices</a></li>
+<li class="chapter" data-level="2.2" data-path="criticisms-of-p-values.html"><a href="criticisms-of-p-values.html#the-universe-of-possible-events"><i class="fa fa-check"></i><b>2.2</b> The universe of possible events</a></li>
+<li class="chapter" data-level="2.3" data-path="criticisms-of-p-values.html"><a href="criticisms-of-p-values.html#summary-1"><i class="fa fa-check"></i><b>2.3</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="an-alternative-to-p-values.html"><a href="an-alternative-to-p-values.html"><i class="fa fa-check"></i><b>3</b> An alternative to <em>p</em> values</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="an-alternative-to-p-values.html"><a href="an-alternative-to-p-values.html#doing-inference-with-likelihoods"><i class="fa fa-check"></i><b>3.1</b> Doing inference with likelihoods</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="an-alternative-to-p-values.html"><a href="an-alternative-to-p-values.html#a-brief-detour-back-to-sampling-rules"><i class="fa fa-check"></i><b>3.1.1</b> A brief detour back to sampling rules</a></li>
+<li class="chapter" data-level="3.1.2" data-path="an-alternative-to-p-values.html"><a href="an-alternative-to-p-values.html#the-likelihood-ratio"><i class="fa fa-check"></i><b>3.1.2</b> The likelihood ratio</a></li>
+<li class="chapter" data-level="3.1.3" data-path="an-alternative-to-p-values.html"><a href="an-alternative-to-p-values.html#a-note-about-likelihood-functions-and-probability-distributions"><i class="fa fa-check"></i><b>3.1.3</b> A note about likelihood functions and probability distributions</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="an-alternative-to-p-values.html"><a href="an-alternative-to-p-values.html#testing-more-complex-hypotheses"><i class="fa fa-check"></i><b>3.2</b> Testing more complex hypotheses</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="an-alternative-to-p-values.html"><a href="an-alternative-to-p-values.html#theres-more-than-one-way-to-average"><i class="fa fa-check"></i><b>3.2.1</b> There’s more than one way to average</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="bayes-rule.html"><a href="bayes-rule.html"><i class="fa fa-check"></i><b>4</b> Bayes rule</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="bayes-rule.html"><a href="bayes-rule.html#what-is-bayes-rule"><i class="fa fa-check"></i><b>4.1</b> What is Bayes rule</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="bayes-rule.html"><a href="bayes-rule.html#conditional-probability-form"><i class="fa fa-check"></i><b>4.1.1</b> Conditional probability form</a></li>
+<li class="chapter" data-level="4.1.2" data-path="bayes-rule.html"><a href="bayes-rule.html#proportional-form"><i class="fa fa-check"></i><b>4.1.2</b> Proportional form</a></li>
+<li class="chapter" data-level="4.1.3" data-path="bayes-rule.html"><a href="bayes-rule.html#ratio-form"><i class="fa fa-check"></i><b>4.1.3</b> Ratio form</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="bayes-rule.html"><a href="bayes-rule.html#bayes-factor"><i class="fa fa-check"></i><b>4.2</b> Bayes factor</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Advanced Statistical Methods</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="bayes-rule" class="section level1" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Bayes rule</h1>
+<p><a href="data:text/x-markdown;base64,LS0tCnRpdGxlOiAiQmF5ZXMgcnVsZSIKb3V0cHV0OiBodG1sX2RvY3VtZW50Ci0tLQoKYGBge3Igc2V0dXAsIGVjaG89RkFMU0V9CmtuaXRyOjpvcHRzX2NodW5rJHNldChlY2hvID0gRkFMU0UpCnN1cHByZXNzTWVzc2FnZXMoZXhwciA9ICB7CiAgaWYgKCJwYXRjaHdvcmsiICVpbiUgcm93Lm5hbWVzKGluc3RhbGxlZC5wYWNrYWdlcygpKSA9PSBGQUxTRSkgewogICAgaW5zdGFsbC5wYWNrYWdlcygicGF0Y2h3b3JrIikKICB9CiAgaWYgKCJiYXllc3BsYXkiICVpbiUgcm93Lm5hbWVzKGluc3RhbGxlZC5wYWNrYWdlcygpKSA9PSBGQUxTRSkgewogICAgaW5zdGFsbC5wYWNrYWdlcygiYmF5ZXNwbGF5IikKICB9CiAgaWYgKCJwb2xzcGxpbmUiICVpbiUgcm93Lm5hbWVzKGluc3RhbGxlZC5wYWNrYWdlcygpKSA9PSBGQUxTRSkgewogICAgaW5zdGFsbC5wYWNrYWdlcygicG9sc3BsaW5lIikKICB9CgogIGlmICgiSVJkaXNwbGF5IiAlaW4lIHJvdy5uYW1lcyhpbnN0YWxsZWQucGFja2FnZXMoKSkgPT0gVFJVRSkgewogICAgZGlzcGxheV9tYXJrZG93biA8PC0gXCh4KSBJUmRpc3BsYXk6OmRpc3BsYXlfbWFya2Rvd24oYXMuY2hhcmFjdGVyKHgpKQogICAgZGlzcGxheV9odG1sIDw8LSBcKHgpIElSZGlzcGxheTo6ZGlzcGxheV9odG1sKGFzLmNoYXJhY3Rlcih4KSkKICB9IGVsc2UgewogICAgZGlzcGxheV9tYXJrZG93biA8PC0ga25pdHI6OmFzaXNfb3V0cHV0CiAgICBkaXNwbGF5X2h0bWwgPDwtIGtuaXRyOjphc2lzX291dHB1dAogIH0KCiAgbGlicmFyeSh0aWR5dmVyc2UpCiAgbGlicmFyeShwb2xzcGxpbmUpCiAgbGlicmFyeShwYXRjaHdvcmspCiAgbGlicmFyeShtYWdyaXR0cikKfSkKCnRhYmxlX2Zvcm1hdCA8LSAiaHRtbCIKCmBgYAojIEJheWVzIHJ1bGUKCkkndmUgbGVmdCB0YWxraW5nIGFib3V0IEJheWVzIHJ1bGUgdW50aWwgbm93LCBiZWNhdXNlIEkgdGhpbmsgeW91IGNhbiB1bmRlcnN0YW5kIHRoZSBjb25jZXB0IG9mIHRoZSBCYXllcyBmYWN0b3Igd2l0aG91dCBpdCwgYW5kIGJlY2F1c2UgSSB3YW50ZWQgdG8gZW1waGFzaXNlIHRoZSBpZGVhIHRoYXQgdGhlIEJheWVzIGZhY3RvciBpcyBhIHJhdGlvIG9mICoqdHdvIHdlaWdodGVkIGF2ZXJhZ2VzKiouIEhvd2V2ZXIsIG5vdyB0aGF0IHdlIGhhdmUgdGhpcyBzaW1wbGUgdW5kZXJzdGFuZGluZywgSSdtIGhvcGluZyB0byBkZWVwZW4geW91ciB1bmRlcnN0YW5kaW5nIGEgYml0IGJ5IGludHJvZHVjaW5nIEJheWVzIHJ1bGUuIFRoaXMgZGVlcGVyIHVuZGVyc3RhbmRpbmcgb2YgQmF5ZXMgcnVsZSB3aWxsIGFsc28gaGVscCB1c2UgdW5kZXJzdGFuZCBzb21lIG9mIHRoZSB0b3BpYyB3ZSdsbCBjb3ZlciBsYXRlciBpbiB0aGUgY291cnNlLgoKIyMgV2hhdCBpcyBCYXllcyBydWxlCgpCYXllcyBydWxlIGZvbGxvd3Mgc3RyYWlnaHRmb3J3YXJkbHkgZnJvbSB0aGUgYXhpb21zIG9mIGNvbmRpdGlvbmFsIHByb2JhYmlsaXR5LiBJbiB0aGlzIHNlbnNlLCB0aGVyZSdzIG5vdGhpbmcgcGFydGljdWxhcmx5ICJCYXllc2lhbiIgYWJvdXQgaXQgaW4gdGhhdCBib3RoIEZyZXF1ZW50aXN0cyBhbmQgQmF5ZXNpYW5zIGNhbiwgYW5kIGRvLCBtYWtlIHVzZSBvZiB0aGUgY29uY2VwdCBvZiBjb25kaXRpb25hbCBwcm9iYWJpbGl0eS4KCiMjIyBDb25kaXRpb25hbCBwcm9iYWJpbGl0eSBmb3JtCgpXaGVuIHlvdSBlbmNvdW50ZXIgQmF5ZXMgcnVsZSBpbiBhIGZyZXF1ZW50aXN0IGNvbnRleHQsIGl0IG9mdGVuIHRha2VzIHRoZSBmb2xsb3dpbmcgZm9ybToKCiQkcChBfEIpID0gXGZyYWN7cChCfEEpcChBKX17cChCKX0kJAoKb3IKCiQkcChBfEIpID0gXGZyYWN7cChCfEEpcChBKX17cChCfEEpcChBKSArIHAoQnxcbmVne31BKXAoXG5lZ3t9QSl9JCQKCkluIHRoaXMgZm9ybSwgaXQgdHlwaWNhbGx5IGV4cGxhaW5lZCBieSB3YXkgb2YgYW4gZXhhbXBsZSB1c3VhbGx5IGludm9sdmluZyBzb21lIGtpbmQgb2YgYSB0ZXN0LiBJbiBjbGFzc2ljIGV4YW1wbGVzLCB0aGUgY29udGV4dCBpZiAqb2Z0ZW4qIGEgdGVzdCBmb3IgYSByYXJlIGRpc2Vhc2UuIEl0IGlzIHRoZW4gc2hvd24gdGhhdCBCYXllcyBydWxlIGNhbiBiZSB1c2VkIHRvIGNhbGN1bGF0ZSB0aGUgcHJvYmFiaWxpdHkgdGhhdCB0aGUgKipwb3NpdGl2ZSoqIHRlc3QgaW5kaWNhdGVzIHRoZSAqKnByZXNlbmNlKiogb2YgdGhlIGRpc2Vhc2UgXFtwKGRpc2Vhc2UgcHJlc2VudFx8IHBvc2l0aXZlIHRlc3QpXF0sIGJ5IHRha2luZyBpbnRvIGFjY291bnQgdGhlICoqc2Vuc2l0aXZpdHkqKiBvZiB0aGUgdGVzdCBcW3AocG9zaXRpdmUgdGVzdCBcfCBkaXNlYXNlIHByZXNlbnQpXF0sIHRoZSBwcmV2YWxlbmNlIG9mIHRoZSBkaXNlYXNlIFxbcChkaXNlYXNlKVxdLCBhbmQgdGhlIHByb2JhYmlsaXR5IG9mIHRoZSB0ZXN0IHJldHVybmluZyBhIHBvc2l0aXZlIHJlc3VsdCBpcnJlc3BlY3RpdmUgb2YgdGhlIHByZXNlbmNlIG9mIHRoZSBkaXNlYXNlIFxbcChwb3NpdGl2ZSlcXS4KCkJheWVzIHJ1bGUgcHJlc2VudGVkIGluIHRoaXMgZm9ybSBpcyB1c2VmdWwgZm9yIHRoaW5raW5nIGFib3V0IGV2aWRlbmNlLiBUaGUgbGVmdCBzaWRlIG9mIHRoZSBlcXVhdGlvbiAtICRcZnJhY3twKEJ8QSlwKEEpfXtwKEIpfSQgLSBvciBtb3JlIHNwZWNpZmljYWxseSwgcGFydCBvZiBpdCAtICRcZnJhY3twKEJ8QSl9e3AoQil9JCAtIGNhbiBiZSByZWFkIGFzIHJlcHJlc2VudGluZyB0aGUgKipldmlkZW5jZSoqIHRoZSB0ZXN0IHByb3ZpZGVzIG9yIHRoZSBwcmVzZW5jZSBvZiB0aGUgZGlzZWFzZS4gVGhpcyAqKmV2aWRlbmNlKiogaXMgdGhlbiAqKndlaWdodGVkKiogYnkgdGhlICoqYmFzZSByYXRlKiogb3IgdGhlIHByaW9yIHByb2JhYmlsaXR5IG9mIHRoZSBkaXNlYXNlIGJlaW5nIHByZXNlbnQuCgojIyMgUHJvcG9ydGlvbmFsIGZvcm0KCkluIHRoZSBjb250ZXh0IG9mIEJheWVzaWFuIGluZmVyZW5jZSwgaXQgaXMgb2Z0ZW4gZ2l2ZW4gaW4gYSBzbGlnaHRseSBkaWZmZXJlbnQgZm9ybToKCiQkcChBfEIpIFxwcm9wdG97fSBQKEJ8QSkgXGNkb3R7fSBQKEEpJCQKCm9yCgokJHAoXHRoZXRhfFkpIFxwcm9wdG97fSBcbWF0aGNhbHtMfShcdGhldGF8WSkgXGNkb3R7fXAoXHRoZXRhKSQkCgpJbiB0aGlzIGZvcm0gaXQgaXMgdXN1YWxseSByZWFkIGFzICJ0aGUgcG9zdGVyaW9yIHByb2JhYmlsaXR5IGlzIHByb3BvcnRpb25hbCB0byB0aGUgbGlrZWxpaG9vZCB0aW1lcyB0aGUgcHJpb3IiLiBUaGUgcHJvcG9ydGlvbmFsIGZvcm0gZHJvcHMgdGhlIGRlbm9taW5hdG9yLCB3aGljaCBmb3IgYSBjb250aW51b3VzIHBhcmFtZXRlciBpcyBnaXZlbiBhczoKCiQkcChZKSA9IFxpbnRfXFRoZXRhIHAoWXxcdGhldGEpcChcdGhldGEpZChcdGhldGEpJCQKCkludGVncmFscyBhcmUgZ2VuZXJhbGx5IGRpZmZpY3VsdCB0byB3b3JrIG91dCwgc28gdGhleSdyZSBvZnRlbiBiZXN0IGF2b2lkZWQhIFdlJ2xsIHNlZSBpbiB0aGUgc2VjdGlvbiBvbiBwYXJhbWV0ZXIgZXN0aW1hdGlvbiB0aGF0IHdoaWxlIGl0J3Mgbm90IGFsd2F5cyBwb3NzaWJsZSB0byB3b3JrIG91dCB0aGUgcG9zdGVyaW9yLCB3ZSBjYW4ganVzdCAqKmRyYXcgc2FtcGxlcyBmcm9tIGl0Kiogd2l0aG91dCBuZWVkaW5nIHRvIHNvbHZlIHRoZSBpbnRlZ3JhbC4KCiMjIyBSYXRpbyBmb3JtCgpCb3RoIG9mIHRoZXNlIGZvcm1zLCBob3dldmVyLCBvYnNjdXJlIHRoZSByZWxhdGlvbnNoaXAgYmV0d2VlbiAqKkJheWVzKiogYW5kICoqcHJlZGljdGlvbioqLgoKRm9sbG93aW5nIFtSb3VkZXIgYW5kIE1vcmV5ICgyMDE5KV0oaHR0cHM6Ly9kb2kub3JnLzEwLjEwODAvMDAwMzEzMDUuMjAxNy4xMzQxMzM0KSwgSSB0aGluayBpdCdzIHVzZWZ1bCB0byBwcmVzZW50IEJheWVzIHJ1bGUgaW4gdGhlIHJhdGlvIGZvcm06CgokJFxmcmFje1xwaShcdGhldGF8WSl9e1xwaSh7XHRoZXRhfSl9PVxmcmFje3AoWXxcdGhldGEpfXtwKFkpfSQkCgpUaGUgcmF0aW8gZm9ybSByZWxhdGVzIG91ciAiYmVsaWVmcyIgYWJvdXQgcGFyYW1ldGVycyAkXGZyYWN7XHBpKFx0aGV0YXxZKX17XHBpKHtcdGhldGF9KX0kIHRvIHByb2JhYmlsaXRpZXMgYWJvdXQgZGF0YSAkXGZyYWN7cChZfFx0aGV0YSl9e3AoWSl9JC4gT3IgcHV0IGFub3RoZXIgd2F5LCBpdCByZWxhdGVzICoqYmVsaWVmcyoqIGFuZCAqKmV2aWRlbmNlKiogdG8gKipwcmVkaWN0aW9ucyoqLiBUbyB1bmRlcnN0YW5kIGhvdyB0aGlzIGlzIHRoZSBjYXNlLCB3ZSdsbCBleGFtaW5lIHRoZSBleGFtcGxlIGdpdmVuIGJ5IFtSb3VkZXIgYW5kIE1vcmV5ICgyMDE5KV0oaHR0cHM6Ly9kb2kub3JnLzEwLjEwODAvMDAwMzEzMDUuMjAxNy4xMzQxMzM0KS4KClRvIGV4cGxvcmUgdGhpcyBmb3JtdWxhIHdlJ2xsIGZpcnN0IGhhdmUgdG8gc2V0IHR3byB0aGluZ3MuIEZpcnN0LCB3ZSdsbCBuZWVkIHRvIHNldCB3aGF0IG91ciBvYnNlcnZhdGlvbiBpcy0tLXRoYXQgaXMsIG91ciAqKmRhdGEqKi4gVGhpcyB3aWxsIGp1c3QgYmUgdGhlIG51bWJlciBvZiBoZWFkcyAoJHgkKSB3ZSd2ZSBvYnNlcnZlZCBhZnRlciAkbiQgZmxpcHMuIFRoZSBzZWNvbmQgdGhpbmcgd2UgbmVlZCB0byBzZXQgaWYgb3VyICoqcHJpb3IqKi4gVGhpcyBpcyBqdXN0IHRoZSB3ZWlnaHRzIHRoYXQgd2Ugc2V0IGluIHRoZSBwcmV2aW91cyBzZWN0aW9uLCBhbmQgdGhlICoqcHJpb3IqKiByZXByZXNlbnRzIG91ciAqImJlbGllZnMiKiBhYm91dCBwbGF1c2libGUgdmFsdWVzIGZvciB0aGUgcGFyYW1ldGVyIChpbiBvdXIgY2FzZSwgdGhlIGJpYXMgb2YgdGhlIGNvaW4pICoqYmVmb3JlKiogc2VlaW5nIHRoZSBkYXRhIChtb3JlIG9uIHdoZXRoZXIgcHJpb3JzIHJlcHJlc2VudCBiZWxpZWZzIGluIHRoZSBuZXh0IHNlY3Rpb24pLiBXZSdsbCByZXByZXNlbnQgb3VyIHByaW9yIHdpdGggYSAkXG1hdGhiZntCZXRhfSQgZGlzdHJpYnV0aW9uLCBiZWNhdXNlIHRoaXMgaGFzIHNvbWUgY29udmVuaWVudCBtYXRoZW1hdGljYWwgcHJvcGVydGllcyAoYWdhaW4sIG1vcmUgb24gdGhhdCBpbiB0aGUgbmV4dCBzZWN0aW9uKS4gQnkgY2hhbmdpbmcgdGhlIHR3byBwYXJhbWV0ZXJzIG9mIHRoZSAkXG1hdGhiZntCZXRhfSQgZGlzdHJpYnV0aW9uICgkXGFscGhhJCBhbmQgJFxiZXRhJCkgeW91IGNhbiBhc3NpZ24gbW9yZSBvciBsZXNzIHByaW9yIG1hc3MgdG8gdGhlIGV4dHJlbWUgKGkuZS4sICRcdGhldGEkID0gMCBhbmQgJFx0aGV0YSQgPSAxKS4gV2hlbiB0aGUgdmFsdWVzIGFyZSB0aGUgc2FtZSwgdGhlIGRpc3RyaWJ1dGlvbiB3aWxsIGJlIHN5bW1ldHJpY2FsIGFuZCB0aGVuIHRoZXkncmUgZGlmZmVyZW50IHRoZSBkaXN0cmlidXRpb24gd2l0aCBiZSBhc3ltbWV0cmljYWwuCgpGb3Igb3VyIHNpbXBsZSBjb2luIGZsaXAgZXhhbXBsZSwgd2UnbGwganVzdCBiZSBhYmxlIHRvIGNhbGN1bGF0ZSB0aGUgcG9zdGVyaW9yIGRpcmVjdGx5LiBUaGlzIHBvc3RlcmlvciByZXByZXNlbnRzIHdoYXQgd2UgYmVsaWV2ZSBhYm91dCB0aGUgcGFyYW1ldGVyICoqYWZ0ZXIqKiBzZWVpbmcgdGhlIGRhdGEuCgp7e2NodW5rXzF9fQoKe3tjaHVua18yfX0KCnt7Y2h1bmtfM319Cgp7e2NodW5rXzR9fQoKT25jZSB3ZSBwbG90IHRoZSAqKnByaW9yKiogYW5kIHRoZSAqKnBvc3RlcmlvcioqIHRvZ2V0aGVyIHdlJ2xsIHNlZSB0aGF0IGZvciBzb21lIHZhbHVlcyBvZiAkXHRoZXRhJCBzZWVpbmcgdGhlIGRhdGEgcmVzdWx0ZWQgaW4gdXMgKmJlbGlldmluZyogdGhhdCB0aGF0IHZhbHVlIG9mICRcdGhldGEkIGlzICptb3JlIHByb2JhYmxlKi4gRm9yIG90aGVyIHZhbHVlcywgd2Ugbm93ICpiZWxpZXZlKiB0aGF0IHRoYXQgdmFsdWUgb2YgJFx0aGV0YSQgaXMgKmxlc3MgcHJvYmFibGUqIChpbiB0aGUgcGxvdHMsIGEgdmFsdWUgdGhhdCBpcyAqbGVzcyBwcm9iYWJsZSogYWZ0ZXIgc2VlaW5nIHRoZSBkYXRhIGlzIHNob3duIHdpdGggZW1wdHkgcG9pbnQgYW5kIGEgdmFsdWUgdGhhdCBpcyAqbW9yZSBwcm9iYWJsZSogYWZ0ZXIgc2VlaW5nIHRoZSBkYXRhIGlzIHNob3duIHdpdGggYSBmaWxsZWQgcG9pbnQpLgoKRm9yIGVhY2ggdmFsdWUgb2YgdGhlIHBhcmFtZXRlciB3ZSBjYW4gZXhhbWluZSB3aGV0aGVyIHRoZSBkYXRhIHJlc3VsdGVkIGluIHVzIGJlbGlldmluZyB0aGF0IHRoYXQgdmFsdWUgb2YgdGhlIHBhcmFtZXRlciBpcyBtb3JlIG9yIGxlc3MgcHJvYmFibGUuIFdlIGNhbiBjYWxsIHRoaXMgdGhlICoqc3RyZW5ndGggb2YgZXZpZGVuY2UgZnJvbSB0aGUgZGF0YSBhYm91dCAkXHRoZXRhJCoqLiBXZSBjYW4gY2FsY3VsYXRlIHRoaXMgYnkganVzdCBjYWxjdWxhdGluZyB0aGUgcmVsYXRpdmUgZGlmZmVyZW5jZSBiZXR3ZWVuIHRoZSBwcmlvciBhbmQgdGhlIHBvc3Rlcmlvci0tLXRoYXQgaXMsIGJ5IGNhbGN1bGF0aW5nICRcZnJhY3tccGkoXHRoZXRhfFkpfXtccGkoXHRoZXRhKX0kLgoKe3tjaHVua181fX0KCldlIGNhbiBub3cgdHVybiBvdXIgYXR0ZW50aW9uIHRvIHRoZSBkYXRhIGFuZCB3ZSBjYW4gYXNrOiAid2hhdCBpcyB0aGUgcHJvYmFiaWxpdHkgb2YgZGlmZmVyZW50IG9ic2VydmF0aW9ucyAqKmFzc3VtaW5nKiogZGlmZmVyZW50IHZhbHVlcyBvZiAkXHRoZXRhJD8iLiBUaGlzIGNhbiBiZSBkb25lIHdpdGggYSBzaW11bGF0aW9uIChsaWtlIGluIG91ciBlYXJsaWVyIGV4YW1wbGVzKTsgaG93ZXZlciwgSSBrbm93IHRoYXQgaXQgZm9sbG93cyBhICRcbWF0aGJme0Jpbm9taWFsfSQgZGlzdHJpYnV0aW9uLCBzbyBJIGNhbiBqdXN0IGdlbmVyYXRlIGl0IGZvciBkaWZmZXJlbnQgYXNzdW1lZCB2YWx1ZXMgb2YgJFx0aGV0YSQuCgp7e2NodW5rXzZ9fQoKVGhlIG5leHQgY29uY2VwdCwgJHAoWSkkLCBvciB0aGUgKiptYXJnaW5hbCBwcm9iYWJpbGl0eSoqLCBpcyBhIHNsaWdodGx5IHRyaWNreSBjb25jZXB0OiAkcChZKSQgaXMgdGhlIHByb2JhYmlsaXR5IG9mIG9ic2VydmluZyBvdXIgZGF0YSBpbmRlcGVuZGVudCBvZiB3aGF0ZXZlciB2YWx1ZSAkXHRoZXRhJCBtaWdodCB0YWtlLiBPZnRlbiB0aGlzIHZhbHVlIGlzIGlnbm9yZWQsIGVzcGVjaWFsbHkgaW4gdGhlIGNvbnRleHQgb2YgcGFyYW1ldGVyIGVzdGltYXRpb24gKGFzIHlvdSdsbCBzZWUgaW4gbGF0ZXIgc2VjdGlvbnMpLiBJbiBmYWN0LCB0aGlzIHZhbHVlIGlzbid0IHByZXNlbnQgaW4gdGhlICJwcm9wb3J0aW9uYWwiIGZvcm11bGF0aW9uIG9mIEJheWVzIHJ1bGU7IGhvd2V2ZXIsIHVuZGVyc3RhbmRpbmcgJHAoWSkkIGlzIGV4dHJlbWVseSB1c2VmdWwgaW4gdGhlIGNvbnRleHQgb2YgKipCYXllcyBmYWN0b3JzKiouCgpUaGUgKiptYXJnaW5hbCBwcm9iYWJpbGl0eSoqIGRpc3RyaWJ1dGlvbi9tYXNzIHBsb3QgY2FuIGJlIG1vcmUgcmVhZGlseSBjb25jZXB0dWFsaXNlZCBhcyB0aGUgcHJlZGljdGlvbnMgYSBtb2RlbCAoJFxtYXRoY2Fse019X0kkKSBtYWtlcyBhYm91dCB0aGUgZGF0YS4gV2UgY2FuIGdlbmVyYXRlIHRoaXMgYnkgc2VlaW5nIHdoYXQgZGF0YSBpcyBwcmVkaWN0ZWQgYnkgZWFjaCB2YWx1ZSBvZiAkXHRoZXRhJCB3aGVyZSAkXHRoZXRhJCBpdHNlbGYgaGFzIGEgcHJvYmFiaWxpdHkgZGlzdHJpYnV0aW9uIHNwZWNpZmllZCBieSAkXHBpKFx0aGV0YSkkLiBUaGlzIGNvbmNlcHQgaXMgbWF5YmUgZWFzaWVzdCB0byB1bmRlcnN0YW5kIHdoZW4gd2UgY29uc2lkZXIgYSB1bmlmb3JtIHByaW9yIHdoZXJlIGVhY2ggdmFsdWUgb2YgJFx0aGV0YSQgaXMgZXF1YWxseSBwcm9iYWJseS4gVGhlbiB3ZSBjYW4gYXNrLCB3aGF0IGlzIHRoZSBwcm9iYWJpbGl0eSBvZiBvYnNlcnZpbmcgYSBzcGVjaWZpYyBvdXRjb21lICRZJCBpbmRlcGVuZGVudCBvZiB0aGUgdmFsdWUgb2YgJFx0aGV0YSQgKG9yLCBhdmVyYWdlZCBhY3Jvc3MgYWxsIHBvc3NpYmxlIHZhbHVlcyBvZiAkXHRoZXRhJC4gVGhpcyBpcyBqdXN0ICRcZnJhY3sxfXtufSQsIHdoZXJlICRuJCBpcyB0aGUgbnVtYmVyIG9mIHBvc3NpYmxlIG91dGNvbWVzLiBJbiBvdXIgY29pbiBmbGlwIGV4YW1wbGUsIHRoZXJlIGFyZSAxMSBwb3NzaWJsZSBvdXRjb21lcy0tLTAgaGVhZHMsIDEgaGVhZCwgMiBoZWFkcywuLi4gMTAgaGVhZHMuIFNvICRwKFkpJCB3b3VsZCBiZSAkXGZyYWN7MX17MTF9JCBmb3IgYW55IG91dGNvbWUuIE9yIHBocmFzZWQgYW5vdGhlciB3YXksIHdlIGNhbiBzYXkgdGhhdCwgd2l0aG91dCBrbm93aW5nICRcdGhldGEkLCBidXQga25vd2luZyB0aGF0IGV2ZXJ5IHZhbHVlIG9mICRcdGhldGEkIGlzIGVxdWFsbHkgcHJvYmFibHksIHdlIGNhbiBwcmVkaWN0IHRoYXQgYW55IG9ic2VydmF0aW9uLCBzdWNoIGFzIG91ciBzcGVjaWZpYyBvYnNlcnZhdGlvbiwgd291bGQgb2NjdXIgd2l0aCBhIHByb2JhYmlsaXR5IG9mICRcZnJhY3sxfXsxMX0kLiBBIHZlcnkgaW1wb3J0YW50IHRoaW5nIHRvIG5vdGUgYWJvdXQgdGhlICptYXJnaW5hbCBwcm9iYWJpbGl0eSBkaXN0cmlidXRpb24qIGlzIHRoYXQgaXQgbXVzdCBzdW0gdG8gMS4gV2UnbGwgc2VlIGluIHRoZSBleGFtcGxlIGJlbG93LCB0aGF0IGZvciBkaWZmZXJlbnQgcHJpb3JzICgkXHBpKFx0aGV0YSkkKSwgdGhlIHBhdHRlcm4gc2VlIGluIHRoZSBtYXJnaW5hbCBkaXN0cmlidXRpb24gY2hhbmdlcywgYnV0IGl0IGFsd2F5cyBzdW1zIHRvIDEuIFRoaXMgbWVhbnMgdGhhdCB3aGVuIHNvbWUgb2JzZXJ2YXRpb25zIGJlY29tZSAqKm1vcmUqKiBwcm9iYWJsZSwgb3RoZXIgb2JzZXJ2YXRpb25zIG11c3QgYmVjb21lICoqbGVzcyoqIHByb2JhYmxlLgoKSW4gdGhlIHRhYmxlIGJlbG93LCB5b3UnbGwgc2VlIGhvdyB0aGUgKiptYXJnaW5hbCBwcm9iYWJpbGl0eSoqIGlzIGNhbGN1bGF0ZWQgZm9yIGVhY2ggb2JzZXJ2YXRpb24uIFRoZSB0YWJsZSBqdXN0IHNob3dzIHRoZSBjYWxjdWxhdGlvbiBmb3Igb3VyIHNwZWNpZmljIG9ic2VydmF0aW9uLS0tdGhhdCBpcywgb3VyICRwKFkpJC4gTm90ZSB0aGF0IHRoZSBhY2N1cmFjeSBvZiBvdXIgZXN0aW1hdGUgZm9yICRwKFkpJCBkZXBlbmRzIG9uIGhvdyBtYW55IHZhbHVlcyBvZiAkXHRoZXRhJCB3ZSBhdmVyYWdlIGFjcm9zcy4gVGhpcyBtZWFucyB0aGF0IGZvciBhIHVuaWZvcm0gcHJpb3IsIHRoZSBsaW1pdCBvZiBvdXIgZXN0aW1hdGUgd2lsbCBhcHByb2FjaCAkXGZyYWN7MX17MTF9JCB3aGVuIHRoZSBudW1iZXIgb2YgdmFsdWVzIG9mICRcdGhldGEkIHRoYXQgd2UgYXZlcmFnZSBhY3Jvc3MgYXBwcm9hY2hlcyBpbmZpbml0eS4KCnt7Y2h1bmtfN319CgpUaGUgdGFibGUganVzdCBzaG93cyB0aGUgbWFyZ2luYWwgcHJvYmFiaWxpdHkgZm9yIG91ciBvYnNlcnZhdGlvbiwgYnV0IGluIHRoZSBmaWd1cmUgYmVsb3cgd2UgY2FuIHBsb3QgdGhlIG1hcmdpbmFsIGRpc3RyaWJ1dGlvbiB3aGljaCBjb25zaWRlcnMgZXZlcnkgcG9zc2libGUgb2JzZXJ2YXRpb24uIFRoaXMgYWxsb3dzIHVzIHRvIGxvb2sgb2YgdGhlIGVudGlyZSByYW5nZSBvZiBwb3NzaWJsZSBvYnNlcnZhdGlvbnMgYW5kIHNlZSB3aGljaCBhcmUgbW9yZSBvciBsZXNzIHByb2JhYmxlLiBUaGVzZSBhcmUgdGhlIHByZWRpY3Rpb25zIG91ciBtb2RlbCBtYWtlcy4KCnt7Y2h1bmtfOH19CgpXZSBjYW4gY29tcGFyZSB0aGUgbWFyZ2luYWwgcHJvYmFiaWxpdHkgb2Ygb3VyIG9ic2VydmF0aW9uICRwKFkpJCB3aXRoIHRoZSBjb25kaXRpb25hbCBwcm9iYWJpbGl0eSAkcChZfFx0aGV0YSkkIC0tLSB0aGF0IGlzLCBjb25kaXRpb25hbCBvbiBhIHNwZWNpZmljIHZhbHVlIG9mICRcdGhldGEkLiBUaGUgcmF0aW8gb2YgdGhlc2UgdHdvICRcZnJhY3twKFl8XHRoZXRhKX17cChZKX0kIGlzIHRoZSBwcmVkaWN0aXZlIGFjY3VyYWN5IGZvciBvdXIgZGF0YSB0aGF0IGdhaW5lZCBieSBjb25zaWRlcmluZyAkXHRoZXRhJC4KClRoZSBmb2xsb3dpbmcgcGxvdCBzaW1wbHkgc2hvd3MgdGhlIGNvbmRpdGlvbmFsIHByb2JhYmlsaXR5IG9mIHRoZSBkYXRhIGdpdmUgZGlmZmVyZW50IHZhbHVlcyBvZiB0aGUgcGFyYW1hdGVyIChsYWJlbGxlZCAqKmNvbmRpdGlvbmFsKiopIGFuZCB0aGUgbWFyZ2luYWwgcHJvYmFiaWxpdHkgb3IgdGhlIHByb2JhYmlsaXR5IG9mIHRoZSBkYXRhIGlycmVzcGVjdGl2ZSBvZiB0aGUgdmFsdWUgb2YgdGhlIHBhcmFtZXRlciAobGFiZWxsZWQgKiptYXJnaW5hbCoqKS4KCnt7Y2h1bmtfOX19Cgp7e2NodW5rXzEwfX0KClRoaXMgcGxvdCAqKmlzIGp1c3QgdGhlIHNhbWUgYXMgdGhlIHN0cmVuZ3RoIG9mIGV2aWRlbmNlKiogZm9yIHZhbHVlcyBvZiAkXHRoZXRhJCBvciB0aGUgZmFjdG9yIGJ5IHdoaWNoIHdlIHVwZGF0ZSBvdXIgYmVsaWVmcyBhYm91dCAkXHRoZXRhJCBhZnRlciBvYnNlcnZpbmcgdGhlIGRhdGEuIFRoaXMgZmFjdCBpcyBqdXN0IHJlcHJlc2VudGVkIGJ5IHRoZSBlcXVhbGl0eSBpbiB0aGUgcmF0aW8gZm9ybSBvZiBCYXllcyBydWxlICRcZnJhY3tccGkoXHRoZXRhfFkpfXtccGkoe1x0aGV0YX0pfT1cZnJhY3twKFl8XHRoZXRhKX17cChZKX0kLiBUaGlzIGVxdWF0aW9uIGNhbiBub3cgd2UgcmVhZCBhcyBtZWFuaW5nIHRoYXQgdGhlIHN0cmVuZ3RoIG9mIGV2aWRlbmNlIHRoYXQgd2UgaGF2ZSBmb3IgYSBwYXJhbWV0ZXIgdmFsdWUgaXMganVzdCB0aGUgc2FtZSBhcyB0aGUgZ2FpbiBpbiBwcmVkaWN0aXZlIGFjY3VyYWN5LgoKIyMgQmF5ZXMgZmFjdG9yCgpJbiB0aGlzIGV4YW1wbGUsIHdlJ3ZlIG9ubHkgY29uc2lkZXJlZCBvbmUgbW9kZWwgZGVmaW5lZCBieSB0aGUgcHJpb3Igd2Ugc2V0IGF0IHRoZSBiZWdpbm5pbmcuIEhvd2V2ZXIsIG1hcmdpbmFsIGRlbnNpdGllcyBhcmUgcGFydGljdWxhcmx5IHVzZWZ1bCB3aGVuIHdlIGNvbnNpZGVyIG11bHRpcGxlIG1vZGVscy4gSW4gdGhlIG5leHQgZXhhbXBsZSwgd2UgcGxvdCB0aGUgbWFyZ2luYWwgZGVuc2l0eSBmb3Igb3VyIGN1cnJlbnQgbW9kZWwgKCRcbWF0aGNhbHtNfV8xJDsgc3VicGxvdCAqKkEqKikgYW5kIG1vcmUgcmVzdHJpY3RlZCBtb2RlbCB3aGVyZSB3ZSBubyBsb25nZXIgYSBwcm9iYWJpbGl0eSBkaXN0cmlidXRpb24gb3ZlciBldmVyeSBwb3NzaWJsZSB2YWx1ZSBvZiAkXHRoZXRhJCwgYnV0IGluc3RlYWQgb25seSBjb25zaWRlciBvbmUgcG9zc2libGUgdmFsdWUsICRcdGhldGEkID0gMC41ICgkXG1hdGhjYWx7TX1fMiQ7IHN1YnBsb3QgKipBKiopLiBUaGUgZGlmZmVyZW5jZSBpbiBwcmVkaWN0aW9ucyB0aGUgbW9kZWxzIG1ha2UgaXMgc2hvd24gaW4gc3VicGxvdCAqKkMqKi4gVGhpcyBwbG90IGlzIGp1c3QgZ2VuZXJhdGVkIGFzIHRoZSByYXRpbyAkXGZyYWN7cChZfFxtYXRoY2Fse019XzEpfXtwKFl8XG1hdGhjYWx7TX1fMil9JC4gT25jZSB3ZSBoYXZlIG91ciBkYXRhIGluIGhhbmQsIHdlIGNhbiBzZWUgd2hldGhlciBvdXIgZGF0YSBpcyBiZXR0ZXIgcHJlZGljdGVkIGJ5IE1vZGVsIDEgb3IgTW9kZWwgMi0tLXRoaXMgdmFsdWUgaXMgdGhlICoqQmF5ZXMgZmFjdG9yKiouCgp7e2NodW5rXzExfX0KCnt7Y2h1bmtfMTJ9fQo" download="04-bayes.Rmd"><img src="https://img.shields.io/badge/.Rmd-Download-blue"></a>
+<a href="https://colab.research.google.com/github/ljcolling/bayes2022/blob/main/_notebooks/04-bayes.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" /></a></p>
+<p>I’ve left talking about Bayes rule until now, because I think you can understand the concept of the Bayes factor without it, and because I wanted to emphasise the idea that the Bayes factor is a ratio of <strong>two weighted averages</strong>. However, now that we have this simple understanding, I’m hoping to deepen your understanding a bit by introducing Bayes rule. This deeper understanding of Bayes rule will also help use understand some of the topic we’ll cover later in the course.</p>
+<div id="what-is-bayes-rule" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> What is Bayes rule</h2>
+<p>Bayes rule follows straightforwardly from the axioms of conditional probability. In this sense, there’s nothing particularly “Bayesian” about it in that both Frequentists and Bayesians can, and do, make use of the concept of conditional probability.</p>
+<div id="conditional-probability-form" class="section level3" number="4.1.1">
+<h3><span class="header-section-number">4.1.1</span> Conditional probability form</h3>
+<p>When you encounter Bayes rule in a frequentist context, it often takes the following form:</p>
+<p><span class="math display">\[p(A|B) = \frac{p(B|A)p(A)}{p(B)}\]</span></p>
+<p>or</p>
+<p><span class="math display">\[p(A|B) = \frac{p(B|A)p(A)}{p(B|A)p(A) + p(B|\neg{}A)p(\neg{}A)}\]</span></p>
+<p>In this form, it typically explained by way of an example usually involving some kind of a test. In classic examples, the context if <em>often</em> a test for a rare disease. It is then shown that Bayes rule can be used to calculate the probability that the <strong>positive</strong> test indicates the <strong>presence</strong> of the disease <span class="math display">\[p(disease present\| positive test)\]</span>, by taking into account the <strong>sensitivity</strong> of the test <span class="math display">\[p(positive test \| disease present)\]</span>, the prevalence of the disease <span class="math display">\[p(disease)\]</span>, and the probability of the test returning a positive result irrespective of the presence of the disease <span class="math display">\[p(positive)\]</span>.</p>
+<p>Bayes rule presented in this form is useful for thinking about evidence. The left side of the equation - <span class="math inline">\(\frac{p(B|A)p(A)}{p(B)}\)</span> - or more specifically, part of it - <span class="math inline">\(\frac{p(B|A)}{p(B)}\)</span> - can be read as representing the <strong>evidence</strong> the test provides or the presence of the disease. This <strong>evidence</strong> is then <strong>weighted</strong> by the <strong>base rate</strong> or the prior probability of the disease being present.</p>
+</div>
+<div id="proportional-form" class="section level3" number="4.1.2">
+<h3><span class="header-section-number">4.1.2</span> Proportional form</h3>
+<p>In the context of Bayesian inference, it is often given in a slightly different form:</p>
+<p><span class="math display">\[p(A|B) \propto{} P(B|A) \cdot{} P(A)\]</span></p>
+<p>or</p>
+<p><span class="math display">\[p(\theta|Y) \propto{} \mathcal{L}(\theta|Y) \cdot{}p(\theta)\]</span></p>
+<p>In this form it is usually read as “the posterior probability is proportional to the likelihood times the prior”. The proportional form drops the denominator, which for a continuous parameter is given as:</p>
+<p><span class="math display">\[p(Y) = \int_\Theta p(Y|\theta)p(\theta)d(\theta)\]</span></p>
+<p>Integrals are generally difficult to work out, so they’re often best avoided! We’ll see in the section on parameter estimation that while it’s not always possible to work out the posterior, we can just <strong>draw samples from it</strong> without needing to solve the integral.</p>
+</div>
+<div id="ratio-form" class="section level3" number="4.1.3">
+<h3><span class="header-section-number">4.1.3</span> Ratio form</h3>
+<p>Both of these forms, however, obscure the relationship between <strong>Bayes</strong> and <strong>prediction</strong>.</p>
+<p>Following <a href="https://doi.org/10.1080/00031305.2017.1341334">Rouder and Morey (2019)</a>, I think it’s useful to present Bayes rule in the ratio form:</p>
+<p><span class="math display">\[\frac{\pi(\theta|Y)}{\pi({\theta})}=\frac{p(Y|\theta)}{p(Y)}\]</span></p>
+<p>The ratio form relates our “beliefs” about parameters <span class="math inline">\(\frac{\pi(\theta|Y)}{\pi({\theta})}\)</span> to probabilities about data <span class="math inline">\(\frac{p(Y|\theta)}{p(Y)}\)</span>. Or put another way, it relates <strong>beliefs</strong> and <strong>evidence</strong> to <strong>predictions</strong>. To understand how this is the case, we’ll examine the example given by <a href="https://doi.org/10.1080/00031305.2017.1341334">Rouder and Morey (2019)</a>.</p>
+<p>To explore this formula we’ll first have to set two things. First, we’ll need to set what our observation is—that is, our <strong>data</strong>. This will just be the number of heads (<span class="math inline">\(x\)</span>) we’ve observed after <span class="math inline">\(n\)</span> flips. The second thing we need to set if our <strong>prior</strong>. This is just the weights that we set in the previous section, and the <strong>prior</strong> represents our <em>“beliefs”</em> about plausible values for the parameter (in our case, the bias of the coin) <strong>before</strong> seeing the data (more on whether priors represent beliefs in the next section). We’ll represent our prior with a <span class="math inline">\(\mathbf{Beta}\)</span> distribution, because this has some convenient mathematical properties (again, more on that in the next section). By changing the two parameters of the <span class="math inline">\(\mathbf{Beta}\)</span> distribution (<span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>) you can assign more or less prior mass to the extreme (i.e., <span class="math inline">\(\theta\)</span> = 0 and <span class="math inline">\(\theta\)</span> = 1). When the values are the same, the distribution will be symmetrical and then they’re different the distribution with be asymmetrical.</p>
+<p>For our simple coin flip example, we’ll just be able to calculate the posterior directly. This posterior represents what we believe about the parameter <strong>after</strong> seeing the data.</p>
+<p>{{chunk_1}}</p>
+<p>{{chunk_2}}</p>
+<p>{{chunk_3}}</p>
+<p>{{chunk_4}}</p>
+<p>Once we plot the <strong>prior</strong> and the <strong>posterior</strong> together we’ll see that for some values of <span class="math inline">\(\theta\)</span> seeing the data resulted in us <em>believing</em> that that value of <span class="math inline">\(\theta\)</span> is <em>more probable</em>. For other values, we now <em>believe</em> that that value of <span class="math inline">\(\theta\)</span> is <em>less probable</em> (in the plots, a value that is <em>less probable</em> after seeing the data is shown with empty point and a value that is <em>more probable</em> after seeing the data is shown with a filled point).</p>
+<p>For each value of the parameter we can examine whether the data resulted in us believing that that value of the parameter is more or less probable. We can call this the <strong>strength of evidence from the data about <span class="math inline">\(\theta\)</span></strong>. We can calculate this by just calculating the relative difference between the prior and the posterior—that is, by calculating <span class="math inline">\(\frac{\pi(\theta|Y)}{\pi(\theta)}\)</span>.</p>
+<p>{{chunk_5}}</p>
+<p>We can now turn our attention to the data and we can ask: “what is the probability of different observations <strong>assuming</strong> different values of <span class="math inline">\(\theta\)</span>?”. This can be done with a simulation (like in our earlier examples); however, I know that it follows a <span class="math inline">\(\mathbf{Binomial}\)</span> distribution, so I can just generate it for different assumed values of <span class="math inline">\(\theta\)</span>.</p>
+<p>{{chunk_6}}</p>
+<p>The next concept, <span class="math inline">\(p(Y)\)</span>, or the <strong>marginal probability</strong>, is a slightly tricky concept: <span class="math inline">\(p(Y)\)</span> is the probability of observing our data independent of whatever value <span class="math inline">\(\theta\)</span> might take. Often this value is ignored, especially in the context of parameter estimation (as you’ll see in later sections). In fact, this value isn’t present in the “proportional” formulation of Bayes rule; however, understanding <span class="math inline">\(p(Y)\)</span> is extremely useful in the context of <strong>Bayes factors</strong>.</p>
+<p>The <strong>marginal probability</strong> distribution/mass plot can be more readily conceptualised as the predictions a model (<span class="math inline">\(\mathcal{M}_I\)</span>) makes about the data. We can generate this by seeing what data is predicted by each value of <span class="math inline">\(\theta\)</span> where <span class="math inline">\(\theta\)</span> itself has a probability distribution specified by <span class="math inline">\(\pi(\theta)\)</span>. This concept is maybe easiest to understand when we consider a uniform prior where each value of <span class="math inline">\(\theta\)</span> is equally probably. Then we can ask, what is the probability of observing a specific outcome <span class="math inline">\(Y\)</span> independent of the value of <span class="math inline">\(\theta\)</span> (or, averaged across all possible values of <span class="math inline">\(\theta\)</span>. This is just <span class="math inline">\(\frac{1}{n}\)</span>, where <span class="math inline">\(n\)</span> is the number of possible outcomes. In our coin flip example, there are 11 possible outcomes—0 heads, 1 head, 2 heads,… 10 heads. So <span class="math inline">\(p(Y)\)</span> would be <span class="math inline">\(\frac{1}{11}\)</span> for any outcome. Or phrased another way, we can say that, without knowing <span class="math inline">\(\theta\)</span>, but knowing that every value of <span class="math inline">\(\theta\)</span> is equally probably, we can predict that any observation, such as our specific observation, would occur with a probability of <span class="math inline">\(\frac{1}{11}\)</span>. A very important thing to note about the <em>marginal probability distribution</em> is that it must sum to 1. We’ll see in the example below, that for different priors (<span class="math inline">\(\pi(\theta)\)</span>), the pattern see in the marginal distribution changes, but it always sums to 1. This means that when some observations become <strong>more</strong> probable, other observations must become <strong>less</strong> probable.</p>
+<p>In the table below, you’ll see how the <strong>marginal probability</strong> is calculated for each observation. The table just shows the calculation for our specific observation—that is, our <span class="math inline">\(p(Y)\)</span>. Note that the accuracy of our estimate for <span class="math inline">\(p(Y)\)</span> depends on how many values of <span class="math inline">\(\theta\)</span> we average across. This means that for a uniform prior, the limit of our estimate will approach <span class="math inline">\(\frac{1}{11}\)</span> when the number of values of <span class="math inline">\(\theta\)</span> that we average across approaches infinity.</p>
+<p>{{chunk_7}}</p>
+<p>The table just shows the marginal probability for our observation, but in the figure below we can plot the marginal distribution which considers every possible observation. This allows us to look of the entire range of possible observations and see which are more or less probable. These are the predictions our model makes.</p>
+<p>{{chunk_8}}</p>
+<p>We can compare the marginal probability of our observation <span class="math inline">\(p(Y)\)</span> with the conditional probability <span class="math inline">\(p(Y|\theta)\)</span> — that is, conditional on a specific value of <span class="math inline">\(\theta\)</span>. The ratio of these two <span class="math inline">\(\frac{p(Y|\theta)}{p(Y)}\)</span> is the predictive accuracy for our data that gained by considering <span class="math inline">\(\theta\)</span>.</p>
+<p>The following plot simply shows the conditional probability of the data give different values of the paramater (labelled <strong>conditional</strong>) and the marginal probability or the probability of the data irrespective of the value of the parameter (labelled <strong>marginal</strong>).</p>
+<p>{{chunk_9}}</p>
+<p>{{chunk_10}}</p>
+<p>This plot <strong>is just the same as the strength of evidence</strong> for values of <span class="math inline">\(\theta\)</span> or the factor by which we update our beliefs about <span class="math inline">\(\theta\)</span> after observing the data. This fact is just represented by the equality in the ratio form of Bayes rule <span class="math inline">\(\frac{\pi(\theta|Y)}{\pi({\theta})}=\frac{p(Y|\theta)}{p(Y)}\)</span>. This equation can now we read as meaning that the strength of evidence that we have for a parameter value is just the same as the gain in predictive accuracy.</p>
+</div>
+</div>
+<div id="bayes-factor" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Bayes factor</h2>
+<p>In this example, we’ve only considered one model defined by the prior we set at the beginning. However, marginal densities are particularly useful when we consider multiple models. In the next example, we plot the marginal density for our current model (<span class="math inline">\(\mathcal{M}_1\)</span>; subplot <strong>A</strong>) and more restricted model where we no longer a probability distribution over every possible value of <span class="math inline">\(\theta\)</span>, but instead only consider one possible value, <span class="math inline">\(\theta\)</span> = 0.5 (<span class="math inline">\(\mathcal{M}_2\)</span>; subplot <strong>A</strong>). The difference in predictions the models make is shown in subplot <strong>C</strong>. This plot is just generated as the ratio <span class="math inline">\(\frac{p(Y|\mathcal{M}_1)}{p(Y|\mathcal{M}_2)}\)</span>. Once we have our data in hand, we can see whether our data is better predicted by Model 1 or Model 2—this value is the <strong>Bayes factor</strong>.</p>
+<p>{{chunk_11}}</p>
+<p>{{chunk_12}}</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="an-alternative-to-p-values.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

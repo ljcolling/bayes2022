@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Advanced Statistical Methods</title>
+  <meta name="description" content="An introduction to Bayesian Statistics" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Advanced Statistical Methods" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="An introduction to Bayesian Statistics" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Advanced Statistical Methods" />
+  
+  <meta name="twitter:description" content="An introduction to Bayesian Statistics" />
+  
+
+<meta name="author" content="Dr Lincoln Colling" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+<link rel="next" href="null-hypothesis-significance-testing.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Bayesian Stats</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#how-to-use-this-book"><i class="fa fa-check"></i>How to use this book</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#outline"><i class="fa fa-check"></i>Outline</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="null-hypothesis-significance-testing.html"><a href="null-hypothesis-significance-testing.html"><i class="fa fa-check"></i><b>1</b> Null-hypothesis significance testing</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="null-hypothesis-significance-testing.html"><a href="null-hypothesis-significance-testing.html#probability"><i class="fa fa-check"></i><b>1.1</b> Probability</a></li>
+<li class="chapter" data-level="1.2" data-path="null-hypothesis-significance-testing.html"><a href="null-hypothesis-significance-testing.html#probability-and-p-values"><i class="fa fa-check"></i><b>1.2</b> Probability and <em>p</em> values</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="null-hypothesis-significance-testing.html"><a href="null-hypothesis-significance-testing.html#understanding-the-p-through-simulation"><i class="fa fa-check"></i><b>1.2.1</b> Understanding the <em>p</em> through simulation</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="null-hypothesis-significance-testing.html"><a href="null-hypothesis-significance-testing.html#summary"><i class="fa fa-check"></i><b>1.3</b> Summary</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="null-hypothesis-significance-testing.html"><a href="null-hypothesis-significance-testing.html#a-short-note-on-confidence-intervals"><i class="fa fa-check"></i><b>1.3.1</b> A short note on confidence intervals</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="criticisms-of-p-values.html"><a href="criticisms-of-p-values.html"><i class="fa fa-check"></i><b>2</b> Criticisms of <em>p</em> values</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="criticisms-of-p-values.html"><a href="criticisms-of-p-values.html#same-measurements-from-different-devices"><i class="fa fa-check"></i><b>2.1</b> Same measurements from different devices</a></li>
+<li class="chapter" data-level="2.2" data-path="criticisms-of-p-values.html"><a href="criticisms-of-p-values.html#the-universe-of-possible-events"><i class="fa fa-check"></i><b>2.2</b> The universe of possible events</a></li>
+<li class="chapter" data-level="2.3" data-path="criticisms-of-p-values.html"><a href="criticisms-of-p-values.html#summary-1"><i class="fa fa-check"></i><b>2.3</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="an-alternative-to-p-values.html"><a href="an-alternative-to-p-values.html"><i class="fa fa-check"></i><b>3</b> An alternative to <em>p</em> values</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="an-alternative-to-p-values.html"><a href="an-alternative-to-p-values.html#doing-inference-with-likelihoods"><i class="fa fa-check"></i><b>3.1</b> Doing inference with likelihoods</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="an-alternative-to-p-values.html"><a href="an-alternative-to-p-values.html#a-brief-detour-back-to-sampling-rules"><i class="fa fa-check"></i><b>3.1.1</b> A brief detour back to sampling rules</a></li>
+<li class="chapter" data-level="3.1.2" data-path="an-alternative-to-p-values.html"><a href="an-alternative-to-p-values.html#the-likelihood-ratio"><i class="fa fa-check"></i><b>3.1.2</b> The likelihood ratio</a></li>
+<li class="chapter" data-level="3.1.3" data-path="an-alternative-to-p-values.html"><a href="an-alternative-to-p-values.html#a-note-about-likelihood-functions-and-probability-distributions"><i class="fa fa-check"></i><b>3.1.3</b> A note about likelihood functions and probability distributions</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="an-alternative-to-p-values.html"><a href="an-alternative-to-p-values.html#testing-more-complex-hypotheses"><i class="fa fa-check"></i><b>3.2</b> Testing more complex hypotheses</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="an-alternative-to-p-values.html"><a href="an-alternative-to-p-values.html#theres-more-than-one-way-to-average"><i class="fa fa-check"></i><b>3.2.1</b> There’s more than one way to average</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="the-bayes-factor.html"><a href="the-bayes-factor.html"><i class="fa fa-check"></i><b>4</b> The Bayes factor</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="the-bayes-factor.html"><a href="the-bayes-factor.html#computing-bayes-factors-with-bayesplay"><i class="fa fa-check"></i><b>4.1</b> Computing Bayes factors with <code>bayesplay</code></a></li>
+<li class="chapter" data-level="4.2" data-path="the-bayes-factor.html"><a href="the-bayes-factor.html#computing-bayes-factors-with-bayesplay-web"><i class="fa fa-check"></i><b>4.2</b> Computing Bayes factors with Bayesplay-Web</a></li>
+<li class="chapter" data-level="4.3" data-path="the-bayes-factor.html"><a href="the-bayes-factor.html#moving-beyond-coin-flips"><i class="fa fa-check"></i><b>4.3</b> Moving beyond coin flips</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="./">Lincoln Colling</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Advanced Statistical Methods</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">Advanced Statistical Methods</h1>
+<h2 class="subtitle"><em>Bayesian Statistics</em></h2>
+<p class="author"><em>Dr Lincoln Colling</em></p>
+</div>
+<div id="preface" class="section level1 unnumbered">
+<h1>Preface</h1>
+<p><img src="Thomas_Bayes.gif" style="display: block; margin: auto;" /></p>
+<p>The aim of this course is to give you an introduction to Bayesian statistics.
+It is by no means intended to be an exhaustive course, so at the end of it,
+there will still be a lot for you to learn. However, I do hope that at the end
+of this workshop you’ll have a better understanding of Bayesian statistics, how
+it differs from Frequentist approaches, and how to incorporate some Bayesian
+methods into your research.</p>
+<p>In this course we’ll primarily focus Bayesian hypothesis testing using Bayes
+factors. We’ll also discuss how Bayesian hypothesis testing differs from
+Null-hypothesis significance testing. Bayesian hypothesis testing with Bayes
+factors is just one of many approaches that could fall under the heading on
+<strong>Bayesian statistics</strong>. Other approaches would include things like Bayesian
+paramter estimation, and Bayesian regression modelling. These other approaches
+are definitely worth learning, but there simply aren’t within the scope of this
+short workshop.</p>
+<div id="how-to-use-this-book" class="section level2 unnumbered">
+<h2>How to use this book</h2>
+<p>You can read through this book just like you would read through any course
+notes. However, you’re get the most out of it if you work along with the code.
+To work along with the code click on one of the two badges that appear at the
+start of each chapter.</p>
+<p>The first badge will allow you to download the <strong>RMarkdown</strong> file that contains
+all the code for the examples. You’ll be able to load this up in <strong>RStudio</strong>.</p>
+<p><img src="https://img.shields.io/badge/.Rmd-Download-blue"></p>
+<p>The second badge will allow you to open the chapter in <strong>Google Colab</strong>. The
+interface for <strong>Google Colab</strong> is similar to an <strong>RMardown</strong> document in that
+it will contain code and text. However, you won’t need <strong>R</strong> installed and
+you’ll be able to work with the file directly in your web browser. If you make
+any changes to the document then you’ll be able to save these directly in you
+Google Drive account. You’ll just need to login with a GMail account.</p>
+<p><img src="https://colab.research.google.com/assets/colab-badge.svg" /></p>
+</div>
+<div id="outline" class="section level2 unnumbered">
+<h2>Outline</h2>
+<p>In the first part of this course will be a refresher on frequentist methods. In
+particular, we’ll talk about the sampling distribution, where it comes from,
+and how we do inference with it. Following this, we’ll cover some of the
+features of sampling distributions that have been criticised by Bayesian. From
+the sampling distribution, we’ll move on to likelihoods. We’ll see that
+likelihoods don’t suffer from some of the problems of sampling distributions,
+and we’ll see how to do inference with likelihoods.</p>
+<p>Finally, we’ll learn how to compute and interpret Bayes factors, and we’ll
+learn about some of the considerations that go into specifying models for
+Bayes factors.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="null-hypothesis-significance-testing.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

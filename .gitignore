@@ -1,0 +1,6 @@
+.DS_store
+termpdf.log
+_bookdown_files
+book/
+# Local Netlify folder
+.netlify
