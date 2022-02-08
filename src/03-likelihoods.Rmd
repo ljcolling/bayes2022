@@ -681,16 +681,15 @@ $$\int_{\theta\in\Theta}\mathcal{L}(\theta|\mathbf{y})d(\theta)$$
 
 Now that we're taking an integral, we get exactly $\frac{1}{11}$.
 
-Now that we have these two values: First, $\frac{45}{1024}$, which gives
-the probability of obtaining 8 heads in 10 flips if $\theta=0.5$, and
-second, $\frac{1}{11}$, which gives the probability of obtaining 8 heads
-is 10 flips, which the probability of obtaining 8 head in flips if
-$\theta$ was some unknown value between 0 and 1, what can we do with them?
-Well, we can just take the ratio! Just like we did with the two simple
-point hypotheses, we can also take the ratio between our simple point
-hypothesis and our more complex hypothesis. Taking this ratio tells us
-that's we'd be $2\frac{34}{495}$ times more likely to see our data if
-$\theta$ was some unknown value between 0 and 1 than if $\theta=0.5$.
+Now that we have these two values: First, $\frac{45}{1024}$, which gives the
+probability of obtaining 8 heads in 10 flips if $\theta=0.5$, and second,
+$\frac{1}{11}$, which the probability of obtaining 8 head in flips if $\theta$
+was some unknown value between 0 and 1, what can we do with them? Well, we can
+just take the ratio! Just like we did with the two simple point hypotheses, we
+can also take the ratio between our simple point hypothesis and our more
+complex hypothesis. Taking this ratio tells us that's we'd be $2\frac{34}{495}$
+times more likely to see our data if $\theta$ was some unknown value between 0
+and 1 than if $\theta=0.5$.
 
 Thinking back to the  *law of likelihood* that we covered at the start of
 this section, we said if our data would be produced more often if
