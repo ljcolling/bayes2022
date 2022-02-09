@@ -7,9 +7,9 @@ tasks:
     cmds: 
     - | 
       cd src
-      R -e "bookdown::render_book()"
+      R -e "bookdown::render_book()" --slave --no-save > /dev/null
       cd ..
       cd book
-      ./build_pdf
+      ./build_pdf > /dev/null
       osascript -e 'display notification "Finished building"'
     silent: true
