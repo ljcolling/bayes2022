@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 5 Moving beyond coin flips | Advanced Statistical Methods</title>
+  <meta name="description" content="An introduction to Bayesian Statistics" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 5 Moving beyond coin flips | Advanced Statistical Methods" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="An introduction to Bayesian Statistics" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 5 Moving beyond coin flips | Advanced Statistical Methods" />
+  
+  <meta name="twitter:description" content="An introduction to Bayesian Statistics" />
+  
+
+<meta name="author" content="Dr Lincoln Colling" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="the-bayes-factor.html"/>
+
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Bayesian Stats</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#how-to-use-this-book"><i class="fa fa-check"></i>How to use this book</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#outline"><i class="fa fa-check"></i>Outline</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="null-hypothesis-significance-testing.html"><a href="null-hypothesis-significance-testing.html"><i class="fa fa-check"></i><b>1</b> Null-hypothesis significance testing</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="null-hypothesis-significance-testing.html"><a href="null-hypothesis-significance-testing.html#probability"><i class="fa fa-check"></i><b>1.1</b> Probability</a></li>
+<li class="chapter" data-level="1.2" data-path="null-hypothesis-significance-testing.html"><a href="null-hypothesis-significance-testing.html#probability-and-p-values"><i class="fa fa-check"></i><b>1.2</b> Probability and <em>p</em> values</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="null-hypothesis-significance-testing.html"><a href="null-hypothesis-significance-testing.html#understanding-the-p-through-simulation"><i class="fa fa-check"></i><b>1.2.1</b> Understanding the <em>p</em> through simulation</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="null-hypothesis-significance-testing.html"><a href="null-hypothesis-significance-testing.html#summary"><i class="fa fa-check"></i><b>1.3</b> Summary</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="null-hypothesis-significance-testing.html"><a href="null-hypothesis-significance-testing.html#a-short-note-on-confidence-intervals"><i class="fa fa-check"></i><b>1.3.1</b> A short note on confidence intervals</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="criticisms-of-p-values.html"><a href="criticisms-of-p-values.html"><i class="fa fa-check"></i><b>2</b> Criticisms of <em>p</em> values</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="criticisms-of-p-values.html"><a href="criticisms-of-p-values.html#same-measurements-from-different-devices"><i class="fa fa-check"></i><b>2.1</b> Same measurements from different devices</a></li>
+<li class="chapter" data-level="2.2" data-path="criticisms-of-p-values.html"><a href="criticisms-of-p-values.html#the-universe-of-possible-events"><i class="fa fa-check"></i><b>2.2</b> The universe of possible events</a></li>
+<li class="chapter" data-level="2.3" data-path="criticisms-of-p-values.html"><a href="criticisms-of-p-values.html#summary-1"><i class="fa fa-check"></i><b>2.3</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="an-alternative-to-p-values.html"><a href="an-alternative-to-p-values.html"><i class="fa fa-check"></i><b>3</b> An alternative to <em>p</em> values</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="an-alternative-to-p-values.html"><a href="an-alternative-to-p-values.html#doing-inference-with-likelihoods"><i class="fa fa-check"></i><b>3.1</b> Doing inference with likelihoods</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="an-alternative-to-p-values.html"><a href="an-alternative-to-p-values.html#a-brief-detour-back-to-sampling-rules"><i class="fa fa-check"></i><b>3.1.1</b> A brief detour back to sampling rules</a></li>
+<li class="chapter" data-level="3.1.2" data-path="an-alternative-to-p-values.html"><a href="an-alternative-to-p-values.html#the-likelihood-ratio"><i class="fa fa-check"></i><b>3.1.2</b> The likelihood ratio</a></li>
+<li class="chapter" data-level="3.1.3" data-path="an-alternative-to-p-values.html"><a href="an-alternative-to-p-values.html#a-note-about-likelihood-functions-and-probability-distributions"><i class="fa fa-check"></i><b>3.1.3</b> A note about likelihood functions and probability distributions</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="an-alternative-to-p-values.html"><a href="an-alternative-to-p-values.html#testing-more-complex-hypotheses"><i class="fa fa-check"></i><b>3.2</b> Testing more complex hypotheses</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="an-alternative-to-p-values.html"><a href="an-alternative-to-p-values.html#theres-more-than-one-way-to-average"><i class="fa fa-check"></i><b>3.2.1</b> There’s more than one way to average</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="the-bayes-factor.html"><a href="the-bayes-factor.html"><i class="fa fa-check"></i><b>4</b> The Bayes factor</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="the-bayes-factor.html"><a href="the-bayes-factor.html#computing-bayes-factors-with-bayesplay"><i class="fa fa-check"></i><b>4.1</b> Computing Bayes factors with <code>bayesplay</code></a></li>
+<li class="chapter" data-level="4.2" data-path="the-bayes-factor.html"><a href="the-bayes-factor.html#computing-bayes-factors-with-bayesplay-web"><i class="fa fa-check"></i><b>4.2</b> Computing Bayes factors with Bayesplay-Web</a></li>
+<li class="chapter" data-level="4.3" data-path="the-bayes-factor.html"><a href="the-bayes-factor.html#moving-beyond-coin-flips"><i class="fa fa-check"></i><b>4.3</b> Moving beyond coin flips</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="moving-beyond-coin-flips-1.html"><a href="moving-beyond-coin-flips-1.html"><i class="fa fa-check"></i><b>5</b> Moving beyond coin flips</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="moving-beyond-coin-flips-1.html"><a href="moving-beyond-coin-flips-1.html#choosing-a-likelihood"><i class="fa fa-check"></i><b>5.1</b> Choosing a likelihood</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="moving-beyond-coin-flips-1.html"><a href="moving-beyond-coin-flips-1.html#the-variance-of-likelihoods"><i class="fa fa-check"></i><b>5.1.1</b> The variance of likelihoods</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="moving-beyond-coin-flips-1.html"><a href="moving-beyond-coin-flips-1.html#inferences-about-raw-means"><i class="fa fa-check"></i><b>5.2</b> Inferences about raw means</a></li>
+<li class="chapter" data-level="5.3" data-path="moving-beyond-coin-flips-1.html"><a href="moving-beyond-coin-flips-1.html#inferences-about-effect-sizes"><i class="fa fa-check"></i><b>5.3</b> Inferences about effect sizes</a></li>
+<li class="chapter" data-level="5.4" data-path="moving-beyond-coin-flips-1.html"><a href="moving-beyond-coin-flips-1.html#inferences-about-t-values"><i class="fa fa-check"></i><b>5.4</b> Inferences about <em>t</em> values</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="./">Lincoln Colling</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Advanced Statistical Methods</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="moving-beyond-coin-flips-1" class="section level1" number="5">
+<h1><span class="header-section-number">Chapter 5</span> Moving beyond coin flips</h1>
+<p><a href="data:text/x-markdown;base64,LS0tCnRpdGxlOiAiQmV5b25kIGNvaW4gY2xpcHMiCm91dHB1dDogaHRtbF9kb2N1bWVudAotLS0KCmBgYHtyIHNldHVwLCBlY2hvPUZBTFNFLCBtZXNzYWdlID0gRkFMU0UsIHdhcm5pbmcgPSBGQUxTRX0Ka25pdHI6Om9wdHNfY2h1bmskc2V0KGVjaG8gPSBGQUxTRSwgbWVzc2FnZSA9IEZBTFNFLCB3YXJuaW5nID0gRkFMU0UpCnN1cHByZXNzTWVzc2FnZXMoZXhwciA9IHsKICBpZiAoInhmdW4iICVpbiUgcm93Lm5hbWVzKGluc3RhbGxlZC5wYWNrYWdlcygpKSA9PSBGQUxTRSkgewogICAgaW5zdGFsbC5wYWNrYWdlcygieGZ1biIpCiAgfQoKICBkaXNwbGF5X21hcmtkb3duIDw8LSBrbml0cjo6YXNpc19vdXRwdXQKICBkaXNwbGF5X2h0bWwgPDwtIGtuaXRyOjphc2lzX291dHB1dAoKICB4ZnVuOjpwa2dfYXR0YWNoKAogICAgYygKICAgICAgInRpZHl2ZXJzZSIsCiAgICAgICJwb2xzcGxpbmUiLAogICAgICAicGF0Y2h3b3JrIiwKICAgICAgIm1hZ3JpdHRyIiwKICAgICAgImJheWVzcGxheSIsCiAgICAgICJrbml0ciIsCiAgICAgICJicm9vbSIsCiAgICAgICJiYXllc3BsYXkiCiAgICApLAogICAgaW5zdGFsbCA9IFRSVUUKICApCn0pCgp0YWJsZV9mb3JtYXQgPC0gImh0bWwiCmBgYAojIE1vdmluZyBiZXlvbmQgY29pbiBmbGlwcwoKSW4gdGhlIHByZXZpb3VzIHNlY3Rpb24gKHNlZSBbQW4gYWx0ZXJuYXRpdmUgdG8gKnAqCnZhbHVlc10oYW4tYWx0ZXJuYXRpdmUtdG8tcC12YWx1ZXMuaHRtbCksIGFuZCBbVGhlIEJheWVzCmZhY3Rvcl0odGhlLWJheWVzLWZhY3Rvci5odG1sKSksIHdlIHdlcmUgaW50cm9kdWNlZCB0byB0aGUgY29uY2VwdCBvZiB0aGUKKipsaWtlbGlob29kKiouIEluIHRoZXNlIHNlY3Rpb25zLCB3ZSBzcGVjaWZpY2FsbHkgY292ZXJlZCB0aGUgKipiaW5vbWlhbCoqCmxpa2VsaWhvb2QsIHdoaWNoIGNhbiBiZSB1c2VkIGZvciB3b3JraW5nIG91dCBCYXllcyBmYWN0b3JzIGZvciBzYW1wbGVzIG9mCkJlcm5vdWxsaSB0cmlhbHMtLS10aGF0IGlzLCB0cmlhbHMgd2l0aCB0d28gZGlzY3JldGUgb3V0Y29tZXMgbGlrZSBoZWFkcyBhbmQKdGFpbHMgb3Igc3VjY2Vzc2VzIGFuZCBmYWlsdXJlcy4gV2UgdXNlZCB0aGlzIHNwZWNpZmljYWxseSBmb3IgY29tcHV0aW5nIG91cgpCYXllcyBmYWN0b3JzIGZvciBoeXBvdGhlc2VzIGFib3V0IGNvaW4gZmxpcHMuIEFsdGhvdWdoIHRoZXNlIEJheWVzIGZhY3RvcnMKY291bGQgYmUgdXNlZCBhbnl3aGVyZSB3aGVyZSB3ZSBtaWdodCBvcmRpbmFyaWx5IHVzZSBhIGZyZXF1ZW50aXN0ICoqYmlub21pYWwKdGVzdCoqIGl0IGlzIHN0aWxsIHJhdGhlciBsaW1pdGVkIGluIHNjb3BlLiBUaGVyZWZvcmUsIGluIHRoaXMgc2VjdGlvbiwgd2UnbGwKY292ZXIgQmF5ZXMgZmFjdG9ycyB0aGF0IGNhbiBiZSB1c2VkIGluIG90aGVyIHNpdHVhdGlvbnMuIFNwZWNpZmljYWxseSwgd2UnbGwKZm9jdXMgcHJpbWFyaWx5IG9uIHNpdHVhdGlvbnMgd2hlcmUgd2UncmUgaW50ZXJlc3RlZCBpbiAqKmRpZmZlcmVuY2VzIGJldHdlZW4KbWVhbnMqKi0tLXRoYXQgaXMsIHNpdHVhdGlvbnMgd2hlcmUgd2UgbWlnaHQgb3RoZXJ3aXNlIHVzZSBhICp0Ki10ZXN0IG9yIEFOT1ZBLgoKIyMgQ2hvb3NpbmcgYSBsaWtlbGlob29kCgpJbiBvdXIgaW5pdGlhbCBleGFtcGxlIG9uIGh1bnRpbmcgdHJlYXN1cmUgKHNlZSBbTnVsbCBoeXBvdGhlc2lzIHNpZ25pZmljYW5jZQp0ZXN0aW5nXShudWxsLWh5cG90aGVzaXMtc2lnbmlmaWNhbmNlLXRlc3RpbmcuaHRtbCkpIG91ciB0cmVhc3VyZSBodW50aW5nCmRldmljZSB3b3JrZWQgYnksIG9uIGF2ZXJhZ2UsIHBvaW50aW5nIGF0IDAgd2hlbiB0aGVyZSB3YXMgbm8gdHJlYXN1cmUKYXJvdW5kIGFuZCwgb24gYXZlcmFnZSwgcG9pbnRpbmcgYXQgc29tZSBvdGhlciB2YWx1ZSB3aGVuIHRoZXJlIHdhcyB0cmVhc3VyZQphcm91bmQuCgpUbyB3b3JrIG91dCB3aGV0aGVyIG91ciBkZXZpY2Ugd2FzLCBvbiBhdmVyYWdlLCBwb2ludGluZyBhdCBhIHBhcnRpY3VsYXIgdmFsdWUKd2UgY29sbGVjdGVkIGEgc2FtcGxlIG9mIGEgZml4ZWQgc2l6ZSAoMTAgaW4gb3VyIGZpcnN0IGV4YW1wbGUpIGFuZCB0aGVuIHdvcmtlZApvdXQgdGhlIGF2ZXJhZ2Ugb2YgdGhlc2UgdmFsdWVzLiBGb3IgZXhhbXBsZSwgd2UgbWlnaHQndmUgY29sbGVjdGVkIGEgc2FtcGxlIG9mCjEwIHZhbHVlcyBhcyBmb2xsb3dzOgoKYGBge3J9CnNldC5zZWVkKDEyMykKCnNhbXBsZV9zaXplIDwtIDEwCnNhbXBsZV9tZWFuIDwtIDAKc2FtcGxlX3NkIDwtIDI1CnNhbXBsZV9kYXRhIDwtIHJub3JtKG4gPSBzYW1wbGVfc2l6ZSwgbSA9IHNhbXBsZV9tZWFuLCBzZCA9IHNhbXBsZV9zZCkKCnBhc3RlMCgiKipTYW1wbGUgZGF0YSoqOiAiLCBwYXN0ZShyb3VuZChzYW1wbGVfZGF0YSwgMSksIGNvbGxhcHNlID0gIiwgIiksICIKCioqU2FtcGxlIG1lYW4qKjogIiwgcm91bmQobWVhbihzYW1wbGVfZGF0YSksIDIpKSAlPiUKICBkaXNwbGF5X21hcmtkb3duKCkKCgoKYGBgCgpBZnRlciBjb2xsZWN0aW5nIGEgbGFyZ2UgbnVtYmVyIG9mIHNhbXBsZXMsIHdlIGNvdWxkIHBsb3Qgb3VyIGF2ZXJhZ2VzIGFzCmZvbGxvd3M6CgpgYGB7cn0KCmdlbmVyYXRlX2RhdGEgPC0gZnVuY3Rpb24oc2l6ZSwgbWVhbiwgc2QsIHNhbXBsZXMpIHsKICBwdXJycjo6bWFwX2RmKDE6c2FtcGxlcywgZnVuY3Rpb24oeCkgewogICAgZGF0YSA8LSBybm9ybShzaXplLCBtZWFuLCBzZCkKICAgIHRpYmJsZTo6dGliYmxlKAogICAgICBtZWFuID0gbWVhbihkYXRhKSwKICAgICAgdCA9IG1lYW4gLyAoc2QoZGF0YSkgLyBzcXJ0KHNpemUpKSwKICAgICAgZCA9IG1lYW4gLyBzZChkYXRhKQogICAgKQogIH0pCn0KCgpzYW1wbGVfbWVhbnNfZGF0YSA8LSBnZW5lcmF0ZV9kYXRhKDEwLCAwLCAyNSwgMTAwMDApCnNhbXBsZV9tZWFuc19kYXRhX25vbnplcm8gPC0gZ2VuZXJhdGVfZGF0YSgxMCwgMTkuNiwgMjUsIDEwMDAwKQoKCmdlbmVyYXRlX3Bsb3QgPC0gZnVuY3Rpb24oZGF0YSkgewogIGRlbnNpdHlfcGxvdF9tZWFucyA8LSB0aWJibGUoeCA9IHNlcShtaW4oZGF0YSRtZWFuKSwKICAgIG1heChkYXRhJG1lYW4pLAogICAgbGVuZ3RoLm91dCA9IDEwMDAwCiAgKSkgJT4lCiAgICBtdXRhdGUoeSA9IHBvbHNwbGluZTo6ZGxvZ3NwbGluZSgKICAgICAgeCwKICAgICAgcG9sc3BsaW5lOjpsb2dzcGxpbmUoZGF0YSRtZWFuKQogICAgKSkKCiAgZGVuc2l0eV9wbG90X3RzIDwtIHRpYmJsZSh4ID0gc2VxKG1pbihkYXRhJHQpLAogICAgbWF4KGRhdGEkdCksCiAgICBsZW5ndGgub3V0ID0gMTAwMDAKICApKSAlPiUKICAgIG11dGF0ZSh5ID0gcG9sc3BsaW5lOjpkbG9nc3BsaW5lKAogICAgICB4LAogICAgICBwb2xzcGxpbmU6OmxvZ3NwbGluZShkYXRhJHQpCiAgICApKQoKICBkZW5zaXR5X3Bsb3RfZHMgPC0gdGliYmxlKHggPSBzZXEobWluKGRhdGEkZCksCiAgICBtYXgoZGF0YSRkKSwKICAgIGxlbmd0aC5vdXQgPSAxMDAwMAogICkpICU+JQogICAgbXV0YXRlKHkgPSBwb2xzcGxpbmU6OmRsb2dzcGxpbmUoCiAgICAgIHgsCiAgICAgIHBvbHNwbGluZTo6bG9nc3BsaW5lKGRhdGEkZCkKICAgICkpCgoKCiAgbWVhbl9wbG90IDwtIGdncGxvdCgpICsKICAgIGdlb21faGlzdG9ncmFtKAogICAgICBkYXRhID0gZGF0YSwKICAgICAgYWVzKHggPSBtZWFuLCB5ID0gLi5kZW5zaXR5Li4pLCBiaW5zID0gMzAsIG5hLnJtID0gVFJVRQogICAgKSArCiAgICBnZW9tX2xpbmUoCiAgICAgIGRhdGEgPSBkZW5zaXR5X3Bsb3RfbWVhbnMsIGFlcyh4ID0geCwgeSA9IHkpLCBzaXplID0gMSwKICAgICAgbmEucm0gPSBUUlVFCiAgICApICsKICAgIHRoZW1lX21pbmltYWwoMTQpICsKICAgIGxhYnMoeCA9ICLOvCIsIHkgPSAiRGVuc2l0eSIpICsKICAgIE5VTEwKCiAgdF9wbG90IDwtIGdncGxvdCgpICsKICAgIGdlb21faGlzdG9ncmFtKAogICAgICBkYXRhID0gZGF0YSwKICAgICAgYWVzKHggPSB0LCB5ID0gLi5kZW5zaXR5Li4pLCBiaW5zID0gMzAsIG5hLnJtID0gVFJVRSwKICAgICkgKwogICAgZ2VvbV9saW5lKAogICAgICBkYXRhID0gZGVuc2l0eV9wbG90X3RzLCBhZXMoeCA9IHgsIHkgPSB5KSwgc2l6ZSA9IDEsCiAgICAgIG5hLnJtID0gVFJVRQogICAgKSArCiAgICB0aGVtZV9taW5pbWFsKDE0KSArCiAgICBsYWJzKHggPSAidCIsIHkgPSAiRGVuc2l0eSIpICsKICAgIE5VTEwKCgogIGRfcGxvdCA8LSBnZ3Bsb3QoKSArCiAgICBnZW9tX2hpc3RvZ3JhbSgKICAgICAgZGF0YSA9IGRhdGEsCiAgICAgIGFlcyh4ID0gZCwgeSA9IC4uZGVuc2l0eS4uKSwgYmlucyA9IDMwLCBuYS5ybSA9IFRSVUUsCiAgICApICsKICAgIGdlb21fbGluZSgKICAgICAgZGF0YSA9IGRlbnNpdHlfcGxvdF9kcywgYWVzKHggPSB4LCB5ID0geSksIHNpemUgPSAxLAogICAgICBuYS5ybSA9IFRSVUUKICAgICkgKwogICAgdGhlbWVfbWluaW1hbCgxNCkgKwogICAgbGFicyh4ID0gIs60IiwgeSA9ICJEZW5zaXR5IikgKwogICAgTlVMTAoKICBsaXN0KG1lYW5fcGxvdCA9IG1lYW5fcGxvdCwgdF9wbG90ID0gdF9wbG90LCBkX3Bsb3QgPSBkX3Bsb3QpCn0KCgoKYGBgCgpgYGB7cn0KbGlzdCgKICBwbG90ID0gZ2VuZXJhdGVfcGxvdChzYW1wbGVfbWVhbnNfZGF0YSksCiAgbGltaXRzID0gbGlzdChjKC0zMCwgMzApLCBjKC00LCA0KSwgYygtMiwgMikpCikgJT4lCiAgcG1hcChmdW5jdGlvbihwbG90LCBsaW1pdHMpIHBsb3QgKyB4bGltKGxpbWl0cykpICU+JQogIHdyYXBfcGxvdHMobmNvbCA9IDMpICsgcGxvdF9hbm5vdGF0aW9uKHRhZ19sZXZlbCA9ICJBIikKCgpgYGAKCkluIHRoZSBhYm92ZSBleGFtcGxlcywgd2UndmUgc2V0IHRoZSAqcGFyYW1ldGVyKiBvZiBpbnRlcmVzdCAodGhlIG1lYW4pIHRvIDAuClRoZSBhYm92ZSBwbG90cyBhcmUganVzdCBleGFtcGxlcyBvZiB0aGUgc2FtcGxpbmcgZGlzdHJpYnV0aW9uIHdoZW4gdGhlCnBhcmFtZXRlciBpcyAwLiBQYW5lbCAqKkEqKiBzaG93cyB0aGUgc2FtcGxpbmcgZGlzdHJpYnV0aW9uIG9mIHRoZSAqcmF3IG1lYW5zKi4KUGFuZWwgKipCKiogc2hvd3MgdGhlIHNhbXBsaW5nIGRpc3RyaWJ1dGlvbiBvZiB0aGUgcmF3IG1lYW5zIHJlLXNjYWxlZCB0byAqdCoKdmFsdWVzLiBGaW5hbGx5LCBwYW5lbCAqKkMqKiBzaG93cyB0aGUgc2FtcGxpbmcgZGlzdHJpYnV0aW9uIG9mIHRoZSByYXcgbWVhbnMKcmUtc2NhbGVkIHRvICpDb2hlbidzIGQqIHZhbHVlcyAod2hlcmUgJFxkZWx0YSA9IFxmcmFje1xtdX17XHNpZ21hfSQpLiBBbGwKdGhlc2UgcGxvdHMgYXBwcm94aW1hdGVseSBmb2xsb3cgdGhlIHNoYXBlIG9mIGEgKm5vcm1hbCBkaXN0cmlidXRpb24qIG9yIGEKKnQgZGlzdHJpYnV0aW9uKi4gV2UgY291bGQgdXNlIHRoZXNlIHBsb3RzIHRvIHdvcmsgb3V0ICpwKiB2YWx1ZXMsIGp1c3QKYXMgd2UgcHJldmlvdXNseSBkaWQuCgpCdXQsIGFzIHdlIGRpZCB3aXRoIHRoZSBjb2luIGZsaXAgZXhhbXBsZXMsIHdoZW4gd29ya2luZyB3aXRoICpsaWtlbGlob29kcyosCndlJ3JlIGludGVyZXN0ZWQgaW4gdGhlIHByb2JhYmlsaXR5IG9mIG9idGFpbmluZyBvdXIgZGF0YSB1bmRlciBkaWZmZXJlbnQKdmFsdWVzIG9mIHRoZSBwYXJhbWV0ZXIuIFRoYXQgaXMsIHdlIG11c3QgY29uc2lkZXIgdGhlIHByb2JhYmlsaXR5IG9mIG9idGFpbmluZwpvdXIgY3VycmVudCBkYXRhIG5vdCBqdXN0IGluIHRoZSBjYXNlIHdoZXJlIHRoZSBwYXJhbWV0ZXIgb2YgaW50ZXJlc3QgaXMgMCwgYnV0CmFsc28gd2hlcmUgdGhlIHBhcmFtZXRlciBvZiBpbnRlcmVzdCBpcyBzb21lIG90aGVyIHZhbHVlLiBGb3IgZXhhbXBsZSwgdGhlCnBsb3RzIGJlbG93IGhhdmUgYmVlbiBnZW5lcmF0ZWQgYnkgc2V0dGluZyB0aGUgcGFyYW1ldGVyIHZhbHVlLS10aGF0IGlzLCB0aGUKdmFsdWUgdG8gd2hpY2ggdGhlIGRldmljZSwgb24gYXZlcmFnZSBwb2ludHMtLS10byBhIHJhdyBtZWFuIG9mIGFwcHJveGltYXRlbHkKMTkuNi4gV2UndmUgYWxzbyBzZXQgdGhlIGF2ZXJhZ2Ugc3ByZWFkIG9mIHRoZSB2YWx1ZXMtLS10aGF0IGlzLCB0aGUgc3RhbmRhcmQKZGV2aWF0aW9uLS10byAyNS4gQ29uc2VxdWVudGx5LCB3aGVuIHJlc2NhbGVkIHRvIGEgKnQqIHZhbHVlLCB0aGlzIHdvdWxkIHJlc3VsdAppbiBhbiBhdmVyYWdlICp0KiBvZiAkXGZyYWN7MTkuNn17XGZyYWN7MjV9e1xzcXJ0ezEwfX19JC4gQW5kIHdoZW4gcmVzY2FsZWQgdG8KYSAqZCogdmFsdWUsIHRoaXMgd291bGQgcmVzdWx0IGluIGFuIGF2ZXJhZ2UgKmQqIHZhbHVlIG9mICRcZnJhY3sxOS42fXsyNX0kLgoKYGBge3J9Cmxpc3QoCiAgcGxvdCA9IGdlbmVyYXRlX3Bsb3Qoc2FtcGxlX21lYW5zX2RhdGFfbm9uemVybyksCiAgbGltaXRzID0gbGlzdChjKC0xMCwgNTApLCBjKC0yLCA4KSwgYygtMSwgNSkpCikgJT4lCiAgcG1hcChmdW5jdGlvbihwbG90LCBsaW1pdHMpIHBsb3QgKyB4bGltKGxpbWl0cykpICU+JQogIHdyYXBfcGxvdHMobmNvbCA9IDMpICArIHBsb3RfYW5ub3RhdGlvbih0YWdfbGV2ZWwgPSAiQSIpCgoKCmBgYAoKRm9yIHRoZXNlIHBsb3RzLCBwYW5lbCAqKkEqKiBhZ2FpbiBzaG93cyB0aGUgKnJhdyBtZWFucyosIHdpdGggcGFuZWwgKipCKioKc2hvd2luZyB0aGUgKnQqIHZhbHVlcywgYW5kIHBhbmVsICoqQyoqIHNob3dpbmcgdGhlIENvaGVuJ3MgKmQqIHZhbHVlcy4gVGhlCmRpc3RyaWJ1dGlvbiBpbiBQYW5lbCAqKkEqKiBub3cgYXBwcm94aW1hdGVseSBmb2xsb3dzIHRoZSBzaGFwZSBvZiBhICpub3JtYWwKZGlzdHJpYnV0aW9uKiBvciBhICpzY2FsZWQgYW5kIHNoaWZ0ZWQgdCBkaXN0cmlidXRpb24qLiBQYW5lbCAqKkIqKiBhbmQgKipDKioKbm93IGZvbGxvdyB0aGUgc2hhcGUgb2Ygc2xpZ2h0bHkgZGlmZmVyZW50bHkgc2NhbGVkIHZlcnNpb25zIG9mIHRoZQoqbm9uLWNlbnRyYWwgdCBkaXN0cmlidXRpb24qLgoKSW4gdGhlIHNlY3Rpb24gdGhhdCBmb2xsb3dzLCB3ZSdsbCBkaXNjb3ZlciBhbmQgbGVhcm4gaG93IHRvIHVzZSB0aGVzZQpsaWtlbGlob29kczogVGhlICpub3JtYWwqIGxpa2VsaWhvb2QsIHRoZSAqc2NhbGVkIGFuZCBzaGlmdGVkIHQqIGxpa2VsaWhvb2QsCmFuZCB0aHJlZSB2ZXJzaW9ucyBvZiB0aGUgKm5vbi1jZW50cmFsIHQqIGxpa2VsaWhvb2QgKHdoaWNoIGBiYXllc3BsYXlgIGNhbGxzCnRoZSAqbm9uLWNlbnRyYWwgdCosICpub24tY2VudHJhbCBkKiwgYW5kICpub24tY2VudHJhbCBkMiogbGlrZWxpaG9vZHMpLgoKIyMjIFRoZSB2YXJpYW5jZSBvZiBsaWtlbGlob29kcwoKV2hlbiB3ZSB3ZXJlIGV4YW1pbmluZyBjb2luIGZsaXBzLCB3ZSBzYXcgdGhhdCB0aGUgc2FtcGxpbmcgZGlzdHJpYnV0aW9uIChpbgp0aGUgZmxpcCB1bnRpbCAqKm4qKiBmbGlwcyBjYXNlKSBmb2xsb3dlZCB0aGUgKmJpbm9taWFsIGRpc3RyaWJ1dGlvbiouIEFuZCB3aGVuCndlIHdhbnRlZCB0byBtYWtlIGluZmVyZW5jZXMgYWJvdXQgcGFyYW1ldGVyIHZhbHVlcyAodGhlIGNvaW4gYmlhcykgd2UgdXNlZCB0aGUKKmJpbm9taWFsKiBsaWtlbGlob29kLiBPdXIgZGF0YSwgd2hpY2ggd2UgdXNlZCB0byBtYWtlIG91ciBpbmZlcmVuY2UgY29uc2lzdGVkCm9mLCBmaXJzdCwgdGhlIG51bWJlciBvZiBoZWFkcyBhbmQsIHNlY29uZCwgdGhlIG51bWJlciBvZiBmbGlwcy4KClRoZXNlIHR3byB2YWx1ZXMgY29udHJvbGxlZCBkaWZmZXJlbnQgYXNwZWN0cyBvZiB0aGUgc2hhcGUgb2YgdGhlIGxpa2VsaWhvb2QKZnVuY3Rpb24uIEZpcnN0LCB0aGUgbnVtYmVyIG9mIGhlYWRzIHRoYXQgd2Ugb2JzZXJ2ZWQgbW9yZS1vci1sZXNzIGNvbnRyb2xsZWQKd2hlcmUgdGhlIHBlYWsgb2YgdGhlIGxpa2VsaWhvb2QgZnVuY3Rpb24gd2FzIGxvY2F0ZWQuIFNlY29uZCwgdGhlIG51bWJlciBvZgpmbGlwcywgb3IgdGhlIHNhbXBsZSBzaXplLCBjb250cm9sbGVkIGhvdyBzcHJlYWQgb3V0IHRoZSBsaWtlbGlob29kIGZ1bmN0aW9uCndhcy4gSW4gdGhlIHBsb3RzIGJlbG93IHdlIGNhbiBzZWUgdGhyZWUgY2FzZXMgb2Ygb2JzZXJ2aW5nICRcZnJhY3tufXsyfSQgaGVhZHMKaW4gMiwgMjAsIGFuZCAxMDAgZmxpcHMuIEluIGFsbCB0aHJlZSBwbG90cywgdGhlIGxpa2VsaWhvb2QgZnVuY3Rpb24gaXMgcGVha2VkCmF0IDAuNSBhbmQgZHJvcHMgb2ZmIGFzIHdlIG1vdmUgYXdheSBmcm9tIDAuNS4gVGhlIHJhdGUgb2YgdGhpcyBkcm9wIG9mZiwKaG93ZXZlciwgaXMgc3RlZXBlciBhcyB0aGUgc2FtcGxlIHNpemUgaW5jcmVhc2VzLgoKYGBge3J9Cmxpa2VsaWhvb2RzIDwtIGMoCiAgbGlrZWxpaG9vZCgiYmlub21pYWwiLCAyIC8gMiwgMiksCiAgbGlrZWxpaG9vZCgiYmlub21pYWwiLCAyMCAvIDIsIDIwKSwKICBsaWtlbGlob29kKCJiaW5vbWlhbCIsIDEwMCAvIDIsIDEwMCkKKQoKKG1hcChsaWtlbGlob29kcywgZnVuY3Rpb24oeCkgewogIHBsb3QoeCkgKwogICAgdGhlbWVfbWluaW1hbCgxNCkgKwogICAgZ2VvbV92bGluZSh4aW50ZXJjZXB0ID0gMC44LCBsaW5ldHlwZSA9IDIpICsKICAgIHNjYWxlX3hfY29udGludW91cygKICAgICAgYnJlYWtzID0gYygwLCAwLjIsIC41LCAwLjgsIDEpLAogICAgICBsaW1pdHMgPSBjKDAsIDEpCiAgICApICsKICAgIGxhYnMoc3VidGl0bGUgPSBnbHVlOjpnbHVlKAogICAgICAie3gkcGFyYW1ldGVyc1tbMV1dfSBoZWFkcyBpbiB7eCRwYXJhbWV0ZXJzW1syXV19IgogICAgKSkKfSkgJT4lCiAgd3JhcF9wbG90cyhuY29sID0gMykgKyBwbG90X2Fubm90YXRpb24odGFnX2xldmVsID0gIkEiKSkgJT4lIHNob3coKQoKCgpgYGAKCldoYXQgaXMgdGhlIGltcG9ydGFudCBpbnR1aXRpb24gaGVyZT8gVG8gZ2V0IGEgaGFuZGxlIG9uIHRoZSBpbnR1aXRpb24gd2UgY2FuCnRoaW5rIG9mIHRoZSBleHRyZW1lIGNhc2VzLiBXaGVuIHRoZSBjb2luIGlzIHZlcnkgYmlhc2VkLS0tZm9yIGV4YW1wbGUsIGl0CnNob3dzIGhlYWRzIDAuOCBvZiB0aGUgdGltZS0tLXRoZW4gaXQgd2lsbCBzdGlsbCBzb21ldGltZXMgc2hvdyB0YWlscy4gSXQgbWlnaHQKZXZlbiBzb21ldGltZXMgc2hvdyB0YWlscyBvbiB0aGUgZmlyc3QgZmxpcC4gSW4gZmFjdCwgaXQnbGwgc2hvdyB0YWlscyBvbiB0aGUKZmlyc3QgZmxpcCAwLjIgb2YgdGhlIHRpbWUuIFRoZXJlZm9yZSwgd2Ugd291bGRuJ3QgYmUgdGhhdCBzdXJwcmlzZWQgaWYgYWZ0ZXIKdHdvIGZsaXBzIHdlIGhhdmUgb25lIGhlYWQgYW5kIG9uZSB0YWlsLCBiZWNhdXNlIGl0IHdvbid0IGJlIHN1Y2ggYW4gdW5jb21tb24Kb2NjdXJyZW5jZS4gQnV0IGluIHRoZSBzaXR1YXRpb24gd2hlcmUgd2UncmUgbWFraW5nIDEwMCBmbGlwcywgaXQgbm93IGJlY29tZXMKbW9yZSBhbmQgbW9yZSB1bmxpa2VseSB0aGF0IHdlJ2Qgc2VlIGVxdWFsIG51bWJlcnMgb2YgaGVhZHMgYW5kIHRhaWxzIGlmIHRoZQpjb2luIGJpYXMgcmVhbGx5IHdhcyAwLjguIFdlIGNhbiBwdXQgbnVtYmVycyB0byBpdCBieSBjYWxjdWxhdGluZyB0aGUKbGlrZWxpaG9vZCByYXRpbyBiZXR3ZWVuIDAuNSBhbmQgMC44IGZvciBlYWNoIG9mIHRoZSB0aHJlZSBzYW1wbGUgc2l6ZXMuCgpgYGB7cn0KCm1hcF9kZihsaWtlbGlob29kcywgZnVuY3Rpb24oeCkgewogIHRpYmJsZSgKICAgIGxyID0geCRsaWtlbGlob29kX2Z1bmN0aW9uKDAuNSkgLyB4JGxpa2VsaWhvb2RfZnVuY3Rpb24oMC44KSwKICAgIHRyaWFscyA9IHgkcGFyYW1ldGVycyR0cmlhbHMKICApCn0pICU+JQogIGdsdWU6OmdsdWVfZGF0YSgiV2hlbiB0aGVyZSBhcmUge3RyaWFsc30gdHJpYWxzLCB0aGUgbGlrZWxpaG9vZCByYXRpbwpiZXR3ZWVuIM64ID0gMC41IGFuZCDOuCA9IDAuOCBpcyB7cm91bmQobHIsMil9LlxuXG5cbiIpICU+JQogIGRpc3BsYXlfbWFya2Rvd24oKQoKCgpgYGAKCkZvciBhbGwgdGhlIGxpa2VsaWhvb2RzIHRoYXQgd2UnbGwgZXhhbWluZSBpbiB0aGlzIHNlY3Rpb24sIHdoZW4gZGVmaW5pbmcgdGhlCmxpa2VsaWhvb2RzIHdlJ2xsIGhhdmUgb25lIHZhbHVlIHRoYXQgcmVwcmVzZW50cyBvdXIgb2JzZXJ2YXRpb246IHRoZSBtZWFuIHdlCm9ic2VydmUsIHRoZSAqdCogdmFsdWUgd2Ugb2JzZXJ2ZSwgb3IgdGhlICpkKiB2YWx1ZSB3ZSBvYnNlcnZlLiBUaGlzIHdpbGwgYmUKYW5hbG9nb3VzIHRvIHRoZSBudW1iZXIgb2YgaGVhZHMgd2Ugb2JzZXJ2ZSBpbiB0aGUgY29pbiBmbGlwIGV4YW1wbGUuIEFuZCB3ZSdsbApoYXZlIGEgdmFsdWUgKG9yIHZhbHVlcykgdGhhdCBkZWZpbmVzIGhvdyBwZWFrZWQgb3Igc3ByZWFkIG91dCB0aGUgbGlrZWxpaG9vZAp3aWxsIGJlOiB0aGlzIGNvdWxkIGJlIHRoZSBzYW1wbGUgc2l6ZSwgdGhlIGRlZ3JlZXMgb2YgZnJlZWRvbSBhbmQvb3Igc3RhbmRhcmQKZGV2aWF0aW9uLiAKCkluIG1vcmUgdGVjaG5pY2FsIHRlcm1zLCBhbGwgdGhlIGxpa2VsaWhvb2RzIHRoYXQgd2UnbGwgZXhhbWluZSB3aWxsIGhhdmUgb25lCnBhcmFtZXRlciB0aGF0IHdlJ3JlIG1ha2luZyBpbmZlcmVuY2VzIGFib3V0OiB0aGUgKm1lYW4qLCB0aGUgKnQqIHZhbHVlLCBvciB0aGUKKmQqIHZhbHVlLiBCdXQgdGhpcyBwYXJhbWV0ZXIgd2lsbCBhbHNvIGhhdmUgYSAqdmFyaWFuY2UqIGFzc29jaWF0ZWQgd2l0aCBpdC4KQW5kIGFzIHdlJ2xsIHNlZSBpbiB0aGUgZXhhbXBsZXMgYmVsb3csIGRlcGVuZGluZyBvbiB3aGV0aGVyIHdlJ3JlIGludGVyZXN0ZWQKaW4gKnJhdyBtZWFucyosKnQqIHZhbHVlcywgb3IgKmQqIHZhbHVlcywgdGhlIHNhbXBsaW5nIGRpc3RyaWJ1dGlvbnMgYXJlCnNsaWdodGx5IGRpZmZlcmVudCBzaGFwZXMuIFRoZXJlZm9yZSwgdGhlICpsaWtlbGlob29kcyogdGhhdCB3ZSB1c2UgaW4gZWFjaApjYXNlIHdpbGwgYmUgc2xpZ2h0bHkgZGlmZmVyZW50LiBXZSdsbCBsb29rIGF0IGVhY2ggb2YgdGhlc2UgaW4gdHVybi4KCiMjIEluZmVyZW5jZXMgYWJvdXQgcmF3IG1lYW5zCgpXaGVuIHdlJ3JlIGludGVyZXN0ZWQgaW4gbWFraW5nIGluZmVyZW5jZXMgYWJvdXQgdGhlICpyYXcgbWVhbnMqIHdlIGhhdmUgdHdvCmNob2ljZXMgYXZhaWxhYmxlIHRvIHVzLiBUaGUgbW9zdCBzdHJhaWdodGZvcndhcmQgY2hvaWNlIGlzIHRvIGNob29zZSB0aGUKKm5vcm1hbCogbGlrZWxpaG9vZC4gVGhlIHNoYXBlIG9mIHRoZSAqbm9ybWFsKiBsaWtlbGlob29kIGlzIGNvbnRyb2xsZWQgYnkKKip0d28qKiB2YWx1ZXMuIFRoZSBmaXJzdCB2YWx1ZSBpcyBvdXIgKipvYnNlcnZlZCBtZWFuKiouIFRoaXMgdmFsdWUgY29udHJvbHMKdGhlIGxvY2F0aW9uIG9mIHRoZSBwZWFrIG9mIHRoZSBsaWtlbGlob29kIGZ1bmN0aW9uLiBUaGUgc2Vjb25kIHZhbHVlIGlzIHRoZQoqKnN0YW5kYXJkIGRldmlhdGlvbiBvZiB0aGUgbWVhbioqLiAgVGhlICoqc3RhbmRhcmQgZGV2aWF0aW9uIG9mIHRoZSBtZWFuKiogaXMKbW9yZSBjb21tb25seSBrbm93biBhcyB0aGUgKipzdGFuZGFyZCBlcnJvciBvZiB0aGUgbWVhbioqLiBXZSBjYW4gd29yayBvdXQgdGhlCipzdGFuZGFyZCBlcnJvciogdXNpbmcgdGhlIGZvbGxvd2luZyBmb3JtdWxhOgoKJCRcc2lnbWFfe1xiYXJ7eH19ID0gXGZyYWN7XHNpZ21hfXtcc3FydHtufX0sJCQKCndoZXJlICRcc2lnbWEkIGlzIHRoZSBzdGFuZGFyZCBkZXZpYXRpb24gb2YgdGhlIHBvcHVsYXRpb24uIFVzdWFsbHksIHdlIGRvbid0Cmtub3cgdGhlIHZhbHVlIG9mICRcc2lnbWEkLCBzbyB3ZSBlc3RpbWF0ZSBpdCB1c2luZyAkcyQsIG9yIHRoZSBzdGFuZGFyZApkZXZpYXRpb24gb2Ygb3VyIHNhbXBsZS4KClRvIHNlZSBob3cgZGVmaW5pbmcgYSAqbm9ybWFsKiBsaWtlbGlob29kIHdvcmtzIGluIHByYWN0aWNlLCB3ZSdsbCBnZW5lcmF0ZSBvdXIKZGF0YS4gRnJvbSB0aGlzLCB3ZSdsbCB3b3JrIG91dCB0aGUgbWVhbiBvZiBvdXIgc2FtcGxlLCBhbmQgd2UnbGwgZXN0aW1hdGUgdGhlCnN0YW5kYXJkIGVycm9yICh0aGUgc3RhbmRhcmQgZGV2aWF0aW9uIG9mIHRoZSBtZWFuKS4KClRvIGdlbmVyYXRlIG91ciBkYXRhLCB3ZSdsbCBzZXQgdXAgYSBkYXRhIGdlbmVyYXRpbmcgcHJvY2VzcyAoeW91IGNhbiB0aGluayBvZgp0aGlzIGFzICoqdGhlIHBvcHVsYXRpb24qKikgYW5kIHdlJ2xsIGRyYXcgYSBzYW1wbGUgb2YgMTAgdmFsdWVzIGZyb20gdGhpcy4gT3VyCmRhdGEgZ2VuZXJhdGluZyBwcm9jZXNzIHdpbGwgaGF2ZSBhICRcbXUkIChtZWFuIG9mIHRoZSBwb3B1bGF0aW9uKSBvZiAxOS42LCBhbmQKYSAkXHNpZ21hJCAoc3RhbmRhcmQgZGV2aWF0aW9uIG9mIHRoZSBwb3B1bGF0aW9uKSBvZiAyNS4KCgpgYGB7cn0KCnNldC5zZWVkKDEyMykKc2FtcGxlX2RhdGEgPC0gcm5vcm0obiA9IDEwLCBtZWFuID0gMTkuNiwgc2QgPSAyNSkKCmdsdWU6OmdsdWUoIioqU2FtcGxlIGRhdGEqKjoge3Bhc3RlKHJvdW5kKHNhbXBsZV9kYXRhLCAyKSwgY29sbGFwc2UgPSAnLCAnKX0KCioqTWVhbiBvZiBzYW1wbGUqKjoge3JvdW5kKG1lYW4oc2FtcGxlX2RhdGEpLCAyKX0KCgoqKlN0YW5kYXJkIGRldmlhdGlvbiBvZiBzYW1wbGUqKjoge3JvdW5kKHNkKHNhbXBsZV9kYXRhKSwgMil9CgoKKipTaXplIG9mIHNhbXBsZSoqOiB7cm91bmQobGVuZ3RoKHNhbXBsZV9kYXRhKSwgMil9CgoqKlN0YW5kYXJkIGRldmlhdGlvbiBvZiBzYW1wbGluZyBkaXN0cmlidXRpb24gKHN0YW5kYXJkIGVycm9yKSoqOiB7cm91bmQoc2Qoc2FtcGxlX2RhdGEpL3NxcnQobGVuZ3RoKHNhbXBsZV9kYXRhKSkgLDIpfQoiKSAlPiUKICBkaXNwbGF5X21hcmtkb3duKCkKCgoKCmBgYAoKTm90ZSB0aGF0IHRoZSB0d28gdmFsdWVzIHRoYXQgd2Ugd2FudCBhcmUgdGhlICptZWFuIG9mIHRoZSBzYW1wbGUqIGFuZCB0aGUKKnN0YW5kYXJkIGRldmlhdGlvbiBvZiB0aGUgbWVhbiouIEEgY29tbW9uIGNvbmZ1c2lvbiBpcyB0aGF0IHlvdSB3YW50IHRoZQoqc3RhbmRhcmQgZGV2aWF0aW9uIG9mIHRoZSBzYW1wbGUqLiBUaGlzIGlzIG5vdCB0aGUgdmFsdWUgdGhhdCB3ZSB3YW50LCBhbmQgd2UKb25seSBjYWxjdWxhdGUgaXQgYmVjYXVzZSB3ZSBjYW4gdXNlIGl0IHRvIGVzdGltYXRlIHRoZSAqc3RhbmRhcmQgZGV2aWF0aW9uIG9mCnRoZSBwb3B1bGF0aW9uKiBhbmQsIGZyb20gdGhpcywgdGhlICpzdGFuZGFyZCBkZXZpYXRpb24gb2YgdGhlIG1lYW4qLgoKTm93IHdlIGNhbiBkZWZpbmUgdGhlIGxpa2VsaWhvb2QsIGFuZCB3ZSBjYW4gcGxvdCBpdC4KCmBgYHtyfQojfCBlY2hvID0gVFJVRSwgaW5jbHVkZSA9IFRSVUUKZGF0YV9tb2RlbCA8LSBsaWtlbGlob29kKGZhbWlseSA9ICJub3JtYWwiLCBtZWFuID0gMjEuNDcsIHNkID0gNy41NCkKCnBsb3QoZGF0YV9tb2RlbCkgKwogIGxhYnModGl0bGUgPSAibGlrZWxpaG9vZCBmb3IgbWVhbiA9IDIxLjQ3IChub3JtYWwpIikgKwogIHhsaW0oLTEwLCA1MCkgKwogIHRoZW1lX21pbmltYWwoMTQpCgoKCmBgYAoKRnJvbSBvdXIgbGlrZWxpaG9vZCBwbG90IHdlIGNhbiBzZWUgdGhhdCBvdXIgZGF0YSB3b3VsZCBiZSBnZW5lcmF0ZWQgbW9yZSBvZnRlbgppZiB0aGUgbWVhbiBvZiB0aGUgZGF0YSBnZW5lcmF0aW5nIHByb2Nlc3Mgd2FzIDIxIGFuZCBsZXNzIG9mdGVuIGlmIHRoZSBtZWFuIG9mCnRoZSBkYXRhIGdlbmVyYXRpbmcgcHJvY2VzcyB3YXMgMzAuCgpJbiBmYWN0LCB3ZSBjYW4gcHV0IGEgbnVtYmVyIHRvIGl0IGFuZCBzYXkgdGhhdDoKCmBgYHtyfQoKbGlrZWxpaG9vZF9yYXRpb19uIDwtIGRhdGFfbW9kZWwkbGlrZWxpaG9vZF9mdW5jdGlvbigyMSkgLwogIGRhdGFfbW9kZWwkbGlrZWxpaG9vZF9mdW5jdGlvbigzMCkKCmdsdWU6OmdsdWUoIlRoZSBkYXRhIHdvdWxkIGJlIHByb2R1Y2VkIHtyb3VuZChsaWtlbGlob29kX3JhdGlvX24sIDIpfSB0aW1lcyBtb3JlCm9mdGVuIGlmIHRoZSBtZWFuIG9mIHRoZSBwb3B1bGF0aW9uIHdhcyAyMSB0aGFuIGl0IHdvdWxkIGJlIGlmIHRoZSBtZWFuIG9mIHRoZQpwb3B1bGF0aW9uIHdhcyAzMC4iKSAlPiUKICBkaXNwbGF5X21hcmtkb3duKCkKCgoKYGBgCgpUaGUgbGlrZWxpaG9vZCBmdW5jdGlvbiB3aWxsIGdldCB3aWRlciBvciBuYXJyb3dlciB3aGVuIHRoZSAqc3RhbmRhcmQgZGV2aWF0aW9uCm9mIHRoZSBtZWFuKiBjaGFuZ2VzLiBUaGUgdHdvIGZhY3RvcnMgdGhhdCBjb250cm9sIHRoZSAqc3RhbmRhcmQgZGV2aWF0aW9uIG9mCnRoZSBtZWFuKiBhcmUgdGhlIHNhbXBsZSBzaXplIGFuZCB0aGUgc3RhbmRhcmQgZGV2aWF0aW9uIG9mIHRoZSBwb3B1bGF0aW9uLiBJbgp0aGUgZXhhbXBsZSBiZWxvdyB3ZSdsbCBrZWVwIG91ciBlc3RpbWF0ZSBvZiB0aGUgKnN0YW5kYXJkIGRldmlhdGlvbiBvZiB0aGUKcG9wdWxhdGlvbiogdGhlIHNhbWUgYnV0IHdlJ2xsIGluY3JlYXNlIHRoZSBzYW1wbGUgc2l6ZS4gQ29uc2VxdWVudGx5LCB0aGUKKnN0YW5kYXJkIGRldmlhdGlvbiBvZiB0aGUgbWVhbiogd2lsbCBkZWNyZWFzZSBhbmQgb3VyIGxpa2VsaWhvb2QgZnVuY3Rpb24gd2lsbApiZWNvbWUgbmFycm93ZXIuCgpgYGB7cn0KI3wgZWNobyA9IFRSVUUsIGluY2x1ZGUgPSBUUlVFCgpkYXRhX21vZGVsIDwtIGxpa2VsaWhvb2QoZmFtaWx5ID0gIm5vcm1hbCIsIG1lYW4gPSAyMS40Nywgc2QgPSAyLjM4NCkKCnBsb3QoZGF0YV9tb2RlbCkgKwogIGxhYnModGl0bGUgPSAibGlrZWxpaG9vZCBmb3IgbWVhbiA9IDIxLjQ3IikgKwogIHhsaW0oLTEwLCA1MCkgKwogIHRoZW1lX21pbmltYWwoMTQpCgoKCmBgYAoKQW5kIHRoaXMgd291bGQgYWxzbyBtYWtlIGEgY2hhbmdlIHRvIGFueSBsaWtlbGlob29kIHJhdGlvIHdlIGNvdWxkIGNhbGN1bGF0ZS4KRm9yIGV4YW1wbGUsIGNhbGN1bGF0aW5nIHRoZSBuZXcgbGlrZWxpaG9vZCByYXRpbyBjb21wYXJpbmcgJFxtdSA9IDMwJCBhbmQgJFxtdQo9IDIxJCB3b3VsZCBnaXZlIHRoZSBmb2xsb3dpbmcgcmVzdWx0OgoKYGBge3J9Cmxpa2VsaWhvb2RfcmF0aW8gPC0gZGF0YV9tb2RlbCRsaWtlbGlob29kX2Z1bmN0aW9uKDIxKSAvCiAgZGF0YV9tb2RlbCRsaWtlbGlob29kX2Z1bmN0aW9uKDMwKQoKZ2x1ZTo6Z2x1ZSgiVGhlIGRhdGEgd291bGQgYmUgcHJvZHVjZWQge3JvdW5kKGxpa2VsaWhvb2RfcmF0aW8sIDIpfSB0aW1lcyBtb3JlCm9mdGVuIGlmIHRoZSBtZWFuIG9mIHRoZSBwb3B1bGF0aW9uIHdhcyAyMSB0aGFuIGl0IHdvdWxkIGJlIGlmIHRoZSBtZWFuIG9mIHRoZQpwb3B1bGF0aW9uIHdhcyAzMC4iKSAlPiUKICBkaXNwbGF5X21hcmtkb3duKCkKCgoKYGBgCgpJbiB0aGUgcHJlY2VkaW5nIGV4YW1wbGVzLCB3ZSB3ZXJlIG1vZGVsbGluZyBvdXIgZGF0YSB3aXRoIGEgKm5vcm1hbCoKbGlrZWxpaG9vZC4gQW5kIHdlIHdlcmUgZXN0aW1hdGluZyB0aGUgKnN0YW5kYXJkIGRldmlhdGlvbiBvZiB0aGUgbWVhbiogdXNpbmcKdGhlICpzdGFuZGFyZCBkZXZpYXRpb24gb2Ygb3VyIHNhbXBsZSouIFdlIGRpZCB0aGlzLCBiZWNhdXNlIHdlIGRpZG4ndCBrbm93IHRoZQphY3R1YWwgc3RhbmRhcmQgZGV2aWF0aW9uIG9mIG91ciBkYXRhIGdlbmVyYXRpbmcgcHJvY2Vzcy4gV2UnZCBuZWVkIHRvIGtub3cKdGhpcyB2YWx1ZSBpZiB3ZSB3YW50ZWQgdG8gZXhhY3RseSBjYWxjdWxhdGUgdGhlICpzdGFuZGFyZCBkZXZpYXRpb24gb2YgdGhlCm1lYW4qLgoKT3IgYXQgbGVhc3QsIHdlIG9yZGluYXJpbHkgZG9uJ3Qga25vdyB0aGUgc3RhbmRhcmQgZGV2aWF0aW9uIG9mIG91ciBkYXRhCmdlbmVyYXRpbmcgcHJvY2Vzcy4gSG93ZXZlciwgYmVjYXVzZSBJIHNldCBpdCB1cCwgSSBrbm93IGl0IGlzIDI1LCBiZWNhdXNlIHRoaXMKaXMgdGhlIHZhbHVlIEkgc2V0IGl0IHRvLiBUaGVyZWZvcmUsIG91ciBlc3RpbWF0ZSB3YXMgYW4gdW5kZXIgZXN0aW1hdGUuClR5cGljYWxseSwgd2UnbGwgdW5kZXJlc3RpbWF0ZSB0aGUgKnN0YW5kYXJkIGRldmlhdGlvbiBvZiB0aGUgcG9wdWxhdGlvbiouClRoZXNlIHVuZGVyLWVzdGltYXRlcyB3aWxsIGJlIHdvcnNlIHdoZW4gdGhlIHNhbXBsZSBzaXplIGlzIHNtYWxsLiBBcyBvdXIKc2FtcGxlIHNpemUgaW5jcmVhc2VzIHRoZW4gdGhlIHR3byB2YWx1ZXMgd2lsbCwgYnkgZGVmaW5pdGlvbiwgbWF0Y2guCgpUaGVyZSBhcmUgYSBmZXcgYXBwcm9hY2hlcyB0aGF0IHdlIGNhbiB0YWtlIHRvIGRlYWxpbmcgd2l0aCB0aGlzIGlzc3VlLiBGaXJzdCwKd2UgY2FuIGp1c3QgZG8gbm90aGluZy4gVGhpcyBpcyB0aGUgbW9zdCBzdHJhaWdodGZvcndhcmQgYXBwcm9hY2gsIGFuZCBpdCBpcwphbHNvIGEgdmVyeSBjb21tb24gYXBwcm9hY2guIFRoZSBzZWNvbmQgYXBwcm9hY2gsIGlzIHRvIGFwcGx5IGEgY29ycmVjdGlvbiBhcwpmb2xsb3dzOgoKJCRzX3tcYmFye3h9fSA9IFxmcmFje3N9e1xzcXJ0e259fSBcdGltZXMgXGxlZnQoMSArIFxmcmFjezIwfXtcbWF0aHJte2RmfV4yfVxyaWdodCksJCQKCndoZXJlICRcbWF0aHJte2RmfSQgYXJlIHRoZSBkZWdyZWVzIG9mIGZyZWVkb20gZm9yIHRoZSBjb3JyZXNwb25kaW5nICp0KiB0ZXN0LgpbRGllbmVzICgyMDE0LCBwIDExKV0oaHR0cDovL2R4LmRvaS5vcmcvMTAuMzM4OS9mcHN5Zy4yMDE0LjAwNzgxKSBwcm92aWRlcwptb3JlIGRldGFpbHMgb24gdGhpcyBhcHByb2FjaC4gRGllbmVzICgyMDE0KSBhbHNvIHByb3ZpZGVzIGdvb2QgZ3VpZGFuY2Ugb24KdXNpbmcgQmF5ZXMgZmFjdG9ycywgYW5kIEkgd291bGQgcmVjb21tZW5kIHJlYWRpbmcgaXQgZm9yIHRoZSBhc3Nlc3NtZW50LgoKRmluYWxseSwgdGhlIHRoaXJkIGFwcHJvYWNoLCBpcyB0byBlbXBsb3kgYSAqc2NhbGVkIGFuZCBzaGlmdGVkIHQgbGlrZWxpaG9vZCoKaW5zdGVhZCBvZiBhICpub3JtYWwgbGlrZWxpaG9vZCouIFRoZSAqc2NhbGVkIGFuZCBzaGlmdGVkIHQgbGlrZWxpaG9vZCogaGFzCmZhdHRlciB0YWlscyB0aGFuIHRoZSAqbm9ybWFsIGxpa2VsaWhvb2QqLCB3aGljaCBhY2NvdW50cyBmb3IgdGhlIGZhY3QgdGhhdCBvdXIKKm5vcm1hbCBsaWtlbGlob29kKiB0ZW5kcyB0byBiZSBuYXJyb3dlciB0aGFuIGl0IG91Z2h0IHRvIGJlLgoKSW4gYGJheWVzcGxheWAgd2UgY2FuIHVzZSB0aGUgKnNjYWxlZCBhbmQgc2hpZnRlZCB0IGxpa2VsaWhvb2QqIGJ5IHNldHRpbmcgdGhlCmxpa2VsaWhvb2QgKipmYW1pbHkqKiB0byAqKnN0dWRlbnRfdCouIFdoZW4gdXNpbmcgdGhpcyBsaWtlbGlob29kLCBvbmUKYWRkaXRpb25hbCB2YWx1ZSB3aWxsIG5lZWQgdG8gYmUgc2V0LiBUaGlzIGlzIHRoZSAqKmRmKiogdmFsdWUsIHdoaWNoIGlzIHRoZSAKc2FtZSBhcyB0aGUgKipkZioqIHZhbHVlIHRoYXQgd2Ugd291bGQgdXNlIGZvciB0aGUgY29ycmVjdGlvbiBhcHByb2FjaCBhYm92ZS4KCldlJ2xsIHJlY29tcHV0ZSBvdXIgcHJldmlvdXMgZXhhbXBsZSB1c2luZyB0aGlzIGxpa2VsaWhvb2QgZmFtaWx5LgoKYGBge3J9CiN8IGVjaG8gPSBUUlVFLCBpbmNsdWRlID0gVFJVRQpkYXRhX21vZGVsIDwtIGxpa2VsaWhvb2QoZmFtaWx5ID0gInN0dWRlbnRfdCIsIG1lYW4gPSAyMS40Nywgc2QgPSA3LjU0LCBkZiA9IDkpCgpwbG90KGRhdGFfbW9kZWwpICsKICBsYWJzKHRpdGxlID0gImxpa2VsaWhvb2QgZm9yIG1lYW4gPSAyMS40NyAoc3R1ZGVudCB0KSIpICsKICB4bGltKC0xMCwgNTApICsKICB0aGVtZV9taW5pbWFsKDE0KQoKCgpgYGAKCkFzIHlvdSBjYW4gc2VlIHRoZSB0d28gbGlrZWxpaG9vZCBmdW5jdGlvbnMgbG9vayB2ZXJ5IHNpbWlsYXIuCgpgYGB7cn0KbGlrZWxpaG9vZF9yYXRpb190IDwtIGRhdGFfbW9kZWwkbGlrZWxpaG9vZF9mdW5jdGlvbigyMSkgLwogIGRhdGFfbW9kZWwkbGlrZWxpaG9vZF9mdW5jdGlvbigzMCkKCmdsdWU6OmdsdWUoIlRoZSBkYXRhIHdvdWxkIGJlIHByb2R1Y2VkIHtyb3VuZChsaWtlbGlob29kX3JhdGlvX3QsIDIpfSB0aW1lcyBtb3JlCm9mdGVuIGlmIHRoZSBtZWFuIG9mIHRoZSBwb3B1bGF0aW9uIHdhcyAyMSB0aGFuIGl0IHdvdWxkIGJlIGlmIHRoZSBtZWFuIG9mIHRoZQpwb3B1bGF0aW9uIHdhcyAzMC4iKSAlPiUKICBkaXNwbGF5X21hcmtkb3duKCkKCgoKYGBgCgpUaGlzIGxpa2VsaWhvb2QgcmF0aW9zIGFyZSBhbHNvIHZlcnkgc2ltaWxhci4KCmBgYHtyfQpsaWtlbGlob29kX3JhdGlvX2RpZmYgPC0gYWJzKGxpa2VsaWhvb2RfcmF0aW9fdCAtIGxpa2VsaWhvb2RfcmF0aW9fbikKCmdsdWU6OmdsdWUoIlRoZSBkaWZmZXJlbmNlIGluIHRoZSBsaWtlbGlob29kIHJhdGlvIGJldHdlZW4gdGhlICpub3JtYWwqCmxpa2VsaWhvb2QgYW5kIHRoZSAqc3R1ZGVudF90KiBsaWtlbGlob29kIGlzIGFib3V0IAp7cm91bmQobGlrZWxpaG9vZF9yYXRpb19kaWZmLDIpfSIpICU+JQogIGRpc3BsYXlfbWFya2Rvd24oKQoKCgpgYGAKCgojIyBJbmZlcmVuY2VzIGFib3V0IGVmZmVjdCBzaXplcwoKQSB2ZXJ5IHBvcHVsYXIgYWx0ZXJuYXRpdmUgYXBwcm9hY2ggdG8gbW9kZWxsaW5nIGRhdGEgaW4gdGVybXMgb2YgdGhlIG9ic2VydmVkCm1lYW4gaXMgdG8gaW5zdGVhZCBtb2RlbCBkYXRhIGluIHRlcm1zIG9mIHN0YW5kYXJkaXplZCBlZmZlY3Qgc2l6ZXMgb24gdGhlIHJhdwptZWFucyB0aGVtc2VsdmVzLiBUaGlzIGdldHMgYXJvdW5kIHRoZSBwcm9ibGVtIG9mIHRoZSB1bmtub3duIHZhcmlhbmNlOwpob3dldmVyLCBpdCBoYXMgYW4gYWRkZWQgYmVuZWZpdCBpbiB0aGF0IGl0IGNhbiBwbGFjZSByZXN1bHRzIGZyb20gdmVyeQpkaWZmZXJlbnQgZXhwZXJpbWVudHMgb24gYSBjb21tb24gc2NhbGUuIEZvciBleGFtcGxlLCByZXN1bHRzIGZyb20gYSBzdHVkeSBvZgpyZWFjdGlvbiB0aW1lcyBtaWdodCBoYXZlIHZhbHVlcyBiZXR3ZWVuIDUwMCBhbmQgMjAwMCBtcyBhbmQgcmVzdWx0cyBmcm9tIGEKc3R1ZHkgb24gdGVzdCBzY29yZXMgbWlnaHQgaGF2ZSB2YWx1ZXMgdGhhdCByYW5nZSBiZXR3ZWVuIDQwIGFuZCA5MC4gQnkKcmUtc2NhbGluZyBtZWFuIHZhbHVlcyB0byAqc3RhbmRhcmRpc2VkIG1lYW5zKi0tLXRoYXQgaXMsIHRvIGVmZmVjdCBzaXplcy0tLXdlCmNhbiBiZSBtb3JlIGNlcnRhaW4gdGhhdCB2YWx1ZXMgd2lsbCBmYWxsIHNvbWV3aGVyZSBiZXR3ZWVuIC0xMCAvIDEwLCBhbmQgbW9yZQp0eXBpY2FsbHkgYmV0d2VlbiAtMS8xLiBXaGVuIHdlIHRhbGsgbW9yZSBhYm91dCBwcmlvcnMsIHdlJ2xsIHNlZSB0aGF0IHRoaXMKcmVzY2FsaW5nIHdpbGwgaGVscCB1cyB0byBjb21lIHVwIHdpdGggcHJpb3JzIHRoYXQgd2lsbCB3b3JrIGluIGEgd2lkZSByYW5nZSBvZgpzZXR0aW5ncyBhbmQgd2l0aCBhIHdpZGUgcmFuZ2Ugb2YgZXhwZXJpbWVudHMgYW5kIHR5cGVzIG9mIGRhdGEuIEhvd2V2ZXIsIHdlJ2xsCmFsc28gc2VlIHRoYXQgd2hlbiB3ZSB3YW50IHRvIGNvbWUgdXAgd2l0aCBwcmlvcnMgZm9yIHNwZWNpZmljIHNpdHVhdGlvbnMsCnRoaW5raW5nIGluIHRlcm1zIG9mICoqc3RhbmRhcmRpc2VkIGVmZmVjdHMqKiByYXRoZXIgdGhhbiBhY3R1YWwgZGlmZmVyZW5jZXMgaW4KZGF0YSBjYW4gZ2V0IGNvbmZ1c2luZy4KClRvIGRlZmluZSBhIGxpa2VsaWhvb2QgYmFzZWQgb24gZWZmZWN0IHNpemUsIHdlIGZpcnN0IG5lZWQgdG8gd29yayBvdXQgdGhlCmVmZmVjdCBzaXplLiBUaGVyZSBhcmUgdHdvIGZvcm11bGFzIGZvciBlZmZlY3Qgc2l6ZXMsIGRlcGVuZGluZyBvbiB3aGV0aGVyCndlIGhhdmUgZGF0YSBmcm9tIG9uZSBncm91cCAob3IgZnJvbSBwYWlyZWQgc2FtcGxlcykgb3Igd2hldGhlciB3ZSBoYXZlIGRhdGEKZnJvbSB0d28gZ3JvdXBzLgoKSWYgd2UgaGF2ZSBkYXRhIGZyb20gcGFpcmVkIHNhbXBsZXMsIHRoZW4gd2UgZmlyc3Qgd29yayBvdXQgdGhlIHBhaXItd2lzZQpkaWZmZXJlbmNlcy4gRm9sbG93aW5nIHRoaXMsIHdlIHByb2NlZWQgYXMgd2Ugd291bGQgZm9yIHRoZSBvbmUtc2FtcGxlIGNhc2UuIFRvCndvcmsgb3V0IHRoZSBlZmZlY3Qgc2l6ZSBmb3IgdGhlIG9uZSBzYW1wbGUgY2FzZSwgd2UgdXNlIHRoZSBmb2xsb3dpbmcgZm9ybXVsYToKCiQkZCA9IFxmcmFje219e3N9LCQkCgpXaGVyZSAkbSQgaXMgdGhlIG1lYW4gb2YgdGhlIHNhbXBsZSwgYW5kICRzJCBpcyB0aGUgc3RhbmRhcmQgZGV2aWF0aW9uIG9mIHRoZQpzYW1wbGUuCgpJZiB3ZSBoYXZlIGRhdGEgZnJvbSB0d28gZ3JvdXBzIHRoZW4gdGhlIGZvcm11bGEgaXMgYSBsaXR0bGUgbW9yZSBjb21wbGV4LiBGb3IKdGhlIHR3byBncm91cCBjYXNlLCB0aGUgZm9ybXVsYSBpcyBhcyBmb2xsb3dzOgoKJCRkID0gXGZyYWN7bV8xIC0gbTJ9e3NfXG1hdGhybXtwb29sZWR9fSwkJAoKIHdoZXJlICRzX1xtYXRocm17cG9vbGVkfSQgaXMgZ2l2ZW4gYXMgZm9sbG93czoKCiQkc19cbWF0aHJte3Bvb2xlZH0gPSBcc3FydHtcZnJhY3sobl8xIC0gMSlzXjJfMSArIChuXzIgLSAxKXNeMl8yfXtuXzEgKyBuXzIgLTJ9fSwkJAoKYW5kIHdoZXJlICRtXzEkLyRtXzIkLCAkc18xJC8kc18yJCwgYW5kICRuXzEkLyRuXzIkLCBhcmUgdGhlIG1lYW4sIHN0YW5kYXJkCmRldmlhdGlvbiwgYW5kIHNhbXBsZSBzaXplIGZvciBncm91cCAxIGFuZCBncm91cCAyLiBJbiB0aGUgd29ya2VkIGV4YW1wbGVzCmJlbG93IHdlJ2xsIHNlZSB0aGF0IHdlIGNhbiB1c2UgdGhlIGBlZmZzaXplYCBwYWNrYWdlIGluIFIgdG8gd29yayBvdXQgdGhpcwplZmZlY3Qgc2l6ZS4KCk9uY2Ugd2UgaGF2ZSB0aGUgZWZmZWN0IHNpemUsIHRoZW4gdGhlIG9ubHkgb3RoZXIgdmFsdWUgdGhhdCB3ZSBuZWVkIGlzIHRoZQpzYW1wbGUgc2l6ZS4gV2UgaGF2ZSBvbmUgc2FtcGxlIHNpemUgaW4gdGhlIG9uZSBncm91cCBjYXNlIChzYW1wbGUgc2l6ZSBvcgpudW1iZXIgb2YgcGFpcnMpLCBhbmQgZm9yIHRoZSB0d28gZ3JvdXAgY2FzZSB3ZSdsbCBoYXZlIHRoZSBzYW1wbGUgc2l6ZSBvZiBlYWNoCmdyb3VwLiBXZSdsbCB3YWxrIHRocm91Z2ggYSBjb3VwbGUgb2YgZXhhbXBsZXMgdXNpbmcgc2ltdWxhdGVkIGRhdGEuCgpJbiB0aGUgZm9sbG93aW5nIGV4YW1wbGUsIHdlIGhhdmUgZGF0YSBmcm9tIGFuIGV4cGVyaW1lbnQgbG9va2luZyBhdCBtZW1vcnkgZm9yCndvcmRzLiBUaGUgd29yZHMgd2VyZSBwcmVzZW50ZWQgdW5kZXIgdHdvIGNvbmRpdGlvbnM6IGFuICplbW90aW9uYWwqIGNvbmRpdGlvbgphbmQgYSAqbmV1dHJhbCogY29uZGl0aW9uLiBXZSdyZSBpbnRlcmVzdGVkIGluIGtub3dpbmcgd2hldGhlciB0aGVyZSBpcyBhCmRpZmZlcmVuY2UgaW4gcmVjb2duaXRpb24gYWNjdXJhY3kgYmV0d2VlbiB0aGUgdHdvIGNvbmRpdGlvbnMuIFRoaXMgaXMgdGhlIGtpbmQKb2YgZGF0YSB3ZSdkIG9yZGluYXJpbHkgYW5hbHlzZSB3aXRoIGEgKnQqIHRlc3QuCgpXZSdsbCBsb2FkIHRoZSBkYXRhLCB3b3JrIG91dCB0aGUgZWZmZWN0IHNpemUsIGRlZmluZSB0aGUgbGlrZWxpaG9vZCwgYW5kIHRoZW4KcGxvdCBpdC4KCmBgYHtyfQojfCBlY2hvID0gVFJVRSwgaW5jbHVkZSA9IFRSVUUKCiMgRmlyc3QgbG9hZCB0aGUgZGF0YQp3b3JkX2RhdGEgPC0gcmVhZHI6OnJlYWRfY3N2KCJodHRwczovL2ZpbGVzLm1pbmRzY2kubmV0L3dvcmRfZGF0YS5jc3YiLAogIHNob3dfY29sX3R5cGVzID0gRkFMU0UKKQoKIyBOb3cgd2UnbGwgd29yayBvdXQgdGhlIGVmZmVjdCBzaXplIGFuZCBuCnN1bW1hcnlfZGF0YSA8LSB3b3JkX2RhdGEgJT4lCiAgcGl2b3Rfd2lkZXIoMTozLCBuYW1lc19mcm9tID0gImNvbmRpdGlvbiIsIHZhbHVlc19mcm9tID0gImFjY3VyYWN5IikgJT4lCiAgbXV0YXRlKGRpZmYgPSBlbW90aW9uYWwgLSBuZXV0cmFsKSAlPiUKICBzdW1tYXJpc2UobSA9IG1lYW4oZGlmZiksIHMgPSBzZChkaWZmKSwgbiA9IG4oKSkgJT4lCiAgbXV0YXRlKGQgPSBtIC8gcywgdCA9IG0gLyAocyAvIHNxcnQobikpKQoKCiMgTm93IGRlZmluZSB0aGUgbGlrZWxpaG9vZCBhbmQgcGxvdCBpdApkYXRhX21vZGVsIDwtIGxpa2VsaWhvb2QoCiAgZmFtaWx5ID0gIm5vbmNlbnRyYWxfZCIsCiAgZCA9IHN1bW1hcnlfZGF0YSRkLAogIG4gPSBzdW1tYXJ5X2RhdGEkbgopCgpwbG90KGRhdGFfbW9kZWwpICsKICBsYWJzKAogICAgeCA9ICLOtCIsIHkgPSAiUChZfM64KSIsCiAgICB0aXRsZSA9ICJMaWtlbGlob29kIGZvcjoiLAogICAgc3VidGl0bGUgPSBnbHVlOjpnbHVlKCJkID0ge3JvdW5kKHN1bW1hcnlfZGF0YSRkLDIpfSwgbiA9IHtzdW1tYXJ5X2RhdGEkbn0iKQogICkgKwogIHRoZW1lX21pbmltYWwoMTQpICsKICBzY2FsZV94X2NvbnRpbnVvdXMobGltaXRzID0gYygtMSwgMSksIGJyZWFrcyA9IHNlcSgtMSwgMSwgLjUpKQoKCgpgYGAKCkluIHRoZSBzZWNvbmQgZXhhbXBsZSwgd2UnbGwgbG9vayBhdCB0aGUgdHdvIGdyb3VwIGNhc2UuIEZvciB0aGlzIGV4YW1wbGUgd2UnbGwKdXNlIHNvbWUgc2ltdWxhdGVkIGRhdGEgdG8gbWF0Y2ggc29tZSBkYXRhIGZyb20gYW4gZXhwZXJpbWVudCBJIGNvbmR1Y3RlZCBtYW55CnllYXJzIGFnby4gSW4gdGhpcyB0YXNrLCBwZW9wbGUgd2VyZSBhc2tlZCB0byB3YXRjaCBhbiBhbmltYXRlZCBhdmF0YXIKcGVyZm9ybWluZyBhIG1vdmVtZW50LCB0aGV5IHdlcmUgYXNrZWQgdG8gc3luY2hyb25pc2UgYSBidXR0b24gcHJlc3Mgd2l0aApjcml0aWNhbCBwb2ludHMgaW4gdGhlIG1vdmVtZW50LCBhbmQgdGhlIHRpbWluZyBlcnJvciB3YXMgbWVhc3VyZWQuIFRoZQphbmltYXRlZCBhdmF0YXIgbW92ZWQgaW4gdHdvIGRpZmZlcmVuY2Ugd2F5cy4gSW4gb25lIGNvbmRpdGlvbiBpdCBtb3ZlZCBsaWtlIGEKaHVtYW4uIEluIHRoZSBvdGhlciBjb25kaXRpb24sIHRoZSBkeW5hbWljcyBvZiB0aGUgbW92ZW1lbnQgd2VyZSBhbHRlcmVkIHNvCnRoYXQgaXQgbW92ZWQgbGlrZSBhIHJvYm90LiBBbGwgcGFydGljaXBhbnRzIHZpZXdlZCBib3RoIGtpbmRzIG9mIG1vdmVtZW50cy4gSW4KYWRkaXRpb24gdG8gdGhpcyB3aXRoaW4gc3ViamVjdHMgZmFjdG9yLCB0aGVyZSB3YXMgYWxzbyBhIGJldHdlZW4gc3ViamVjdHMKZmFjdG9yLiBCZWZvcmUgdmlld2luZyBhbnkgb2YgdGhlIG1vdmVtZW50LCBwYXJ0aWNpcGFudHMgd2VyZSBzcGxpdCBpbnRvIHR3bwpncm91cHMuIE9uZSBncm91cCB3YXMgZ2l2ZW4gZXhwZXJpZW5jZSBhY3R1YWxseSBwZXJmb3JtaW5nIHRoZSBtb3ZlbWVudCB0aGV5CndvdWxkIGxhdGVyIG9ic2VydmUsIHdoaWxlIHRoZSBvdGhlciBncm91cCB3YXMgbm90LgoKVGhpcyBpcyB0aGUga2luZCBvZiBkYXRhIHRoYXQgd291bGQgb3JkaW5hcmlseSBiZSBhbmFseXNlZCB1c2luZyBhIDIgw5cgMiBtaXhlZApBTk9WQS4gSG93ZXZlciwgSSB3YXMgcGFydGljdWxhcmx5IGludGVyZXN0ZWQgaW4gdGhlICoqaW50ZXJhY3Rpb24qKi4gVGhlCioqaW50ZXJhY3Rpb24qKiBqdXN0IGV4YW1pbmVzIHdoZXRoZXIgdGhlIGRpZmZlcmVuY2UgYmV0d2VlbiAqKmNvbmRpdGlvbiAxKioKYW5kICoqY29uZGl0aW9uIDIqKiBpcyBkaWZmZXJlbnQgYmV0d2VlbiAqKmdyb3VwIDEqKiBhbmQgKipncm91cCAyKiouICBJbiB0aGUKZXhhbXBsZSBiZWxvdywgSSd2ZSBhbHJlYWR5IHdvcmtlZCBvdXQgdGhlIGRpZmZlcmVuY2UgaW4gdGhlIHRpbWluZyBlcnJvciBmb3IKKipjb25kaXRpb24gMSoqIGFuZCAqKmNvbmRpdGlvbiAyKiosIGFuZCBub3cgd2UganVzdCBoYXZlIHRvIGNvbXBhcmUgdGhpcwpkaWZmZXJlbmNlIGJldHdlZW4gdGhlIHR3byBncm91cHMuCgpBcyB3aXRoIHRoZSBlYXJsaWVyIGV4YW1wbGUsIHdlJ2xsIGxvYWQgdGhlIGRhdGEsIHdvcmsgb3V0IHRoZSBlZmZlY3Qgc2l6ZSwgCmRlZmluZSB0aGUgbGlrZWxpaG9vZCwgYW5kIHRoZW4gcGxvdCBpdC4KCmBgYHtyfQojfCBlY2hvID0gVFJVRSwgaW5jbHVkZSA9IFRSVUUKCiMgRmlyc3QgbG9hZCB0aGUgZGF0YQptb3Rvcl9leHAgPC0gcmVhZHI6OnJlYWRfY3N2KCJodHRwczovL2ZpbGVzLm1pbmRzY2kubmV0L21vdG9yX2V4cC5jc3YiLAogIHNob3dfY29sX3R5cGVzID0gRkFMU0UKKQoKCiMgTm93IHdlJ2xsIHdvcmsgb3V0IHRoZSBlZmZlY3Qgc2l6ZSBhbmQgbgpzdW1tYXJ5X2RhdGEgPC0gbW90b3JfZXhwICU+JQogIGRwbHlyOjpncm91cF9ieShncm91cCkgJT4lCiAgZHBseXI6OnN1bW1hcmlzZShtID0gbWVhbihyX2RpZmYpLCBzID0gc2Qocl9kaWZmKSwgbiA9IG4oKSkgJT4lCiAgdGlkeXI6OnBpdm90X3dpZGVyKG5hbWVzX2Zyb20gPSAiZ3JvdXAiLCB2YWx1ZXNfZnJvbSA9IGMoIm0iLCAicyIsICJuIikpCgptZF9kaWZmIDwtIHN1bW1hcnlfZGF0YSRtX2V4cGVyIC0gc3VtbWFyeV9kYXRhJG1fbmFpdmUKc2RfcG9vbGVkIDwtIHNxcnQoKCgoc3VtbWFyeV9kYXRhJG5fZXhwZXIgLSAxKSAqIHN1bW1hcnlfZGF0YSRzX2V4cGVyXjIpICsKICAoKHN1bW1hcnlfZGF0YSRuX25haXZlIC0gMSkgKiBzdW1tYXJ5X2RhdGEkc19uYWl2ZV4yKSkgLwogIChzdW1tYXJ5X2RhdGEkbl9leHBlciArIHN1bW1hcnlfZGF0YSRuX25haXZlIC0gMikpCmQgPC0gbWRfZGlmZiAvIHNkX3Bvb2xlZAoKIyBvciB3ZSBjYW4gdXNlIHRoZSBlZmZzaXplIHBhY2thZ2UKIyB5b3UnbGwganVzdCBuZWVkIHRvIGluc3RhbGwgaXQgYmVmb3JlIHlvdSB1c2UgaXQKIyB5b3UgY2FuIGluc3RhbGwgaXQgd2l0aCB0aGUgZm9sbG93aW5nIGNvbW1hbmQKIyBpbnN0YWxsLnBhY2thZ2UoImVmZnNpemUiKQojCiMgYW5kIHRoZW4gdXNlIGl0IGFzIGZvbGxvd3MKIyBkIDwtIGVmZnNpemU6OmNvaGVuLmQobW90b3JfZXhwJHJfZGlmZiwgbW90b3JfZXhwJGdyb3VwKSRlc3RpbWF0ZQoKIyBzYW1wbGVfc2l6ZSA8LSBtb3Rvcl9leHAgJT4lCiMgICBkcGx5cjo6Z3JvdXBfYnkoZ3JvdXApICU+JQojICAgZHBseXI6OnN1bW1hcmlzZShuID0gbigpKQoKIyBOb3cgZGVmaW5lIHRoZSBsaWtlbGlob29kIGFuZCBwbG90IGl0CmRhdGFfbW9kZWwgPC0gbGlrZWxpaG9vZCgKICBmYW1pbHkgPSAibm9uY2VudHJhbF9kMiIsCiAgZCA9IGQsCiAgbjEgPSBzdW1tYXJ5X2RhdGEkbl9leHBlciwKICBuMiA9IHN1bW1hcnlfZGF0YSRuX25haXZlCikKCnBsb3QoZGF0YV9tb2RlbCkgKwogIGxhYnMoCiAgICB4ID0gIs60IiwgeSA9ICJQKFl8zrgpIiwKICAgIHRpdGxlID0gIkxpa2VsaWhvb2QgZm9yOiIsCiAgICBzdWJ0aXRsZSA9IGdsdWU6OmdsdWUoImQgPSB7cm91bmQoZCwyKX0sIG4xID0ge3N1bW1hcnlfZGF0YSRuX2V4cGVyfSwgbjIgPSB7c3VtbWFyeV9kYXRhJG5fbmFpdmV9IikKICApICsKICB0aGVtZV9taW5pbWFsKDE0KSArCiAgc2NhbGVfeF9jb250aW51b3VzKGxpbWl0cyA9IGMoLTEsIDMpLCBicmVha3MgPSBzZXEoLTEsIDMsIDEpKQoKCgpgYGAKCiMjIEluZmVyZW5jZXMgYWJvdXQgKnQqIHZhbHVlcwoKRmluYWxseSwgd2UnbGwgcmVwZWF0IHRoZSBsYXN0IGFuYWx5c2lzLCBidXQgaW4gdGhpcyBjYXNlIHdlJ2xsIG1vZGVsIHRoZSBkYXRhCmluIHRlcm1zIG9mICp0KiByYXRoZXIgdGhhbiAqZCouCgpgYGB7cn0KI3wgZWNobyA9IFRSVUUsIGluY2x1ZGUgPSBUUlVFCgojIExvYWQgdGhlIGRhdGEgYWdhaW4ganVzdCBpbiBjYXNlCm1vdG9yX2V4cCA8LSByZWFkcjo6cmVhZF9jc3YoImh0dHBzOi8vZmlsZXMubWluZHNjaS5uZXQvbW90b3JfZXhwLmNzdiIsCiAgc2hvd19jb2xfdHlwZXMgPSBGQUxTRQopCgojIFJ1biB0aGUgdCB0ZXN0IGFuZCBleHRyYWN0IHRoZSB0IHZhbHVlIGFuZCBkZgp0X3Rlc3RfcmVzIDwtIHQudGVzdChyX2RpZmYgfiBncm91cCwgbW90b3JfZXhwLCB2YXIuZXF1YWwgPSBUUlVFKSAlPiUKICBicm9vbTo6dGlkeSgpICU+JQogIGRwbHlyOjpzZWxlY3Qoc3RhdGlzdGljLCBwYXJhbWV0ZXIpCgojIE5vdyBkZWZpbmUgdGhlIGxpa2VsaWhvb2QKCmRhdGFfbW9kZWwgPC0gbGlrZWxpaG9vZCgKICBmYW1pbHkgPSAibm9uY2VudHJhbF90IiwKICB0ID0gdF90ZXN0X3JlcyRzdGF0aXN0aWMsCiAgZGYgPSB0X3Rlc3RfcmVzJHBhcmFtZXRlcgopCgojIEFuZCBwbG90IGl0CnBsb3QoZGF0YV9tb2RlbCkgKwogIGxhYnMoCiAgICB4ID0gInQiLCB5ID0gIlAoWXzOuCkiLAogICAgdGl0bGUgPSAiTGlrZWxpaG9vZCBmb3I6IiwKICAgIHN1YnRpdGxlID0gZ2x1ZTo6Z2x1ZSgidCA9IHtyb3VuZCh0X3Rlc3RfcmVzJHN0YXRpc3RpYywyKX0sIGRmID0ge3RfdGVzdF9yZXMkcGFyYW1ldGVyfSIpCiAgKSArCiAgdGhlbWVfbWluaW1hbCgxNCkgKwogIHNjYWxlX3hfY29udGludW91cyhsaW1pdHMgPSBjKC0yLCA2KSwgYnJlYWtzID0gc2VxKC0yLCA2LCAyKSkKCmBgYAoKVXNpbmcgdGhlICpub24tY2VudHJhbCB0KiBsaWtlbGlob29kIG1pZ2h0IHNlZW0gYSBsaXR0bGUgZWFzaWVyIHRvIHVzZSwgYmVjYXVzZQppdCByZXF1aXJlcyBsZXNzIHdvcmsgdXBmcm9udCBiZWNhdXNlIHdlIGNhbiBqdXN0IHVzZSB0aGUgYHQudGVzdGAgZnVuY3Rpb24gdG8Kd29yayBvdXQgdGhlICp0KiBzdGF0aXN0aWMgaW5zdGVhZCBvZiBoYXZpbmcgdG8gd29yayBvdXQgdGhlICpkKiB2YWx1ZS4KSG93ZXZlciwgYXMgd2UnbGwgc2VlIGluIHRoZSBzZWN0aW9uIG9uICoqcHJpb3JzKiosIHRoZXJlIGFzIGFkdmFudGFnZXMgdG8gdXNpbmcKdGhlICpub24tY2VudHJhbCB0KiBsaWtlbGlob29kLiBUaGlzIGRpc2FkdmFudGFnZSBpcyBwcmltYXJpbHkgdG8gZG8gd2l0aCB0aGUKZmFjdCB0aGF0IHRoZSAqdCogdmFsdWUgY2FuIGNoYW5nZSBkcmFtYXRpY2FsbHkgd2l0aCBzYW1wbGUgc2l6ZS0tLXRoYXQgaXMsIAp2ZXJ5IGxhcmdlIHNhbXBsZSBzaXplcyBjYW4gcmVzdWx0IGluIHZlcnkgbGFyZ2UgKnQqIHZhbHVlcyBldmVuIGlmIHRoZSBtZWFuIApkaWZmZXJlbmNlIGJldHdlZW4gY29uZGl0aW9ucyBvciBncm91cHMgc3RheXMgY29uc3RhbnQuIEZvciB0aGUgKm5vbi1jZW50cmFsIGQqIAphbmQgKm5vbi1jZW50cmFsIGQyKiBsaWtlbGlob29kcyB0aGlzIGlzbid0IGFuIGlzc3VlLiBUaGUgKmQqIHZhbHVlIHdpbGwgc3RheQp0aGUgc2FtZSBldmVuIGlmIHRoZSBzYW1wbGUgc2l6ZSBpbmNyZWFzZXMgYW5kIGluc3RlYWQsIHRoZSBsaWtlbGlob29kIHdpbGwgCmp1c3QgZ2V0IG5hcnJvd2VyLgoKSSd2ZSBjb3ZlcmVkIHRoZSAqbm9uLWNlbnRyYWwgdCogbGlrZWxpaG9vZCBmb3IgY29tcGxldGVuZXNzLCBidXQgaXQncyBhbG1vc3QKbmV2ZXIgb2YgYW55IHJlYWwgdXNlLgoK" download="05-more-likelihoods.Rmd"><img src="https://img.shields.io/badge/.Rmd-Download-blue"></a>
+<a href="https://colab.research.google.com/github/ljcolling/bayes2022/blob/main/_notebooks/05-more-likelihoods.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" /></a></p>
+<p>In the previous section (see <a href="an-alternative-to-p-values.html">An alternative to <em>p</em>
+values</a>, and <a href="the-bayes-factor.html">The Bayes
+factor</a>), we were introduced to the concept of the
+<strong>likelihood</strong>. In these sections, we specifically covered the <strong>binomial</strong>
+likelihood, which can be used for working out Bayes factors for samples of
+Bernoulli trials—that is, trials with two discrete outcomes like heads and
+tails or successes and failures. We used this specifically for computing our
+Bayes factors for hypotheses about coin flips. Although these Bayes factors
+could be used anywhere where we might ordinarily use a frequentist <strong>binomial
+test</strong> it is still rather limited in scope. Therefore, in this section, we’ll
+cover Bayes factors that can be used in other situations. Specifically, we’ll
+focus primarily on situations where we’re interested in <strong>differences between
+means</strong>—that is, situations where we might otherwise use a <em>t</em>-test or ANOVA.</p>
+<div id="choosing-a-likelihood" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> Choosing a likelihood</h2>
+<p>In our initial example on hunting treasure (see <a href="null-hypothesis-significance-testing.html">Null hypothesis significance
+testing</a>) our treasure hunting
+device worked by, on average, pointing at 0 when there was no treasure
+around and, on average, pointing at some other value when there was treasure
+around.</p>
+<p>To work out whether our device was, on average, pointing at a particular value
+we collected a sample of a fixed size (10 in our first example) and then worked
+out the average of these values. For example, we might’ve collected a sample of
+10 values as follows:</p>
+<p><strong>Sample data</strong>: -14, -5.8, 39, 1.8, 3.2, 42.9, 11.5, -31.6, -17.2, -11.1</p>
+<p><strong>Sample mean</strong>: 1.87</p>
+<p>After collecting a large number of samples, we could plot our averages as
+follows:</p>
+<p><img src="05-more-likelihoods_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>In the above examples, we’ve set the <em>parameter</em> of interest (the mean) to 0.
+The above plots are just examples of the sampling distribution when the
+parameter is 0. Panel <strong>A</strong> shows the sampling distribution of the <em>raw means</em>.
+Panel <strong>B</strong> shows the sampling distribution of the raw means re-scaled to <em>t</em>
+values. Finally, panel <strong>C</strong> shows the sampling distribution of the raw means
+re-scaled to <em>Cohen’s d</em> values (where <span class="math inline">\(\delta = \frac{\mu}{\sigma}\)</span>). All
+these plots approximately follow the shape of a <em>normal distribution</em> or a
+<em>t distribution</em>. We could use these plots to work out <em>p</em> values, just
+as we previously did.</p>
+<p>But, as we did with the coin flip examples, when working with <em>likelihoods</em>,
+we’re interested in the probability of obtaining our data under different
+values of the parameter. That is, we must consider the probability of obtaining
+our current data not just in the case where the parameter of interest is 0, but
+also where the parameter of interest is some other value. For example, the
+plots below have been generated by setting the parameter value–that is, the
+value to which the device, on average points—to a raw mean of approximately
+19.6. We’ve also set the average spread of the values—that is, the standard
+deviation–to 25. Consequently, when rescaled to a <em>t</em> value, this would result
+in an average <em>t</em> of <span class="math inline">\(\frac{19.6}{\frac{25}{\sqrt{10}}}\)</span>. And when rescaled to
+a <em>d</em> value, this would result in an average <em>d</em> value of <span class="math inline">\(\frac{19.6}{25}\)</span>.</p>
+<p><img src="05-more-likelihoods_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>For these plots, panel <strong>A</strong> again shows the <em>raw means</em>, with panel <strong>B</strong>
+showing the <em>t</em> values, and panel <strong>C</strong> showing the Cohen’s <em>d</em> values. The
+distribution in Panel <strong>A</strong> now approximately follows the shape of a <em>normal
+distribution</em> or a <em>scaled and shifted t distribution</em>. Panel <strong>B</strong> and <strong>C</strong>
+now follow the shape of slightly differently scaled versions of the
+<em>non-central t distribution</em>.</p>
+<p>In the section that follows, we’ll discover and learn how to use these
+likelihoods: The <em>normal</em> likelihood, the <em>scaled and shifted t</em> likelihood,
+and three versions of the <em>non-central t</em> likelihood (which <code>bayesplay</code> calls
+the <em>non-central t</em>, <em>non-central d</em>, and <em>non-central d2</em> likelihoods).</p>
+<div id="the-variance-of-likelihoods" class="section level3" number="5.1.1">
+<h3><span class="header-section-number">5.1.1</span> The variance of likelihoods</h3>
+<p>When we were examining coin flips, we saw that the sampling distribution (in
+the flip until <strong>n</strong> flips case) followed the <em>binomial distribution</em>. And when
+we wanted to make inferences about parameter values (the coin bias) we used the
+<em>binomial</em> likelihood. Our data, which we used to make our inference consisted
+of, first, the number of heads and, second, the number of flips.</p>
+<p>These two values controlled different aspects of the shape of the likelihood
+function. First, the number of heads that we observed more-or-less controlled
+where the peak of the likelihood function was located. Second, the number of
+flips, or the sample size, controlled how spread out the likelihood function
+was. In the plots below we can see three cases of observing <span class="math inline">\(\frac{n}{2}\)</span> heads
+in 2, 20, and 100 flips. In all three plots, the likelihood function is peaked
+at 0.5 and drops off as we move away from 0.5. The rate of this drop off,
+however, is steeper as the sample size increases.</p>
+<p><img src="05-more-likelihoods_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>What is the important intuition here? To get a handle on the intuition we can
+think of the extreme cases. When the coin is very biased—for example, it
+shows heads 0.8 of the time—then it will still sometimes show tails. It might
+even sometimes show tails on the first flip. In fact, it’ll show tails on the
+first flip 0.2 of the time. Therefore, we wouldn’t be that surprised if after
+two flips we have one head and one tail, because it won’t be such an uncommon
+occurrence. But in the situation where we’re making 100 flips, it now becomes
+more and more unlikely that we’d see equal numbers of heads and tails if the
+coin bias really was 0.8. We can put numbers to it by calculating the
+likelihood ratio between 0.5 and 0.8 for each of the three sample sizes.</p>
+<p>When there are 2 trials, the likelihood ratio
+between θ = 0.5 and θ = 0.8 is 1.56.</p>
+<p>When there are 20 trials, the likelihood ratio
+between θ = 0.5 and θ = 0.8 is 86.74.</p>
+<p>When there are 100 trials, the likelihood ratio
+between θ = 0.5 and θ = 0.8 is 4909093465.3.</p>
+<p>For all the likelihoods that we’ll examine in this section, when defining the
+likelihoods we’ll have one value that represents our observation: the mean we
+observe, the <em>t</em> value we observe, or the <em>d</em> value we observe. This will be
+analogous to the number of heads we observe in the coin flip example. And we’ll
+have a value (or values) that defines how peaked or spread out the likelihood
+will be: this could be the sample size, the degrees of freedom and/or standard
+deviation.</p>
+<p>In more technical terms, all the likelihoods that we’ll examine will have one
+parameter that we’re making inferences about: the <em>mean</em>, the <em>t</em> value, or the
+<em>d</em> value. But this parameter will also have a <em>variance</em> associated with it.
+And as we’ll see in the examples below, depending on whether we’re interested
+in <em>raw means</em>,<em>t</em> values, or <em>d</em> values, the sampling distributions are
+slightly different shapes. Therefore, the <em>likelihoods</em> that we use in each
+case will be slightly different. We’ll look at each of these in turn.</p>
+</div>
+</div>
+<div id="inferences-about-raw-means" class="section level2" number="5.2">
+<h2><span class="header-section-number">5.2</span> Inferences about raw means</h2>
+<p>When we’re interested in making inferences about the <em>raw means</em> we have two
+choices available to us. The most straightforward choice is to choose the
+<em>normal</em> likelihood. The shape of the <em>normal</em> likelihood is controlled by
+<strong>two</strong> values. The first value is our <strong>observed mean</strong>. This value controls
+the location of the peak of the likelihood function. The second value is the
+<strong>standard deviation of the mean</strong>. The <strong>standard deviation of the mean</strong> is
+more commonly known as the <strong>standard error of the mean</strong>. We can work out the
+<em>standard error</em> using the following formula:</p>
+<p><span class="math display">\[\sigma_{\bar{x}} = \frac{\sigma}{\sqrt{n}},\]</span></p>
+<p>where <span class="math inline">\(\sigma\)</span> is the standard deviation of the population. Usually, we don’t
+know the value of <span class="math inline">\(\sigma\)</span>, so we estimate it using <span class="math inline">\(s\)</span>, or the standard
+deviation of our sample.</p>
+<p>To see how defining a <em>normal</em> likelihood works in practice, we’ll generate our
+data. From this, we’ll work out the mean of our sample, and we’ll estimate the
+standard error (the standard deviation of the mean).</p>
+<p>To generate our data, we’ll set up a data generating process (you can think of
+this as <strong>the population</strong>) and we’ll draw a sample of 10 values from this. Our
+data generating process will have a <span class="math inline">\(\mu\)</span> (mean of the population) of 19.6, and
+a <span class="math inline">\(\sigma\)</span> (standard deviation of the population) of 25.</p>
+<p><strong>Sample data</strong>: 5.59, 13.85, 58.57, 21.36, 22.83, 62.48, 31.12, -12.03, 2.43, 8.46</p>
+<p><strong>Mean of sample</strong>: 21.47</p>
+<p><strong>Standard deviation of sample</strong>: 23.84</p>
+<p><strong>Size of sample</strong>: 10</p>
+<p><strong>Standard deviation of sampling distribution (standard error)</strong>: 7.54</p>
+<p>Note that the two values that we want are the <em>mean of the sample</em> and the
+<em>standard deviation of the mean</em>. A common confusion is that you want the
+<em>standard deviation of the sample</em>. This is not the value that we want, and we
+only calculate it because we can use it to estimate the <em>standard deviation of
+the population</em> and, from this, the <em>standard deviation of the mean</em>.</p>
+<p>Now we can define the likelihood, and we can plot it.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="moving-beyond-coin-flips-1.html#cb14-1" aria-hidden="true" tabindex="-1"></a>data_model <span class="ot">&lt;-</span> <span class="fu">likelihood</span>(<span class="at">family =</span> <span class="st">&quot;normal&quot;</span>, <span class="at">mean =</span> <span class="fl">21.47</span>, <span class="at">sd =</span> <span class="fl">7.54</span>)</span>
+<span id="cb14-2"><a href="moving-beyond-coin-flips-1.html#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="moving-beyond-coin-flips-1.html#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(data_model) <span class="sc">+</span></span>
+<span id="cb14-4"><a href="moving-beyond-coin-flips-1.html#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;likelihood for mean = 21.47 (normal)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb14-5"><a href="moving-beyond-coin-flips-1.html#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="sc">-</span><span class="dv">10</span>, <span class="dv">50</span>) <span class="sc">+</span></span>
+<span id="cb14-6"><a href="moving-beyond-coin-flips-1.html#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="dv">14</span>)</span></code></pre></div>
+<p><img src="05-more-likelihoods_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>From our likelihood plot we can see that our data would be generated more often
+if the mean of the data generating process was 21 and less often if the mean of
+the data generating process was 30.</p>
+<p>In fact, we can put a number to it and say that:</p>
+<p>The data would be produced 1.89 times more
+often if the mean of the population was 21 than it would be if the mean of the
+population was 30.</p>
+<p>The likelihood function will get wider or narrower when the <em>standard deviation
+of the mean</em> changes. The two factors that control the <em>standard deviation of
+the mean</em> are the sample size and the standard deviation of the population. In
+the example below we’ll keep our estimate of the <em>standard deviation of the
+population</em> the same but we’ll increase the sample size. Consequently, the
+<em>standard deviation of the mean</em> will decrease and our likelihood function will
+become narrower.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="moving-beyond-coin-flips-1.html#cb15-1" aria-hidden="true" tabindex="-1"></a>data_model <span class="ot">&lt;-</span> <span class="fu">likelihood</span>(<span class="at">family =</span> <span class="st">&quot;normal&quot;</span>, <span class="at">mean =</span> <span class="fl">21.47</span>, <span class="at">sd =</span> <span class="fl">2.384</span>)</span>
+<span id="cb15-2"><a href="moving-beyond-coin-flips-1.html#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="moving-beyond-coin-flips-1.html#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(data_model) <span class="sc">+</span></span>
+<span id="cb15-4"><a href="moving-beyond-coin-flips-1.html#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;likelihood for mean = 21.47&quot;</span>) <span class="sc">+</span></span>
+<span id="cb15-5"><a href="moving-beyond-coin-flips-1.html#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="sc">-</span><span class="dv">10</span>, <span class="dv">50</span>) <span class="sc">+</span></span>
+<span id="cb15-6"><a href="moving-beyond-coin-flips-1.html#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="dv">14</span>)</span></code></pre></div>
+<p><img src="05-more-likelihoods_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>And this would also make a change to any likelihood ratio we could calculate.
+For example, calculating the new likelihood ratio comparing <span class="math inline">\(\mu = 30\)</span> and <span class="math inline">\(\mu = 21\)</span> would give the following result:</p>
+<p>The data would be produced 590.92 times more
+often if the mean of the population was 21 than it would be if the mean of the
+population was 30.</p>
+<p>In the preceding examples, we were modelling our data with a <em>normal</em>
+likelihood. And we were estimating the <em>standard deviation of the mean</em> using
+the <em>standard deviation of our sample</em>. We did this, because we didn’t know the
+actual standard deviation of our data generating process. We’d need to know
+this value if we wanted to exactly calculate the <em>standard deviation of the
+mean</em>.</p>
+<p>Or at least, we ordinarily don’t know the standard deviation of our data
+generating process. However, because I set it up, I know it is 25, because this
+is the value I set it to. Therefore, our estimate was an under estimate.
+Typically, we’ll underestimate the <em>standard deviation of the population</em>.
+These under-estimates will be worse when the sample size is small. As our
+sample size increases then the two values will, by definition, match.</p>
+<p>There are a few approaches that we can take to dealing with this issue. First,
+we can just do nothing. This is the most straightforward approach, and it is
+also a very common approach. The second approach, is to apply a correction as
+follows:</p>
+<p><span class="math display">\[s_{\bar{x}} = \frac{s}{\sqrt{n}} \times \left(1 + \frac{20}{\mathrm{df}^2}\right),\]</span></p>
+<p>where <span class="math inline">\(\mathrm{df}\)</span> are the degrees of freedom for the corresponding <em>t</em> test.
+<a href="http://dx.doi.org/10.3389/fpsyg.2014.00781">Dienes (2014, p 11)</a> provides
+more details on this approach. Dienes (2014) also provides good guidance on
+using Bayes factors, and I would recommend reading it for the assessment.</p>
+<p>Finally, the third approach, is to employ a <em>scaled and shifted t likelihood</em>
+instead of a <em>normal likelihood</em>. The <em>scaled and shifted t likelihood</em> has
+fatter tails than the <em>normal likelihood</em>, which accounts for the fact that our
+<em>normal likelihood</em> tends to be narrower than it ought to be.</p>
+<p>In <code>bayesplay</code> we can use the <em>scaled and shifted t likelihood</em> by setting the
+likelihood <strong>family</strong> to **student_t*. When using this likelihood, one
+additional value will need to be set. This is the <strong>df</strong> value, which is the
+same as the <strong>df</strong> value that we would use for the correction approach above.</p>
+<p>We’ll recompute our previous example using this likelihood family.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="moving-beyond-coin-flips-1.html#cb16-1" aria-hidden="true" tabindex="-1"></a>data_model <span class="ot">&lt;-</span> <span class="fu">likelihood</span>(<span class="at">family =</span> <span class="st">&quot;student_t&quot;</span>, <span class="at">mean =</span> <span class="fl">21.47</span>, <span class="at">sd =</span> <span class="fl">7.54</span>, <span class="at">df =</span> <span class="dv">9</span>)</span>
+<span id="cb16-2"><a href="moving-beyond-coin-flips-1.html#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="moving-beyond-coin-flips-1.html#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(data_model) <span class="sc">+</span></span>
+<span id="cb16-4"><a href="moving-beyond-coin-flips-1.html#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;likelihood for mean = 21.47 (student t)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb16-5"><a href="moving-beyond-coin-flips-1.html#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="sc">-</span><span class="dv">10</span>, <span class="dv">50</span>) <span class="sc">+</span></span>
+<span id="cb16-6"><a href="moving-beyond-coin-flips-1.html#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="dv">14</span>)</span></code></pre></div>
+<p><img src="05-more-likelihoods_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p>As you can see the two likelihood functions look very similar.</p>
+<p>The data would be produced 1.94 times more
+often if the mean of the population was 21 than it would be if the mean of the
+population was 30.</p>
+<p>This likelihood ratios are also very similar.</p>
+<p>The difference in the likelihood ratio between the <em>normal</em>
+likelihood and the <em>student_t</em> likelihood is about
+0.05</p>
+</div>
+<div id="inferences-about-effect-sizes" class="section level2" number="5.3">
+<h2><span class="header-section-number">5.3</span> Inferences about effect sizes</h2>
+<p>A very popular alternative approach to modelling data in terms of the observed
+mean is to instead model data in terms of standardized effect sizes on the raw
+means themselves. This gets around the problem of the unknown variance;
+however, it has an added benefit in that it can place results from very
+different experiments on a common scale. For example, results from a study of
+reaction times might have values between 500 and 2000 ms and results from a
+study on test scores might have values that range between 40 and 90. By
+re-scaling mean values to <em>standardised means</em>—that is, to effect sizes—we
+can be more certain that values will fall somewhere between -10 / 10, and more
+typically between -1/1. When we talk more about priors, we’ll see that this
+rescaling will help us to come up with priors that will work in a wide range of
+settings and with a wide range of experiments and types of data. However, we’ll
+also see that when we want to come up with priors for specific situations,
+thinking in terms of <strong>standardised effects</strong> rather than actual differences in
+data can get confusing.</p>
+<p>To define a likelihood based on effect size, we first need to work out the
+effect size. There are two formulas for effect sizes, depending on whether
+we have data from one group (or from paired samples) or whether we have data
+from two groups.</p>
+<p>If we have data from paired samples, then we first work out the pair-wise
+differences. Following this, we proceed as we would for the one-sample case. To
+work out the effect size for the one sample case, we use the following formula:</p>
+<p><span class="math display">\[d = \frac{m}{s},\]</span></p>
+<p>Where <span class="math inline">\(m\)</span> is the mean of the sample, and <span class="math inline">\(s\)</span> is the standard deviation of the
+sample.</p>
+<p>If we have data from two groups then the formula is a little more complex. For
+the two group case, the formula is as follows:</p>
+<p><span class="math display">\[d = \frac{m_1 - m2}{s_\mathrm{pooled}},\]</span></p>
+<p>where <span class="math inline">\(s_\mathrm{pooled}\)</span> is given as follows:</p>
+<p><span class="math display">\[s_\mathrm{pooled} = \sqrt{\frac{(n_1 - 1)s^2_1 + (n_2 - 1)s^2_2}{n_1 + n_2 -2}},\]</span></p>
+<p>and where <span class="math inline">\(m_1\)</span>/<span class="math inline">\(m_2\)</span>, <span class="math inline">\(s_1\)</span>/<span class="math inline">\(s_2\)</span>, and <span class="math inline">\(n_1\)</span>/<span class="math inline">\(n_2\)</span>, are the mean, standard
+deviation, and sample size for group 1 and group 2. In the worked examples
+below we’ll see that we can use the <code>effsize</code> package in R to work out this
+effect size.</p>
+<p>Once we have the effect size, then the only other value that we need is the
+sample size. We have one sample size in the one group case (sample size or
+number of pairs), and for the two group case we’ll have the sample size of each
+group. We’ll walk through a couple of examples using simulated data.</p>
+<p>In the following example, we have data from an experiment looking at memory for
+words. The words were presented under two conditions: an <em>emotional</em> condition
+and a <em>neutral</em> condition. We’re interested in knowing whether there is a
+difference in recognition accuracy between the two conditions. This is the kind
+of data we’d ordinarily analyse with a <em>t</em> test.</p>
+<p>We’ll load the data, work out the effect size, define the likelihood, and then
+plot it.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="moving-beyond-coin-flips-1.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First load the data</span></span>
+<span id="cb17-2"><a href="moving-beyond-coin-flips-1.html#cb17-2" aria-hidden="true" tabindex="-1"></a>word_data <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">&quot;https://files.mindsci.net/word_data.csv&quot;</span>,</span>
+<span id="cb17-3"><a href="moving-beyond-coin-flips-1.html#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">show_col_types =</span> <span class="cn">FALSE</span></span>
+<span id="cb17-4"><a href="moving-beyond-coin-flips-1.html#cb17-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-5"><a href="moving-beyond-coin-flips-1.html#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="moving-beyond-coin-flips-1.html#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Now we&#39;ll work out the effect size and n</span></span>
+<span id="cb17-7"><a href="moving-beyond-coin-flips-1.html#cb17-7" aria-hidden="true" tabindex="-1"></a>summary_data <span class="ot">&lt;-</span> word_data <span class="sc">%&gt;%</span></span>
+<span id="cb17-8"><a href="moving-beyond-coin-flips-1.html#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">names_from =</span> <span class="st">&quot;condition&quot;</span>, <span class="at">values_from =</span> <span class="st">&quot;accuracy&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb17-9"><a href="moving-beyond-coin-flips-1.html#cb17-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">diff =</span> emotional <span class="sc">-</span> neutral) <span class="sc">%&gt;%</span></span>
+<span id="cb17-10"><a href="moving-beyond-coin-flips-1.html#cb17-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">m =</span> <span class="fu">mean</span>(diff), <span class="at">s =</span> <span class="fu">sd</span>(diff), <span class="at">n =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb17-11"><a href="moving-beyond-coin-flips-1.html#cb17-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">d =</span> m <span class="sc">/</span> s, <span class="at">t =</span> m <span class="sc">/</span> (s <span class="sc">/</span> <span class="fu">sqrt</span>(n)))</span>
+<span id="cb17-12"><a href="moving-beyond-coin-flips-1.html#cb17-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-13"><a href="moving-beyond-coin-flips-1.html#cb17-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-14"><a href="moving-beyond-coin-flips-1.html#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Now define the likelihood and plot it</span></span>
+<span id="cb17-15"><a href="moving-beyond-coin-flips-1.html#cb17-15" aria-hidden="true" tabindex="-1"></a>data_model <span class="ot">&lt;-</span> <span class="fu">likelihood</span>(</span>
+<span id="cb17-16"><a href="moving-beyond-coin-flips-1.html#cb17-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="st">&quot;noncentral_d&quot;</span>,</span>
+<span id="cb17-17"><a href="moving-beyond-coin-flips-1.html#cb17-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">d =</span> summary_data<span class="sc">$</span>d,</span>
+<span id="cb17-18"><a href="moving-beyond-coin-flips-1.html#cb17-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> summary_data<span class="sc">$</span>n</span>
+<span id="cb17-19"><a href="moving-beyond-coin-flips-1.html#cb17-19" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-20"><a href="moving-beyond-coin-flips-1.html#cb17-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-21"><a href="moving-beyond-coin-flips-1.html#cb17-21" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(data_model) <span class="sc">+</span></span>
+<span id="cb17-22"><a href="moving-beyond-coin-flips-1.html#cb17-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb17-23"><a href="moving-beyond-coin-flips-1.html#cb17-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;δ&quot;</span>, <span class="at">y =</span> <span class="st">&quot;P(Y|θ)&quot;</span>,</span>
+<span id="cb17-24"><a href="moving-beyond-coin-flips-1.html#cb17-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Likelihood for:&quot;</span>,</span>
+<span id="cb17-25"><a href="moving-beyond-coin-flips-1.html#cb17-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">&quot;d = {round(summary_data$d,2)}, n = {summary_data$n}&quot;</span>)</span>
+<span id="cb17-26"><a href="moving-beyond-coin-flips-1.html#cb17-26" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb17-27"><a href="moving-beyond-coin-flips-1.html#cb17-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="dv">14</span>) <span class="sc">+</span></span>
+<span id="cb17-28"><a href="moving-beyond-coin-flips-1.html#cb17-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>), <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>, .<span class="dv">5</span>))</span></code></pre></div>
+<p><img src="05-more-likelihoods_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p>In the second example, we’ll look at the two group case. For this example we’ll
+use some simulated data to match some data from an experiment I conducted many
+years ago. In this task, people were asked to watch an animated avatar
+performing a movement, they were asked to synchronise a button press with
+critical points in the movement, and the timing error was measured. The
+animated avatar moved in two difference ways. In one condition it moved like a
+human. In the other condition, the dynamics of the movement were altered so
+that it moved like a robot. All participants viewed both kinds of movements. In
+addition to this within subjects factor, there was also a between subjects
+factor. Before viewing any of the movement, participants were split into two
+groups. One group was given experience actually performing the movement they
+would later observe, while the other group was not.</p>
+<p>This is the kind of data that would ordinarily be analysed using a 2 × 2 mixed
+ANOVA. However, I was particularly interested in the <strong>interaction</strong>. The
+<strong>interaction</strong> just examines whether the difference between <strong>condition 1</strong>
+and <strong>condition 2</strong> is different between <strong>group 1</strong> and <strong>group 2</strong>. In the
+example below, I’ve already worked out the difference in the timing error for
+<strong>condition 1</strong> and <strong>condition 2</strong>, and now we just have to compare this
+difference between the two groups.</p>
+<p>As with the earlier example, we’ll load the data, work out the effect size,
+define the likelihood, and then plot it.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="moving-beyond-coin-flips-1.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First load the data</span></span>
+<span id="cb18-2"><a href="moving-beyond-coin-flips-1.html#cb18-2" aria-hidden="true" tabindex="-1"></a>motor_exp <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">&quot;https://files.mindsci.net/motor_exp.csv&quot;</span>,</span>
+<span id="cb18-3"><a href="moving-beyond-coin-flips-1.html#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">show_col_types =</span> <span class="cn">FALSE</span></span>
+<span id="cb18-4"><a href="moving-beyond-coin-flips-1.html#cb18-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-5"><a href="moving-beyond-coin-flips-1.html#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="moving-beyond-coin-flips-1.html#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="moving-beyond-coin-flips-1.html#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Now we&#39;ll work out the effect size and n</span></span>
+<span id="cb18-8"><a href="moving-beyond-coin-flips-1.html#cb18-8" aria-hidden="true" tabindex="-1"></a>summary_data <span class="ot">&lt;-</span> motor_exp <span class="sc">%&gt;%</span></span>
+<span id="cb18-9"><a href="moving-beyond-coin-flips-1.html#cb18-9" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span></span>
+<span id="cb18-10"><a href="moving-beyond-coin-flips-1.html#cb18-10" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">m =</span> <span class="fu">mean</span>(r_diff), <span class="at">s =</span> <span class="fu">sd</span>(r_diff), <span class="at">n =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb18-11"><a href="moving-beyond-coin-flips-1.html#cb18-11" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">pivot_wider</span>(<span class="at">names_from =</span> <span class="st">&quot;group&quot;</span>, <span class="at">values_from =</span> <span class="fu">c</span>(<span class="st">&quot;m&quot;</span>, <span class="st">&quot;s&quot;</span>, <span class="st">&quot;n&quot;</span>))</span>
+<span id="cb18-12"><a href="moving-beyond-coin-flips-1.html#cb18-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-13"><a href="moving-beyond-coin-flips-1.html#cb18-13" aria-hidden="true" tabindex="-1"></a>md_diff <span class="ot">&lt;-</span> summary_data<span class="sc">$</span>m_exper <span class="sc">-</span> summary_data<span class="sc">$</span>m_naive</span>
+<span id="cb18-14"><a href="moving-beyond-coin-flips-1.html#cb18-14" aria-hidden="true" tabindex="-1"></a>sd_pooled <span class="ot">&lt;-</span> <span class="fu">sqrt</span>((((summary_data<span class="sc">$</span>n_exper <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> summary_data<span class="sc">$</span>s_exper<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb18-15"><a href="moving-beyond-coin-flips-1.html#cb18-15" aria-hidden="true" tabindex="-1"></a>  ((summary_data<span class="sc">$</span>n_naive <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> summary_data<span class="sc">$</span>s_naive<span class="sc">^</span><span class="dv">2</span>)) <span class="sc">/</span></span>
+<span id="cb18-16"><a href="moving-beyond-coin-flips-1.html#cb18-16" aria-hidden="true" tabindex="-1"></a>  (summary_data<span class="sc">$</span>n_exper <span class="sc">+</span> summary_data<span class="sc">$</span>n_naive <span class="sc">-</span> <span class="dv">2</span>))</span>
+<span id="cb18-17"><a href="moving-beyond-coin-flips-1.html#cb18-17" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> md_diff <span class="sc">/</span> sd_pooled</span>
+<span id="cb18-18"><a href="moving-beyond-coin-flips-1.html#cb18-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-19"><a href="moving-beyond-coin-flips-1.html#cb18-19" aria-hidden="true" tabindex="-1"></a><span class="co"># or we can use the effsize package</span></span>
+<span id="cb18-20"><a href="moving-beyond-coin-flips-1.html#cb18-20" aria-hidden="true" tabindex="-1"></a><span class="co"># you&#39;ll just need to install it before you use it</span></span>
+<span id="cb18-21"><a href="moving-beyond-coin-flips-1.html#cb18-21" aria-hidden="true" tabindex="-1"></a><span class="co"># you can install it with the following command</span></span>
+<span id="cb18-22"><a href="moving-beyond-coin-flips-1.html#cb18-22" aria-hidden="true" tabindex="-1"></a><span class="co"># install.package(&quot;effsize&quot;)</span></span>
+<span id="cb18-23"><a href="moving-beyond-coin-flips-1.html#cb18-23" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb18-24"><a href="moving-beyond-coin-flips-1.html#cb18-24" aria-hidden="true" tabindex="-1"></a><span class="co"># and then use it as follows</span></span>
+<span id="cb18-25"><a href="moving-beyond-coin-flips-1.html#cb18-25" aria-hidden="true" tabindex="-1"></a><span class="co"># d &lt;- effsize::cohen.d(motor_exp$r_diff, motor_exp$group)$estimate</span></span>
+<span id="cb18-26"><a href="moving-beyond-coin-flips-1.html#cb18-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-27"><a href="moving-beyond-coin-flips-1.html#cb18-27" aria-hidden="true" tabindex="-1"></a><span class="co"># sample_size &lt;- motor_exp %&gt;%</span></span>
+<span id="cb18-28"><a href="moving-beyond-coin-flips-1.html#cb18-28" aria-hidden="true" tabindex="-1"></a><span class="co">#   dplyr::group_by(group) %&gt;%</span></span>
+<span id="cb18-29"><a href="moving-beyond-coin-flips-1.html#cb18-29" aria-hidden="true" tabindex="-1"></a><span class="co">#   dplyr::summarise(n = n())</span></span>
+<span id="cb18-30"><a href="moving-beyond-coin-flips-1.html#cb18-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-31"><a href="moving-beyond-coin-flips-1.html#cb18-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Now define the likelihood and plot it</span></span>
+<span id="cb18-32"><a href="moving-beyond-coin-flips-1.html#cb18-32" aria-hidden="true" tabindex="-1"></a>data_model <span class="ot">&lt;-</span> <span class="fu">likelihood</span>(</span>
+<span id="cb18-33"><a href="moving-beyond-coin-flips-1.html#cb18-33" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="st">&quot;noncentral_d2&quot;</span>,</span>
+<span id="cb18-34"><a href="moving-beyond-coin-flips-1.html#cb18-34" aria-hidden="true" tabindex="-1"></a>  <span class="at">d =</span> d,</span>
+<span id="cb18-35"><a href="moving-beyond-coin-flips-1.html#cb18-35" aria-hidden="true" tabindex="-1"></a>  <span class="at">n1 =</span> summary_data<span class="sc">$</span>n_exper,</span>
+<span id="cb18-36"><a href="moving-beyond-coin-flips-1.html#cb18-36" aria-hidden="true" tabindex="-1"></a>  <span class="at">n2 =</span> summary_data<span class="sc">$</span>n_naive</span>
+<span id="cb18-37"><a href="moving-beyond-coin-flips-1.html#cb18-37" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-38"><a href="moving-beyond-coin-flips-1.html#cb18-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-39"><a href="moving-beyond-coin-flips-1.html#cb18-39" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(data_model) <span class="sc">+</span></span>
+<span id="cb18-40"><a href="moving-beyond-coin-flips-1.html#cb18-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb18-41"><a href="moving-beyond-coin-flips-1.html#cb18-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;δ&quot;</span>, <span class="at">y =</span> <span class="st">&quot;P(Y|θ)&quot;</span>,</span>
+<span id="cb18-42"><a href="moving-beyond-coin-flips-1.html#cb18-42" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Likelihood for:&quot;</span>,</span>
+<span id="cb18-43"><a href="moving-beyond-coin-flips-1.html#cb18-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">&quot;d = {round(d,2)}, n1 = {summary_data$n_exper}, n2 = {summary_data$n_naive}&quot;</span>)</span>
+<span id="cb18-44"><a href="moving-beyond-coin-flips-1.html#cb18-44" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb18-45"><a href="moving-beyond-coin-flips-1.html#cb18-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="dv">14</span>) <span class="sc">+</span></span>
+<span id="cb18-46"><a href="moving-beyond-coin-flips-1.html#cb18-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">3</span>), <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">1</span>))</span></code></pre></div>
+<p><img src="05-more-likelihoods_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+</div>
+<div id="inferences-about-t-values" class="section level2" number="5.4">
+<h2><span class="header-section-number">5.4</span> Inferences about <em>t</em> values</h2>
+<p>Finally, we’ll repeat the last analysis, but in this case we’ll model the data
+in terms of <em>t</em> rather than <em>d</em>.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="moving-beyond-coin-flips-1.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data again just in case</span></span>
+<span id="cb19-2"><a href="moving-beyond-coin-flips-1.html#cb19-2" aria-hidden="true" tabindex="-1"></a>motor_exp <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">&quot;https://files.mindsci.net/motor_exp.csv&quot;</span>,</span>
+<span id="cb19-3"><a href="moving-beyond-coin-flips-1.html#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">show_col_types =</span> <span class="cn">FALSE</span></span>
+<span id="cb19-4"><a href="moving-beyond-coin-flips-1.html#cb19-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-5"><a href="moving-beyond-coin-flips-1.html#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="moving-beyond-coin-flips-1.html#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the t test and extract the t value and df</span></span>
+<span id="cb19-7"><a href="moving-beyond-coin-flips-1.html#cb19-7" aria-hidden="true" tabindex="-1"></a>t_test_res <span class="ot">&lt;-</span> <span class="fu">t.test</span>(r_diff <span class="sc">~</span> group, motor_exp, <span class="at">var.equal =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb19-8"><a href="moving-beyond-coin-flips-1.html#cb19-8" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb19-9"><a href="moving-beyond-coin-flips-1.html#cb19-9" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(statistic, parameter)</span>
+<span id="cb19-10"><a href="moving-beyond-coin-flips-1.html#cb19-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-11"><a href="moving-beyond-coin-flips-1.html#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Now define the likelihood</span></span>
+<span id="cb19-12"><a href="moving-beyond-coin-flips-1.html#cb19-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-13"><a href="moving-beyond-coin-flips-1.html#cb19-13" aria-hidden="true" tabindex="-1"></a>data_model <span class="ot">&lt;-</span> <span class="fu">likelihood</span>(</span>
+<span id="cb19-14"><a href="moving-beyond-coin-flips-1.html#cb19-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="st">&quot;noncentral_t&quot;</span>,</span>
+<span id="cb19-15"><a href="moving-beyond-coin-flips-1.html#cb19-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">t =</span> t_test_res<span class="sc">$</span>statistic,</span>
+<span id="cb19-16"><a href="moving-beyond-coin-flips-1.html#cb19-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">df =</span> t_test_res<span class="sc">$</span>parameter</span>
+<span id="cb19-17"><a href="moving-beyond-coin-flips-1.html#cb19-17" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-18"><a href="moving-beyond-coin-flips-1.html#cb19-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-19"><a href="moving-beyond-coin-flips-1.html#cb19-19" aria-hidden="true" tabindex="-1"></a><span class="co"># And plot it</span></span>
+<span id="cb19-20"><a href="moving-beyond-coin-flips-1.html#cb19-20" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(data_model) <span class="sc">+</span></span>
+<span id="cb19-21"><a href="moving-beyond-coin-flips-1.html#cb19-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb19-22"><a href="moving-beyond-coin-flips-1.html#cb19-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;t&quot;</span>, <span class="at">y =</span> <span class="st">&quot;P(Y|θ)&quot;</span>,</span>
+<span id="cb19-23"><a href="moving-beyond-coin-flips-1.html#cb19-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Likelihood for:&quot;</span>,</span>
+<span id="cb19-24"><a href="moving-beyond-coin-flips-1.html#cb19-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">&quot;t = {round(t_test_res$statistic,2)}, df = {t_test_res$parameter}&quot;</span>)</span>
+<span id="cb19-25"><a href="moving-beyond-coin-flips-1.html#cb19-25" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb19-26"><a href="moving-beyond-coin-flips-1.html#cb19-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="dv">14</span>) <span class="sc">+</span></span>
+<span id="cb19-27"><a href="moving-beyond-coin-flips-1.html#cb19-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">6</span>), <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">6</span>, <span class="dv">2</span>))</span></code></pre></div>
+<p><img src="05-more-likelihoods_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p>Using the <em>non-central t</em> likelihood might seem a little easier to use, because
+it requires less work upfront because we can just use the <code>t.test</code> function to
+work out the <em>t</em> statistic instead of having to work out the <em>d</em> value.
+However, as we’ll see in the section on <strong>priors</strong>, there as advantages to using
+the <em>non-central t</em> likelihood. This disadvantage is primarily to do with the
+fact that the <em>t</em> value can change dramatically with sample size—that is,
+very large sample sizes can result in very large <em>t</em> values even if the mean
+difference between conditions or groups stays constant. For the <em>non-central d</em>
+and <em>non-central d2</em> likelihoods this isn’t an issue. The <em>d</em> value will stay
+the same even if the sample size increases and instead, the likelihood will
+just get narrower.</p>
+<p>I’ve covered the <em>non-central t</em> likelihood for completeness, but it’s almost
+never of any real use.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="the-bayes-factor.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": [["bayes_notes.pdf", "pdf"]],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
