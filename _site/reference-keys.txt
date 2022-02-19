@@ -27,3 +27,9 @@ the-bayes-factor
 computing-bayes-factors-with-bayesplay
 computing-bayes-factors-with-bayesplay-web
 moving-beyond-coin-flips
+moving-beyond-coin-flips-1
+choosing-a-likelihood
+the-variance-of-likelihoods
+inferences-about-raw-means
+inferences-about-effect-sizes
+inferences-about-t-values
