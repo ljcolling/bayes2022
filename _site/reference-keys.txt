@@ -33,3 +33,7 @@ the-variance-of-likelihoods
 inferences-about-raw-means
 inferences-about-effect-sizes
 inferences-about-t-values
+choosing-priors
+reference-objective-uninformative-and-default-priors
+default-priors-for-effect-sizes
+interpreting-our-bayes-factors
