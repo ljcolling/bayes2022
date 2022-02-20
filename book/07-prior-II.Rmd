@@ -1,0 +1,29 @@
+---
+title: "Priors: Part 2"
+output: pdf_document
+---
+
+```{r setup, echo=FALSE, message = FALSE, warning = FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+suppressMessages(expr = {
+  library(tidyverse)
+  library(polspline)
+  library(patchwork)
+  library(magrittr)
+  library(bayesplay)
+  library(emojifont)
+  library(knitr)
+  library(bayesplay)
+})
+
+display_markdown <- knitr::asis_output
+display_html <- knitr::asis_output
+table_format <- "latex"
+```
+# Choosing priors: Part II
+
+{{chunk_1}}
+```{r, chunk_1}
+# some code
+```
+

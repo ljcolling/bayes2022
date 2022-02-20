@@ -1,0 +1,39 @@
+---
+output: pdf_document
+---
+```{r setup, echo=FALSE, message = FALSE, warning = FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+suppressMessages(expr = {
+  if ("xfun" %in% row.names(installed.packages()) == FALSE) {
+    install.packages("xfun")
+  }
+
+  display_markdown <<- knitr::asis_output
+  display_html <<- knitr::asis_output
+
+  xfun::pkg_attach(
+    c(
+      "tidyverse",
+      "polspline",
+      "patchwork",
+      "magrittr",
+      "bayesplay",
+      "knitr",
+      "broom",
+      "bayesplay"
+    ),
+    install = TRUE
+  )
+})
+
+table_format <- "html"
+```
+# Choosing priors: Part II
+<a href="data:text/x-markdown;base64,LS0tCnRpdGxlOiAiUHJpb3JzOiBQYXJ0IDIiCm91dHB1dDogaHRtbF9kb2N1bWVudAotLS0KCmBgYHtyIHNldHVwLCBlY2hvPUZBTFNFLCBtZXNzYWdlID0gRkFMU0UsIHdhcm5pbmcgPSBGQUxTRX0Ka25pdHI6Om9wdHNfY2h1bmskc2V0KGVjaG8gPSBGQUxTRSwgbWVzc2FnZSA9IEZBTFNFLCB3YXJuaW5nID0gRkFMU0UpCnN1cHByZXNzTWVzc2FnZXMoZXhwciA9IHsKICBpZiAoInhmdW4iICVpbiUgcm93Lm5hbWVzKGluc3RhbGxlZC5wYWNrYWdlcygpKSA9PSBGQUxTRSkgewogICAgaW5zdGFsbC5wYWNrYWdlcygieGZ1biIpCiAgfQoKICBkaXNwbGF5X21hcmtkb3duIDw8LSBrbml0cjo6YXNpc19vdXRwdXQKICBkaXNwbGF5X2h0bWwgPDwtIGtuaXRyOjphc2lzX291dHB1dAoKICB4ZnVuOjpwa2dfYXR0YWNoKAogICAgYygKICAgICAgInRpZHl2ZXJzZSIsCiAgICAgICJwb2xzcGxpbmUiLAogICAgICAicGF0Y2h3b3JrIiwKICAgICAgIm1hZ3JpdHRyIiwKICAgICAgImJheWVzcGxheSIsCiAgICAgICJrbml0ciIsCiAgICAgICJicm9vbSIsCiAgICAgICJiYXllc3BsYXkiCiAgICApLAogICAgaW5zdGFsbCA9IFRSVUUKICApCn0pCgp0YWJsZV9mb3JtYXQgPC0gImh0bWwiCmBgYAojIENob29zaW5nIHByaW9yczogUGFydCBJSQoKe3tjaHVua18xfX0KYGBge3IsIGNodW5rXzF9CiMgc29tZSBjb2RlCmBgYAoK" download="07-prior-II.Rmd"><img src="https://img.shields.io/badge/.Rmd-Download-blue"></a>
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ljcolling/bayes2022/blob/main/_notebooks/07-prior-II.ipynb)
+
+{{chunk_1}}
+```{r, chunk_1}
+# some code
+```
+
