@@ -6,6 +6,7 @@ tasks:
   default:
     cmds: 
     - | 
+      fd -e png -x cp {} ./_site/
       cd src
       R -e "bookdown::render_book()" --slave --no-save > /dev/null
       cd ..
