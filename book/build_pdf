@@ -2,6 +2,5 @@
 
 cp ../src/*.png .
 sd "https://raw.githubusercontent.com/ljcolling/bayes2022/main/_site/" "" *.Rmd
-fd 0 -e Rmd -x python removelines.py --file="{}" --line=2
 R -e "bookdown::render_book('.')"
 cp _main.pdf ../_site/bayes_notes.pdf
