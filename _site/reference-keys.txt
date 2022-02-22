@@ -33,7 +33,13 @@ the-variance-of-likelihoods
 inferences-about-raw-means
 inferences-about-effect-sizes
 inferences-about-t-values
-choosing-priors
+choosing-priors-part-i
 reference-objective-uninformative-and-default-priors
 default-priors-for-effect-sizes
 interpreting-our-bayes-factors
+choosing-priors-part-ii
+examples-of-representing-predictions
+representing-predictions-with-a-uniform-prior
+representing-predictions-with-a-half-normal-prior
+representing-predictions-with-the-normal-prior
+how-do-i-know-what-my-theory-predicts

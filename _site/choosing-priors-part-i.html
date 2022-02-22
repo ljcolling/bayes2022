@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 6 Choosing priors: Part I | Advanced Statistical Methods</title>
+  <meta name="description" content="An introduction to Bayesian Statistics" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 6 Choosing priors: Part I | Advanced Statistical Methods" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="An introduction to Bayesian Statistics" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 6 Choosing priors: Part I | Advanced Statistical Methods" />
+  
+  <meta name="twitter:description" content="An introduction to Bayesian Statistics" />
+  
+
+<meta name="author" content="Dr Lincoln Colling" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="moving-beyond-coin-flips-1.html"/>
+<link rel="next" href="choosing-priors-part-ii.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Bayesian Stats</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#how-to-use-this-book"><i class="fa fa-check"></i>How to use this book</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#outline"><i class="fa fa-check"></i>Outline</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="null-hypothesis-significance-testing.html"><a href="null-hypothesis-significance-testing.html"><i class="fa fa-check"></i><b>1</b> Null-hypothesis significance testing</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="null-hypothesis-significance-testing.html"><a href="null-hypothesis-significance-testing.html#probability"><i class="fa fa-check"></i><b>1.1</b> Probability</a></li>
+<li class="chapter" data-level="1.2" data-path="null-hypothesis-significance-testing.html"><a href="null-hypothesis-significance-testing.html#probability-and-p-values"><i class="fa fa-check"></i><b>1.2</b> Probability and <em>p</em> values</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="null-hypothesis-significance-testing.html"><a href="null-hypothesis-significance-testing.html#understanding-the-p-through-simulation"><i class="fa fa-check"></i><b>1.2.1</b> Understanding the <em>p</em> through simulation</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="null-hypothesis-significance-testing.html"><a href="null-hypothesis-significance-testing.html#summary"><i class="fa fa-check"></i><b>1.3</b> Summary</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="null-hypothesis-significance-testing.html"><a href="null-hypothesis-significance-testing.html#a-short-note-on-confidence-intervals"><i class="fa fa-check"></i><b>1.3.1</b> A short note on confidence intervals</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="criticisms-of-p-values.html"><a href="criticisms-of-p-values.html"><i class="fa fa-check"></i><b>2</b> Criticisms of <em>p</em> values</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="criticisms-of-p-values.html"><a href="criticisms-of-p-values.html#same-measurements-from-different-devices"><i class="fa fa-check"></i><b>2.1</b> Same measurements from different devices</a></li>
+<li class="chapter" data-level="2.2" data-path="criticisms-of-p-values.html"><a href="criticisms-of-p-values.html#the-universe-of-possible-events"><i class="fa fa-check"></i><b>2.2</b> The universe of possible events</a></li>
+<li class="chapter" data-level="2.3" data-path="criticisms-of-p-values.html"><a href="criticisms-of-p-values.html#summary-1"><i class="fa fa-check"></i><b>2.3</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="an-alternative-to-p-values.html"><a href="an-alternative-to-p-values.html"><i class="fa fa-check"></i><b>3</b> An alternative to <em>p</em> values</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="an-alternative-to-p-values.html"><a href="an-alternative-to-p-values.html#doing-inference-with-likelihoods"><i class="fa fa-check"></i><b>3.1</b> Doing inference with likelihoods</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="an-alternative-to-p-values.html"><a href="an-alternative-to-p-values.html#a-brief-detour-back-to-sampling-rules"><i class="fa fa-check"></i><b>3.1.1</b> A brief detour back to sampling rules</a></li>
+<li class="chapter" data-level="3.1.2" data-path="an-alternative-to-p-values.html"><a href="an-alternative-to-p-values.html#the-likelihood-ratio"><i class="fa fa-check"></i><b>3.1.2</b> The likelihood ratio</a></li>
+<li class="chapter" data-level="3.1.3" data-path="an-alternative-to-p-values.html"><a href="an-alternative-to-p-values.html#a-note-about-likelihood-functions-and-probability-distributions"><i class="fa fa-check"></i><b>3.1.3</b> A note about likelihood functions and probability distributions</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="an-alternative-to-p-values.html"><a href="an-alternative-to-p-values.html#testing-more-complex-hypotheses"><i class="fa fa-check"></i><b>3.2</b> Testing more complex hypotheses</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="an-alternative-to-p-values.html"><a href="an-alternative-to-p-values.html#theres-more-than-one-way-to-average"><i class="fa fa-check"></i><b>3.2.1</b> There’s more than one way to average</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="the-bayes-factor.html"><a href="the-bayes-factor.html"><i class="fa fa-check"></i><b>4</b> The Bayes factor</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="the-bayes-factor.html"><a href="the-bayes-factor.html#computing-bayes-factors-with-bayesplay"><i class="fa fa-check"></i><b>4.1</b> Computing Bayes factors with <code>bayesplay</code></a></li>
+<li class="chapter" data-level="4.2" data-path="the-bayes-factor.html"><a href="the-bayes-factor.html#computing-bayes-factors-with-bayesplay-web"><i class="fa fa-check"></i><b>4.2</b> Computing Bayes factors with Bayesplay-Web</a></li>
+<li class="chapter" data-level="4.3" data-path="the-bayes-factor.html"><a href="the-bayes-factor.html#moving-beyond-coin-flips"><i class="fa fa-check"></i><b>4.3</b> Moving beyond coin flips</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="moving-beyond-coin-flips-1.html"><a href="moving-beyond-coin-flips-1.html"><i class="fa fa-check"></i><b>5</b> Moving beyond coin flips</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="moving-beyond-coin-flips-1.html"><a href="moving-beyond-coin-flips-1.html#choosing-a-likelihood"><i class="fa fa-check"></i><b>5.1</b> Choosing a likelihood</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="moving-beyond-coin-flips-1.html"><a href="moving-beyond-coin-flips-1.html#the-variance-of-likelihoods"><i class="fa fa-check"></i><b>5.1.1</b> The variance of likelihoods</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="moving-beyond-coin-flips-1.html"><a href="moving-beyond-coin-flips-1.html#inferences-about-raw-means"><i class="fa fa-check"></i><b>5.2</b> Inferences about raw means</a></li>
+<li class="chapter" data-level="5.3" data-path="moving-beyond-coin-flips-1.html"><a href="moving-beyond-coin-flips-1.html#inferences-about-effect-sizes"><i class="fa fa-check"></i><b>5.3</b> Inferences about effect sizes</a></li>
+<li class="chapter" data-level="5.4" data-path="moving-beyond-coin-flips-1.html"><a href="moving-beyond-coin-flips-1.html#inferences-about-t-values"><i class="fa fa-check"></i><b>5.4</b> Inferences about <em>t</em> values</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="choosing-priors-part-i.html"><a href="choosing-priors-part-i.html"><i class="fa fa-check"></i><b>6</b> Choosing priors: Part I</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="choosing-priors-part-i.html"><a href="choosing-priors-part-i.html#reference-objective-uninformative-and-default-priors"><i class="fa fa-check"></i><b>6.1</b> Reference, objective, uninformative, and default priors</a></li>
+<li class="chapter" data-level="6.2" data-path="choosing-priors-part-i.html"><a href="choosing-priors-part-i.html#default-priors-for-effect-sizes"><i class="fa fa-check"></i><b>6.2</b> Default priors for effect sizes</a></li>
+<li class="chapter" data-level="6.3" data-path="choosing-priors-part-i.html"><a href="choosing-priors-part-i.html#interpreting-our-bayes-factors"><i class="fa fa-check"></i><b>6.3</b> Interpreting our Bayes factors</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="choosing-priors-part-ii.html"><a href="choosing-priors-part-ii.html"><i class="fa fa-check"></i><b>7</b> Choosing priors: Part II</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="choosing-priors-part-ii.html"><a href="choosing-priors-part-ii.html#examples-of-representing-predictions"><i class="fa fa-check"></i><b>7.1</b> Examples of representing predictions</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="choosing-priors-part-ii.html"><a href="choosing-priors-part-ii.html#representing-predictions-with-a-uniform-prior"><i class="fa fa-check"></i><b>7.1.1</b> Representing predictions with a uniform prior</a></li>
+<li class="chapter" data-level="7.1.2" data-path="choosing-priors-part-ii.html"><a href="choosing-priors-part-ii.html#representing-predictions-with-a-half-normal-prior"><i class="fa fa-check"></i><b>7.1.2</b> Representing predictions with a half-normal prior</a></li>
+<li class="chapter" data-level="7.1.3" data-path="choosing-priors-part-ii.html"><a href="choosing-priors-part-ii.html#representing-predictions-with-the-normal-prior"><i class="fa fa-check"></i><b>7.1.3</b> Representing predictions with the normal prior</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="choosing-priors-part-ii.html"><a href="choosing-priors-part-ii.html#how-do-i-know-what-my-theory-predicts"><i class="fa fa-check"></i><b>7.2</b> How do I know what my theory predicts</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="./">Lincoln Colling</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Advanced Statistical Methods</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="choosing-priors-part-i" class="section level1" number="6">
+<h1><span class="header-section-number">Chapter 6</span> Choosing priors: Part I</h1>
+<p><a href="data:text/x-markdown;base64,LS0tCnRpdGxlOiAiUHJpb3JzOiBQYXJ0IDEiCm91dHB1dDogaHRtbF9kb2N1bWVudAotLS0KCmBgYHtyIHNldHVwLCBlY2hvPUZBTFNFLCBtZXNzYWdlID0gRkFMU0UsIHdhcm5pbmcgPSBGQUxTRX0Ka25pdHI6Om9wdHNfY2h1bmskc2V0KGVjaG8gPSBGQUxTRSwgbWVzc2FnZSA9IEZBTFNFLCB3YXJuaW5nID0gRkFMU0UpCnN1cHByZXNzTWVzc2FnZXMoZXhwciA9IHsKICBpZiAoInhmdW4iICVpbiUgcm93Lm5hbWVzKGluc3RhbGxlZC5wYWNrYWdlcygpKSA9PSBGQUxTRSkgewogICAgaW5zdGFsbC5wYWNrYWdlcygieGZ1biIpCiAgfQoKICBkaXNwbGF5X21hcmtkb3duIDw8LSBrbml0cjo6YXNpc19vdXRwdXQKICBkaXNwbGF5X2h0bWwgPDwtIGtuaXRyOjphc2lzX291dHB1dAoKICB4ZnVuOjpwa2dfYXR0YWNoKAogICAgYygKICAgICAgInRpZHl2ZXJzZSIsCiAgICAgICJwb2xzcGxpbmUiLAogICAgICAicGF0Y2h3b3JrIiwKICAgICAgIm1hZ3JpdHRyIiwKICAgICAgImJheWVzcGxheSIsCiAgICAgICJrbml0ciIsCiAgICAgICJicm9vbSIsCiAgICAgICJiYXllc3BsYXkiCiAgICApLAogICAgaW5zdGFsbCA9IFRSVUUKICApCn0pCgp0YWJsZV9mb3JtYXQgPC0gImh0bWwiCmBgYAojIENob29zaW5nIHByaW9yczogUGFydCBJCgpJbiB0aGUgcHJldmlvdXMgc2VjdGlvbiwgd2UgbGVhcm5lZCBob3cgd2UgY2FuIHVzZSBub3JtYWwsIHN0dWRlbnQgKnQqLAphbmQgdmFyaW91cyBraW5kcyBvZiAqbm9uLWNlbnRyYWwgdCogbGlrZWxpaG9vZHMgdG8gbW9kZWwgbWVhbnMsIG1lYW4KZGlmZmVyZW5jZXMsIGFuZCBlZmZlY3Qgc2l6ZXMuIEJ1dCBpZiB3ZSBhY3R1YWxseSB3YW50IHRvIGNvbXB1dGUgQmF5ZXMKZmFjdG9ycyB0aGVuIHdlJ2xsIGFsc28gbmVlZCB0byBkZWZpbmUgKipwcmlvcnMqKi4gV2hpbGUgdGhlCioqbGlrZWxpaG9vZHMqKiBhcmUgYSBtb2RlbCBvZiBvdXIgKipkYXRhKiogdGhlICoqcHJpb3JzKiogd2lsbCBzZXJ2ZSBhcwp0aGUgbW9kZWxzIGZvciB0aGUgKipoeXBvdGhlc2VzKiogd2UgYWN0dWFsbHkgd2FudCB0byBjb21wYXJlLgoKVGhlcmUgYXJlIHR3byBicm9hZCBzY2hvb2xzIG9mIHRob3VnaHQgd2hlbiBpdCBjb21lcyB0byBkZWZpbmluZyBwcmlvcnMuClRoZSBmaXJzdCBpcyB0byBjaG9vc2UgcHJpb3JzIHRoYXQgY2FuIGJlIHVzZWQgaW4gYSB3aWRlIHJhbmdlIG9mCnNpdHVhdGlvbnMgYW5kIGRvbid0IG5lZWQgdG8gYmUgdGFpbG9yZWQgdG8gdGhlIHNwZWNpZmljcyBvZiB0aGUgc2l0dWF0aW9uCmF0IGhhbmQuIFRoaXMgaXMgb2Z0ZW4gZnJhbWVkIGluIHRlcm1zIG9mIHNlbGVjdGluZyBwcmlvcnMgdGhhdCBhcmVuJ3QKZGVwZW5kZW50IG9uIHRoZSBpbmRpdmlkdWFsIGJlbGllZnMgb3IgdGhlb3JpZXMgb2YgYSBzcGVjaWZpYyByZXNlYXJjaGVyLApvciBwcmlvcnMgdGhhdCByZXByZXNlbnQgaWdub3JhbmNlIGFib3V0IGFueSBwb3NzaWJsZSBlZmZlY3QuIFRoZXNlIGFyZQpzb21ldGltZXMgY2FsbGVkIG9iamVjdGl2ZSwgcmVmZXJlbmNlLCB1bmluZm9ybWF0aXZlLCBvciBkZWZhdWx0IHByaW9ycwoodGhlc2UgdGVybXMgYXJlbid0IGV4YWN0bHkgc3lub255bW91cywgYnV0IGZvciBvdXIgcHVycG9zZXMgdGhlIHRlY2huaWNhbApkaWZmZXJlbmNlcyB3b24ndCBtYXR0ZXIpLiAKClRoZSBzZWNvbmQgYXBwcm9hY2ggaXMgdG8gY2hvb3NlIHByaW9ycyB0aGF0IGFyZSBzcGVjaWZpYyB0byB0aGUgc2l0dWF0aW9uCmF0IGhhbmQuIFRoaXMgbWlnaHQgYmUgYnkgc2VsZWN0aW5nIHByaW9ycyB0aGF0IHJlcHJlc2VudCBhY3R1YWwKc2NpZW50aWZpYyB0aGVvcmllcywgc2VsZWN0aW5nIHByaW9ycyB0aGF0IGNvbnN0cmFpbiB0aGUgcHJlZGljdGVkIGVmZmVjdHMKdG8gYmUgd2l0aGluIHRoZSBleHBlY3RlZCByYW5nZSwgb3IgY2hvb3NpbmcgcHJpb3JzIGJhc2VkIG9uLCBmb3IgZXhhbXBsZSwKcHJldmlvdXMgZXZpZGVuY2UgYWJvdXQgdGhlIG5hdHVyZSBvZiB0aGUgZWZmZWN0IGJlaW5nIHN0dWRpZWQuIFRoZXNlCmtpbmRzIG9mIHByaW9ycyBnbyB1bmRlciB0aGUgbGFiZWwgb2YgaW5mb3JtZWQsIG9yIHN1YmplY3RpdmUgcHJpb3JzLiBJdAppcyBhbHNvIGltcG9ydGFudCB0byBub3RlIHRoYXQgdGhlIGxpbmVzIGJldHdlZW4gdGhlIHR3byBhcHByb2FjaGVzIGlzIG5vdAphbHdheXMgY2xlYXIgY3V0LiBSYXRoZXIsIHRoZXkgYXJlIG9mdGVuIGJsdXJyZWQuCgojIyBSZWZlcmVuY2UsIG9iamVjdGl2ZSwgdW5pbmZvcm1hdGl2ZSwgYW5kIGRlZmF1bHQgcHJpb3JzCgpUaGUgbW9zdCBzdHJhaWdodGZvcndhcmQgd2F5IHRvIGNvbWUgdXAgd2l0aCBhIHByaW9yIHRoYXQgY2FuIHdvcmsgaW4KYSB3aWRlIHJhbmdlIG9mIHNpdHVhdGlvbnMgaXMgdG8gdXNlIHRoZSAqcHJpbmNpcGxlIG9mIGluZGlmZmVyZW5jZSouIFRoaXMKaXMgdGhlIGFwcHJvYWNoIHRoYXQgd2UgdXNlZCB3aGVuIHdlIHdlcmUgY29taW5nIHVwIHdpdGggb3VyIHZlcnkgZmlyc3QKcHJpb3IgZm9yIHRoZSBjb2luIGZsaXAgZXhhbXBsZS4gT3VyIHJlYXNvbmluZyB3YXMgcm91Z2hseSBhcyBmb2xsb3dzOgoKLSBJZiB3ZSBkb24ndCBrbm93IHdoYXQgdGhlIGNvaW4gYmlhcyBpcyAoanVzdCB0aGF0IGl0IGlzIHNvbWUgdmFsdWUKICBiZXR3ZWVuIDAgYW5kIDEpLCB0aGVuIHdlIGhhdmUgbm8gcmVhc29uIGZvciBwcmVkaWN0aW5nIHRoYXQgYW55CiAgcGFydGljdWxhciBvdXRjb21lIChpLmUuLCBudW1iZXIgb2YgaGVhZHMgYWZ0ZXIgYSBwYXJ0aWN1bGFyIG51bWJlciBvZgogIGZsaXBzKSB3aWxsIG9jY3VyIG1vcmUgb2Z0ZW4gdGhhbiBhbnkgb3RoZXIgcGFydGljdWxhciBvdXRjb21lLgoKLSBJZiB3ZSBmbGlwIHRoZSBjb2luICRuJCB0aW1lcywgdGhlbiB0aGVyZSBhcmUgJG4gKyAxJCBwb3NzaWJsZQogIG91dGNvbWVzLiBUaGVyZWZvcmUsIHdlIGFzc2lnbiBhIHByb2JhYmlsaXR5IG9mICRcZnJhY3sxfXtuKzF9JCB0byBlYWNoCiAgb3V0Y29tZS4gCgotIFRoZSBwcmlvciB0aGF0IGZpdHMgd2l0aCB0aGlzIHByZWRpY3Rpb24gaXMgYSB1bmlmb3JtIHByaW9yIGZyb20gMCB0byAxLgoKVGhlIGlkZWEgaGVyZSBpcyB0aGF0IGluIGNvbWluZyB1cCB3aXRoIHRoZSBwcmlvciB3ZSdyZSB0cnlpbmcgdG8gbWFrZSBhcwpmZXcgYXNzdW1wdGlvbnMgYXMgcG9zc2libGUuIENvbWluZyB1cCB3aXRoIHByaW9ycyB0aGF0IG1ha2UgYXMgZmV3CmFzc3VtcHRpb25zIGFzIHBvc3NpYmxlIGlzIG5vdCBhbHdheXMgc3RyYWlnaHRmb3J3YXJkLiBUaGVyZSBhcmUgYSBudW1iZXIKb2YgdGVjaG5pY2FsIGRpZmZpY3VsdGllcyB0aGF0IGNhbiBhcmlzZSB3aGVuIGNob29zaW5nIHByaW9ycyB0aGF0CipzZWVtaW5nbHkqIGRvbid0IG1ha2UgYW55IGFzc3VtcHRpb25zLiBTb21lIG9mIHRoZXNlIGlzc3VlcyBhcmlzZSB3aGVuLApmb3IgZXhhbXBsZSwgY2hvb3NpbmcgYSBwcmlvciB0aGF0IGlzIG5vbi1pbmZvcm1hdGl2ZSB3aGVuIGEgcXVlc3Rpb24gaXMKYXNrZWQgb25lIHdheSAoZm9yIGV4YW1wbGUsIGFza2luZyBhYm91dCB0aGUgKmJpYXMqIG9mIHRoZSBjb2luKSBidXQgdGhlbgpkb2Vzbid0IHR1cm4gb3V0IHRvIGJlIG5vbi1pbmZvcm1hdGl2ZSB3aGVuIHRoZSBxdWVzdGlvbiBpcyBhc2tlZCBpbgphIGRpZmZlcmVudCwgYnV0IGVxdWl2YWxlbnQgd2F5IChmb3IgZXhhbXBsZSwgYXNraW5nIGFib3V0IHRoZSAqbG9nIG9kZHMqCm9mIG9idGFpbmluZyBoZWFkcykuIAoKQmVjYXVzZSBvZiB0aGVzZSB0ZWNobmljYWwgZGlmZmljdWx0aWVzLCBwZW9wbGUgaGF2ZSBjb21lIHVwIHdpdGggcnVsZXMKZm9yIGNob29zaW5nIHByaW9ycyB0aGF0IG1ha2UgYXMgZmV3IGFzc3VtcHRpb25zIGFzIHBvc3NpYmxlLiBPbmNlIHN1Y2gKcnVsZSBpZiBKZWZmcmV5J3MgcnVsZS4gQSBkZXRhaWxlZCB0cmVhdG1lbnQgaXMgSmVmZnJleSdzIHJ1bGUgaXMgb3V0c2lkZQp0aGUgc2NvcGUgb2YgdGhpcyBjb3Vyc2UsIGJ1dCBpdCBpcyBpbnRlcmVzdGluZyB0byBub3RlIHRoYXQgSmVmZnJleSdzCnJ1bGUgcmVsaWVzIG9uIHRoZSAqcmVhbG0gb2YgcG9zc2libGUgZXZlbnRzKiAodGhlIHNhbWUgdGhpbmcgdGhhdCBjYXVzZWQKb3VyIHdvcnJpZXMgYWJvdXQgKnAqLXZhbHVlcyBiZWluZyBpbXBhY3RlZCBieSBkaWZmZXJlbnQgc2FtcGxpbmcgcnVsZXMpLiAKCiMjIERlZmF1bHQgcHJpb3JzIGZvciBlZmZlY3Qgc2l6ZXMKCkFub3RoZXIgbWV0aG9kIGZvciBkZWZpbmluZyAqKm9iamVjdGl2ZSoqIHByaW9ycyB0aGF0IGhhcyBiZWVuCnBhcnRpY3VsYXJseSBwb3B1bGFyIHdpdGhpbiBwc3ljaG9sb2d5IGhhcyBiZWVuIHRvIHVzZSAqKmRlZmF1bHQgcHJpb3JzKiouClRoZSBtb3N0IHByb21pbmVudCBleGFtcGxlIG9mIHRoaXMgYXBwcm9hY2ggaGFzIGJlZW4gdGhlIHVzZSBvZiAqKmRlZmF1bHQKcHJpb3JzKiogZm9yIGVmZmVjdCBzaXplcy0tLXRoZSBzby1jYWxsZWQgKmRlZmF1bHQgQmF5ZXNpYW4gdC10ZXN0KgpbKFJvdWRlciBldCBhbCwKMjAwOSldKGh0dHA6Ly9wY2wubWlzc291cmkuZWR1L3NpdGVzL2RlZmF1bHQvZmlsZXMvUm91ZGVyLmJmXy5wZGYpLgoKVGhlICpkZWZhdWx0IEJheWVzaWFuIHQtdGVzdCogY2FuIGJlIHVzZWQgYW55d2hlcmUgd2hlcmUgYSByZWd1bGFyCmZyZXF1ZW50aXN0ICp0Ki10ZXN0IGNhbiBiZSB1c2VkLiBGb3IgdGhlIGRlZmF1bHQgQmF5ZXMgKnQqLXRlc3QsIHRoZSBkYXRhCmFyZSBtb2RlbGxlZCBpbiB0ZXJtcyBvZiB0aGUgZWZmZWN0IHNpemUuIFRoYXQgaXMsIGEgKm5vbi1jZW50cmFsIGQqIG9yCipub24tY2VudHJhbCBkMiogbGlrZWxpaG9vZCBpcyB1c2VkIChkZXBlbmRpbmcgb24gd2hldGhlciB0aGUgZGF0YSBhcmUKZnJvbSBvbmUtc2FtcGxlL3BhaXJlZCBkYXRhIG9yIGluZGVwZW5kZW50IHNhbXBsZXMpLiBUaGVzZSBhcmUgdGhlCmxpa2VsaWhvb2QncyB0aGF0IHdlIGRlZmluZWQgbmVhciB0aGUgZW5kIG9mIHRoZSBwcmV2aW91cyBzZWN0aW9uLgpIb3dldmVyLCB3aGF0IHJlYWxseSBjaGFyYWN0ZXJpc2VzIHRoaXMgYXBwcm9hY2ggaXMgdGhlIHByaW9yIHRoYXQgaXMKZW1wbG95ZWQuIFRoZSBkZWZhdWx0IEJheWVzICp0Ki10ZXN0IHVzZXMgYSAqKkNhdWNoeSoqIHByaW9yLiBBICoqQ2F1Y2h5KioKZGlzdHJpYnV0aW9uIGlzIHNpbWlsYXIgaW4gc2hhcGUgdG8gYSBzdGFuZGFyZCBub3JtYWwgZGlzdHJpYnV0aW9uIChwYW5lbApBIGJlbG93KSwgaG93ZXZlciBpdCBoYXMgZmFyIGZhdHRlciB0YWlscyAocGFuZWwgQiBiZWxvdykuCgpgYGB7cn0Kbm9ybWFsIDwtIHByaW9yKCJub3JtYWwiLCAwLCAxKQpjYXVjaHkgPC0gcHJpb3IoImNhdWNoeSIsIDAsIDEpCigocGxvdChub3JtYWwpICsKICB0aGVtZV9taW5pbWFsKDE0KSArCiAgTlVMTCkgLwogIChwbG90KGNhdWNoeSkgKwogICAgdGhlbWVfbWluaW1hbCgxNCkgKwogICAgTlVMTCkgKwogIHBsb3RfYW5ub3RhdGlvbih0YWdfbGV2ZWxzID0gIkEiKSkKYGBgCgpGb3IgYSBtb3JlIGluLWRlcHRoIGRpc2N1c3Npb24gb2YgQ2F1Y2h5IHByaW9ycywgYSByZWNlbnQgcGFwZXIgYnkKW1NjaG1hbHogZXQgYWwsIDIwMjFdKGh0dHBzOi8vb3NmLmlvLzVnZXF0L2Rvd25sb2FkKSBpcyBoaWdobHkKcmVjb21tZW5kZWQuIFdlJ2xsIGxlYXJuIGFib3V0IHRoZW0gYnkgZXhwbG9yaW5nIHNvbWUgb2YgdGhlaXIgcHJvcGVydGllcwp1c2luZyBgYmF5ZXNwbGF5YC4gQXMgeW91IGNhbiBzZWUgZnJvbSB0aGUgcGxvdHMgYWJvdmUsIGNvbXBhcmVkIHRvCmEgbm9ybWFsIGRpc3RyaWJ1dGlvbiwgdGhlIENhdWNoeSBoYXMgZmFyIGxlc3MgbWFzcyBpbiB0aGUgbWlkZGxlIG9mIHRoZQpkaXN0cmlidXRpb24uIEZvciB0aGUgQ2F1Y2h5IGRpc3RyaWJ1dGlvbiwgNTAlIG9mIHRoZSBkaXN0cmlidXRpb24gbGllcwpiZXR3ZWVuIC0xIGFuZCArMSB3aGlsZSBmb3IgdGhlIG5vcm1hbCBkaXN0cmlidXRpb24gNjglIG9mIHRoZQpkaXN0cmlidXRpb24gbGllcyBiZXR3ZWVuIC0xIGFuZCArMS4gCgpXZSBjYW4gZGVmaW5lIGEgKipDYXVjaHkqKiBwcmlvciB1c2luZyB0aGUgYHByaW9yYCBmdW5jdGlvbiBmcm9tCmBiYXllc3BsYXlgIGFuZCBzZXR0aW5nIHRoZSAqKmZhbWlseSoqIHRvICoqY2F1Y2h5KiouIFR3byBvdGhlciB2YWx1ZXMgY2FuCmFsc28gYmUgc2V0LiBUaGUgZmlyc3QgaXMgKipsb2NhdGlvbioqIHdoaWNoIGRldGVybWluZXMgdGhlIGNlbnRyZSBvZiB0aGUKZGlzdHJpYnV0aW9uLiBUaGlzIGhhcyBhIGRlZmF1bHQgdmFsdWUgb2YgMC4gVGhlIHNlY29uZCBpcyAqKnNjYWxlKiogd2hpY2gKY2FuIGNoYW5nZSBob3cgd2lkZSBvciBuYXJyb3cgdGhlIGRpc3RyaWJ1dGlvbiBpcy4gVGhlIG9yaWdpbmFsIHBhcGVyIGJ5ClJvdWRlciBldCBhbCAoMjAwOSkgc2V0IHRoaXMgdmFsdWUgdG8gMS4gSG93ZXZlciwgbm93IGEgdmFsdWUgb2YKJFxmcmFjezF9e1xzcXJ0ezJ9fVxhcHByb3gwLjcwNyQgaXMgbW9yZSB0eXBpY2FsLCBhbmQgdGhpcyBpcyB0aGUgZGVmYXVsdAp2YWx1ZSBpbiB0aGVpciBSIHBhY2thZ2UgKGNhbGxlZCBgQmF5ZXNGYWN0b3JgKS4KCkxldCB1cyBkZWZpbmUgYSBDYXVjaHkgcHJpb3Igd2l0aCBhIGxvY2F0aW9uIG9mIDAsIGFuZCBhIHNjYWxlIG9mIDEuCgpgYGB7cn0KI3wgZWNobyA9IFRSVUUsIGluY2x1ZGUgPSBUUlVFCgpzdGFuZGFyZF9jYXVjaHkgPC0gcHJpb3IoCiAgZmFtaWx5ID0gImNhdWNoeSIsCiAgbG9jYXRpb24gPSAwLAogIHNjYWxlID0gMQopCmBgYAoKQW5kIG5vdyB3ZSdsbCBkZWZpbmUgYSBDYXVjaHkgcHJpb3Igd2l0aCBhIGxvY2F0aW9uIG9mIDAsIGFuZCBhIHNjYWxlIG9mIAokXGZyYWN7MX17XHNxcnR7Mn19JC4KCgpgYGB7cn0KI3wgZWNobyA9IFRSVUUsIGluY2x1ZGUgPSBUUlVFCgptZWRpdW1fY2F1Y2h5IDwtIHByaW9yKAogIGZhbWlseSA9ICJjYXVjaHkiLAogIGxvY2F0aW9uID0gMCwKICBzY2FsZSA9IDEgLyBzcXJ0KDIpCikKYGBgCgoKV2l0aCBib3RoIHByaW9ycyBkZWZpbmVkIHdlIGNhbiBwbG90IHRoZW0gYWJvdmUgZWFjaCBvdGhlci4KCmBgYHtyfQojfCBlY2hvID0gVFJVRSwgaW5jbHVkZSA9IFRSVUUKCnN0YW5kYXJkX2NhdWNoeV9wbG90IDwtIHBsb3Qoc3RhbmRhcmRfY2F1Y2h5KSArCiAgdGhlbWVfbWluaW1hbCgxNCkgKwogIHRoZW1lKHRpdGxlID0gZWxlbWVudF90ZXh0KHNpemUgPSA4KSkgKwogIGxhYnMoc3VidGl0bGUgPSAiQ2F1Y2h5KDAsIDEpIikKCgptZWRpdW1fY2F1Y2h5X3Bsb3QgPC0gcGxvdChtZWRpdW1fY2F1Y2h5KSArCiAgdGhlbWVfbWluaW1hbCgxNCkgKwogIHRoZW1lKHRpdGxlID0gZWxlbWVudF90ZXh0KHNpemUgPSA4KSkgKwogIGxhYnMoc3VidGl0bGUgPSAiQ2F1Y2h5KDAsIDAuNzA3KSIpCgoKc3RhbmRhcmRfY2F1Y2h5X3Bsb3QgLyBtZWRpdW1fY2F1Y2h5X3Bsb3QKYGBgCgpBbHRob3VnaCB0aGUgbW90aXZhdGlvbiBiZWhpbmQgdGhlIGRlZmF1bHQgQmF5ZXMgKnQqLXRlc3QgaXMgdG8gY29tZSB1cAp3aXRoIG9iamVjdGl2ZSBwcmlvcnMsIFJvdWRlciBldCBhbCAoMjAwOSkgYWxzbyBub3RlIHRoYXQgcmUtc2NhbGluZyB0aGUKcHJpb3IgdG8gYmUgd2lkZXIgb3IgbmFycm93ZXIsIGRlcGVuZGluZyBvbiB0aGUgcmFuZ2Ugb2YgcHJlZGljdGVkIGVmZmVjdApzaXplcywgY2FuIGJlIGEgd2F5IHRvICp0dW5lKiB0aGUgcHJpb3IgdG8gdGhlIHBhcnRpY3VsYXJzIG9mIHRoZQpleHBlcmltZW50LiBBcyBtZW50aW9uZWQgZWFybGllciwgdGhlIGRpdmlkZSBiZXR3ZWVuICoqb2JqZWN0aXZlKiogYW5kCioqc3ViamVjdGl2ZSoqIHByaW9ycyBpcyBhIGJsdXJyeSBvbmUuCgpPbmUgb2YgdGhlc2UgQ2F1Y2h5IHByaW9ycyBpcyBnb2luZyB0byByZXByZXNlbnQgb3VyICphbHRlcm5hdGl2ZQpoeXBvdGhlc2VzKiwgYnV0IHdlIGFsc28gbmVlZCBhIHByaW9yIHRvIHJlcHJlc2VudCBvdXIgKm51bGwgaHlwb3RoZXNpcyouClRvIGtlZXAgdGhpbmdzIHNpbXBsZSB3ZSdsbCBqdXN0IHVzZSBhIHBvaW50IGh5cG90aGVzaXMgYXQgemVyby4KCk5vdyB0aGF0IHdlJ3ZlIGRlY2lkZWQgb24gdGhlIHByaW9ycyB3ZSdyZSBnb2luZyB0byB1c2UsIHdlIG5lZWQgdG8gZ2V0IHRvCnRoZSBtb3N0IGltcG9ydGFudCBiaXQhIFRoZSBkYXRhLiBXZSdsbCBhbmFseXNlIHRoZSBkYXRhIGZyb20gdGhlIHByZXZpb3VzCnNlY3Rpb24uIFdlJ2xsIGRvIGJvdGggdGhlIG9uZS1zYW1wbGUsIGFuZCB0aGUgdHdvLXNhbXBsZSBjYXNlLiBUaGlzIG1lYW5zCnRoYXQgd2UgY2FuIHVzZSB0aGUgbGlrZWxpaG9vZHMgdGhhdCB3ZSBkZWZpbmVkIGluIHRoZSBwcmV2aW91cyBzZWN0aW9uLAphbmQgd2UganVzdCBuZWVkIHRvIGFkZCB0aGUgcHJpb3JzLgoKSW4gdGhlIGZpcnN0IG9uZSBzYW1wbGUgY2FzZSwgd2UgZm91bmQgYSAqZCogb2YgMC4yMyB3aXRoIGEgc2FtcGxlIHNpemUKb2YgODAuIEZvciBvdXIgYWx0ZXJuYXRpdmUgaHlwb3RoZXNpcywgd2UnbGwgdXNlIHRoZSBuYXJyb3dlciBDYXVjaHkKZGlzdHJpYnV0aW9uLiBUaGF0IGlzLCBhIENhdWNoeSB3aXRoIGEgbG9jYXRpb24gb2YgMCBhbmQgYSBzY2FsZSBvZiAwLjcwNy4KQW5kIGZvciB0aGUgbnVsbCBoeXBvdGhlc2lzIHdlJ2xsIHVzZSBhIHBvaW50IGF0IDAuIAoKSSdsbCB1c2UgdGhlIFtiYXllc3BsYXkgd2ViLWFwcF0oaHR0cHM6Ly9iYXllc3BsYXkubWluZHNjaS5uZXQpIHRvIGRlZmluZQp0aGUgbW9kZWwuIFRoZSBzZXR0aW5nJ3MgYXJlIGp1c3QgYXMgZm9sbG93cy4KCkZpcnN0IHRoZSBsaWtlbGlob29kOgoKIVtdKGh0dHBzOi8vcmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbS9samNvbGxpbmcvYmF5ZXMyMDIyL21haW4vX3NpdGUvYnBfbGlrZWxpaG9vZC5wbmcpCgpUaGVuIHRoZSBhbHRlcm5hdGl2ZSBwcmlvcjoKCiFbXShodHRwczovL3Jhdy5naXRodWJ1c2VyY29udGVudC5jb20vbGpjb2xsaW5nL2JheWVzMjAyMi9tYWluL19zaXRlL2JwX3ByaW9yX2FsdC5wbmcpCgpBbmQgdGhlbiB0aGUgbnVsbCBwcmlvcjoKCiFbXShodHRwczovL3Jhdy5naXRodWJ1c2VyY29udGVudC5jb20vbGpjb2xsaW5nL2JheWVzMjAyMi9tYWluL19zaXRlL2JwX3ByaW9yX251bGwucG5nKQoKV2l0aCB0aGVzZSB2YWx1ZXMgZW50ZXJlZCwgSSBjYW4gZ2VuZXJhdGUgdGhlIFIgY29kZS4gVGhpcyBjb2RlIGlzIHNob3duCmJlbG93LgoKCmBgYHtyfQojfCBpbmNsdWRlID0gVFJVRSwgZWNobyA9IFRSVUUKIyBkZWZpbmUgbGlrZWxpaG9vZApkYXRhX21vZGVsIDwtIGxpa2VsaWhvb2QoZmFtaWx5ID0gIm5vbmNlbnRyYWxfZCIsIGQgPSAwLjIzLCBuID0gODApCgojIGRlZmluZSBhbHRlcm5hdGl2ZSBwcmlvcgphbHRfcHJpb3IgPC0gcHJpb3IoZmFtaWx5ID0gImNhdWNoeSIsIGxvY2F0aW9uID0gMCwgc2NhbGUgPSAwLjcwNykKCiMgZGVmaW5lIG51bGwgcHJpb3IKbnVsbF9wcmlvciA8LSBwcmlvcihmYW1pbHkgPSAicG9pbnQiLCBwb2ludCA9IDApCgojIHdlaWdodCBsaWtlbGlob29kIGJ5IHByaW9yCm0xIDwtIGRhdGFfbW9kZWwgKiBhbHRfcHJpb3IKbTAgPC0gZGF0YV9tb2RlbCAqIG51bGxfcHJpb3IKCiMgdGFrZSB0aGUgaW50ZXJnYWwgb2YgZWFjaCB3ZWlnaHRlZCBsaWtlbGlob29kCiMgYW5kIGRpdmlkZSB0aGVtCmJmIDwtIGludGVncmFsKG0xKSAvIGludGVncmFsKG0wKQpiZgpgYGAKCkFuZCBub3cgd2UgY2FuIGdpdmUgYSBiaXQgb2YgYSBkZXNjcmlwdGlvbiBvZiBvdXIgcmVzdWx0LgoKYGBge3J9CmdsdWU6OmdsdWUoIlRoZSBCYXllcyBmYWN0b3IgaXMge3JvdW5kKGJmLDIpfS4gVGhpcyBtZWFucyB0aGF0IHRoZQpkYXRhIGFyZSB7cm91bmQoYmYsMil9IHRpbWVzIG1vcmUgbGlrZWx5IHVuZGVyIG91ciBhbHRlcm5hdGl2ZSBoeXBvdGhlc2lzCnJlbGF0aXZlIHRvIG91ciBudWxsIGh5cG90aGVzaXMuIikgJT4lCiAgZGlzcGxheV9tYXJrZG93bigpCmBgYAoKV2l0aCB0aGUgb25lLXNhbXBsZSBjYXNlIG91dCBvZiB0aGUgd2F5LCB3ZSBjYW4gbm93IHR1cm4gb3VyIGF0dGVudGlvbiB0bwp0aGUgdHdvIHNhbXBsZSBjYXNlLiBXZSdsbCB1c2UgdGhlIHNhbWUgcHJpb3JzIGFzIGJlZm9yZSwgYnV0IG5vdyB3ZSdsbAp1c2UgdGhlICoqbm9uY2VudHJhbF9kMioqIGxpa2VsaWhvb2QgdGhhdCB3ZSB1c2VkIHRvIG1vZGVsIHRoaXMgZGF0YSBpbgp0aGUgcHJldmlvdXMgc2VjdGlvbi4gQmVjYXVzZSB3ZSdyZSB1c2luZyB0aGUgc2FtZSBwcmlvcnMgYXMgYmVmb3JlLCB3ZQpjYW4ganVzdCB1cGRhdGUgb3VyIGxpa2VsaWhvb2QgZnJvbSB0aGUgcHJldmlvdXMgY2h1bmsgb2YgY29kZSwgYW5kIGtlZXAKZXZlcnl0aGluZyBlbHNlIHRoZSBzYW1lLiBGb3IgdGhpcyBuZXcgbGlrZWxpaG9vZCwgd2UnbGwgaGF2ZSBhICpkKiBvZgowLjk5IGFuZCBzYW1wbGUgc2l6ZXMgb2YgMTMgYW5kIDEyLgoKYGBge3J9CiN8IGluY2x1ZGUgPSBUUlVFLCBlY2hvID0gVFJVRQojIGRlZmluZSBsaWtlbGlob29kCmRhdGFfbW9kZWwgPC0gbGlrZWxpaG9vZCgKICBmYW1pbHkgPSAibm9uY2VudHJhbF9kMiIsCiAgZCA9IDAuOTksCiAgbjEgPSAxMywKICBuMiA9IDEyCikKCiMgZGVmaW5lIGFsdGVybmF0aXZlIHByaW9yCmFsdF9wcmlvciA8LSBwcmlvcihmYW1pbHkgPSAiY2F1Y2h5IiwgbG9jYXRpb24gPSAwLCBzY2FsZSA9IDAuNzA3KQoKIyBkZWZpbmUgbnVsbCBwcmlvcgpudWxsX3ByaW9yIDwtIHByaW9yKGZhbWlseSA9ICJwb2ludCIsIHBvaW50ID0gMCkKCiMgd2VpZ2h0IGxpa2VsaWhvb2QgYnkgcHJpb3IKbTEgPC0gZGF0YV9tb2RlbCAqIGFsdF9wcmlvcgptMCA8LSBkYXRhX21vZGVsICogbnVsbF9wcmlvcgoKIyB0YWtlIHRoZSBpbnRlcmdhbCBvZiBlYWNoIHdlaWdodGVkIGxpa2VsaWhvb2QKIyBhbmQgZGl2aWRlIHRoZW0KYmYgPC0gaW50ZWdyYWwobTEpIC8gaW50ZWdyYWwobTApCmJmCmBgYAoKQW5kIG5vdyBhIGRlc2NyaXB0aW9uIG9mIG91ciByZXN1bHQuCgpgYGB7cn0KZ2x1ZTo6Z2x1ZSgiVGhlIEJheWVzIGZhY3RvciBpcyB7cm91bmQoYmYsMil9LiBUaGlzIG1lYW5zIHRoYXQgdGhlCmRhdGEgYXJlIHtyb3VuZChiZiwyKX0gdGltZXMgbW9yZSBsaWtlbHkgdW5kZXIgb3VyIGFsdGVybmF0aXZlIGh5cG90aGVzaXMKcmVsYXRpdmUgdG8gb3VyIG51bGwgaHlwb3RoZXNpcy4iKSAlPiUKICBkaXNwbGF5X21hcmtkb3duKCkKYGBgCgojIyBJbnRlcnByZXRpbmcgb3VyIEJheWVzIGZhY3RvcnMKCk5vdyB0aGF0IHdlIGhhdmUgYm90aCBCYXllcyBmYWN0b3JzIGxldCdzIHRoaW5rIGEgbGl0dGxlIGJpdCBhYm91dCB3aGF0CnRoZXkgYWN0dWFsbHkgbWVhbi4gV2hhdCB0aGUgQmF5ZXMgZmFjdG9ycyBkaWQgd2FzIGNvbXBhcmUgdHdvIGh5cG90aGVzZXMuClRoZSBmaXJzdCBoeXBvdGhlc2lzIChvdXIgbnVsbCBoeXBvdGhlc2lzKSBzYWlkIHRoYXQgdGhlIGVmZmVjdApzaXplLS0tdGhhdCBpcywgdGhlIGRpZmZlcmVuY2UgaW4sIGZvciBleGFtcGxlLCB0aGUgYWNjdXJhY3kgb2YKcmVtZW1iZXJpbmcgd29yZHMgaW4gdGhlIHR3byBjb25kaXRpb25zLS0td2FzIDAuIFRoZSBzZWNvbmQgaHlwb3RoZXNpcwpzYWlkIHRoYXQgdGhlIGVmZmVjdCBzaXplIHdhcyAqKm5vdCoqIDAuIEJ1dCBtb3JlIHNwZWNpZmljYWxseSwgaXQgc2FpZAp0aGUgZWZmZWN0IHNpemUgd2FzICoqbm90KiogMCBpbiB0aGUgc3BlY2lmaWMgd2F5IGFzIGRlc2NyaWJlZCBieSB0aGUKc3BlY2lmaWMgQ2F1Y2h5IHByaW9yIHRoYXQgd2UgdXNlZC4gCgpUaGlzIENhdWNoeSBwcmlvciBzYXlzIHRoYXQgd2UgdGhpbmsgdGhhdCBpZiB0aGVyZSBpcyBhbiBlZmZlY3QsIHRoYXQgaXQKaXMgcHJvYmFibHkgc29tZXdoZXJlIGJldHdlZW4gYWJvdXQgLTIuMiBhbmQgMi4yICh0aGF0IGlzLCA4MCUgb2YgdGhlCnByaW9yIGRpc3RyaWJ1dGlvbiBsaWVzIGJldHdlZW4gdGhlc2UgdmFsdWVzLiBbU2NobWFseiBldCBhbCwKMjAyMV0oaHR0cHM6Ly9vc2YuaW8vNWdlcXQvZG93bmxvYWQpIHByb3ZpZGVzIGEgaGFuZHkgdGFibGUgdGhhdCB0ZWxscyB5b3UKdGhlIDUwJSBhbmQgODAlIGJvdW5kcyBmb3IgQ2F1Y2h5IHByaW9ycyBvZiBkaWZmZXJlbnQgc2NhbGVzIChsYWJlbGxlZApKQVNQIHNjYWxlIGZhY3RvciBvbiB0aGUgdGFibGUpLgoKIVtdKGh0dHBzOi8vcmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbS9samNvbGxpbmcvYmF5ZXMyMDIyL21haW4vX3NpdGUveGVuaWFfdGFibGUucG5nKQoKSG93ZXZlciwgaWYgeW91J3JlIGNvbWZvcnRhYmxlIHdpdGggYFJgIHRoZW4geW91IGNhbiB3b3JrIGl0IG91dCB5b3Vyc2VsZi4gCkZvciBleGFtcGxlLCB0aGUgY29kZSBiZWxvdyBjYWxjdWxhdGVzIGhvdyBtdWNoIG9mIHRoZSBkZWZpbmVkIHByaW9yIGlzCmJldHdlZW4gLTIgYW5kIDIuCgpgYGB7cn0KI3wgZWNobyA9IFRSVUUsIGluY2x1ZGUgPSBUUlVFCgojIGRlZmluZSB0aGUgcHJpb3IKcCA8LSBwcmlvcigiY2F1Y2h5IiwgMCwgLjcwNykKCiMgd29yayBvdXQgaG93IG11Y2ggb2YgaXQgaXMgYmV0d2VlbiAtMiBhbmQgMgppbnRlZ3JhdGUoVmVjdG9yaXplKHAkcHJpb3JfZnVuY3Rpb24pLCAtMi4yLCAyLjIpJHZhbHVlCmBgYAoKVGhlIEJheWVzIGZhY3RvciBjYWxjdWxhdGlvbiBzZXRzIHVwIHR3byBoeXBvdGhlc2VzIGFib3V0IHdoYXQgd2UgdGhpbmsKYWJvdXQgdGhlIGVmZmVjdCBzaXplIGluIHRoZSBjYXNlIHRoYXQgdGhlcmUgaXMgbm8gZWZmZWN0ICh0aGUgbnVsbCkgYW5kCmluIHRoZSBjYXNlIHRoYXQgd2UgdGhpbmsgdGhlcmUgaXMgYW4gZWZmZWN0ICh0aGUgYWx0ZXJuYXRpdmUpIGFuZCB0ZWxscwp1cyB1bmRlciB3aGljaCBvZiB0aGVzZSB0d28gc2NlbmFyaW9zIHdlJ2QgYmUgbW9yZSBsaWtlbHkgdG8gb2JzZXJ2ZSBvdXIKZGF0YS4KCk5vdGUsIGhvd2V2ZXIsIHRoYXQgdGhlIHR3byBoeXBvdGhlc2VzIHRoYXQgd2UgY29tcGFyZWQgYXJlIG9ubHkgdHdvIG91dApvZiBhIHBvc3NpYmxlIGluZmluaXRlIHNldCBvZiBoeXBvdGhlc2VzLiBJIG1pZ2h0LCBmb3IgZXhhbXBsZSwgdGhpbmsgdGhhdAppZiB0aGVyZSBpcyBhbiBlZmZlY3QgdGhlbiBpdCBpcyAqKm5vdCoqIHplcm8gaW4gYSBkaWZmZXJlbnQgd2F5LiBJIG1pZ2h0LApmb3IgZXhhbXBsZSwgdGhpbmsgdGhhdCBpZiB0aGVyZSBpcyBhbiBlZmZlY3QgdGhlbiBpdCB3aWxsIGJlIGdyZWF0ZXIgdGhlbgowIGluIGEgc3BlY2lmaWMgd2F5IGFzIGRlc2NyaWJlZCBieSBteSBwcmlvci4gVGhhdCBpcywgSSBtaWdodCBvbmUgdG8KcGVyZm9ybSBhIG9uZS1zaWRlZCB0ZXN0IHJhdGhlciB0aGFuIGEgdHdvLXNpZGVkIChvciB0d28tdGFpbGVkIGluCmZyZXF1ZW50aXN0IHRlcm1zKSB0ZXN0LiAKClRvIGRvIHRoaXMsIGFsbCBJIHdvdWxkIG5lZWQgdG8gZG8gaXMgdXBkYXRlIG15IHByaW9yLiBJbiB0aGUgd2ViLWFwcApJIGNhbiBkbyB0aGlzIGJ5IHRvZ2dsaW5nIHRoZSBsaW1pdCBzd2l0Y2hlcyBhbmQgc2V0dGluZyB0aGUgbG93ZXIgbGltaXQKdG8gMC4gQXMgeW91IGNhbiBzZWUgdGhlIENhdWNoeSBwcmlvciBpcyBub3cgY3V0IGluIGhhbGYgc28gdGhhdCBpdCBvbmx5CmNvbnRhaW5zIHZhbHVlcyBncmVhdGVyIHRoYW4gMC4KCiFbXShodHRwczovL3Jhdy5naXRodWJ1c2VyY29udGVudC5jb20vbGpjb2xsaW5nL2JheWVzMjAyMi9tYWluL19zaXRlL3RydW5jYXRlLnBuZykKCklmIHdlIHdlcmUgdG8gZ2VuZXJhdGUgdGhlIGBSYCBjb2RlLCB3ZSdkIHNlZSB0aGF0IHRoZSBhbHRlcm5hdGl2ZSBwcmlvcgppcyBub3cgZGVmaW5lZCBhcyBmb2xsb3dzOgoKYGBge3J9CiN8IGluY2x1ZGUgPSBUUlVFLCBlY2hvID0gVFJVRQoKIyBkZWZpbmUgYWx0ZXJuYXRpdmUgcHJpb3IKYWx0X3ByaW9yIDwtIHByaW9yKAogIGZhbWlseSA9ICJjYXVjaHkiLAogIGxvY2F0aW9uID0gMCwKICBzY2FsZSA9IDAuNzA3LAogIHJhbmdlID0gYygwLCBJbmYpCikKYGBgCgpJbiBmYWN0LCBJIGNvdWxkIHRlc3QgYW55IGFyYml0cmFyeSBzZXRzIG9mIGh5cG90aGVzZXMgSSB3YW50LiBJbiB0aGUgbmV4dApzZWN0aW9uLCBvbiBpbmZvcm1lZCBvciBzdWJqZWN0aXZlIHByaW9ycyB3ZSdsbCBzZWUgaG93IHdlIGNhbiBjb21wYXJlIGFueQphcmJpdHJhcnkgc2V0IG9mIGh5cG90aGVzZXMgd2Ugd2FudC4K" download="06-prior-I.Rmd"><img src="https://img.shields.io/badge/.Rmd-Download-blue"></a>
+<a href="https://colab.research.google.com/github/ljcolling/bayes2022/blob/main/_notebooks/06-prior-I.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" /></a></p>
+<p>In the previous section, we learned how we can use normal, student <em>t</em>,
+and various kinds of <em>non-central t</em> likelihoods to model means, mean
+differences, and effect sizes. But if we actually want to compute Bayes
+factors then we’ll also need to define <strong>priors</strong>. While the
+<strong>likelihoods</strong> are a model of our <strong>data</strong> the <strong>priors</strong> will serve as
+the models for the <strong>hypotheses</strong> we actually want to compare.</p>
+<p>There are two broad schools of thought when it comes to defining priors.
+The first is to choose priors that can be used in a wide range of
+situations and don’t need to be tailored to the specifics of the situation
+at hand. This is often framed in terms of selecting priors that aren’t
+dependent on the individual beliefs or theories of a specific researcher,
+or priors that represent ignorance about any possible effect. These are
+sometimes called objective, reference, uninformative, or default priors
+(these terms aren’t exactly synonymous, but for our purposes the technical
+differences won’t matter).</p>
+<p>The second approach is to choose priors that are specific to the situation
+at hand. This might be by selecting priors that represent actual
+scientific theories, selecting priors that constrain the predicted effects
+to be within the expected range, or choosing priors based on, for example,
+previous evidence about the nature of the effect being studied. These
+kinds of priors go under the label of informed, or subjective priors. It
+is also important to note that the lines between the two approaches is not
+always clear cut. Rather, they are often blurred.</p>
+<div id="reference-objective-uninformative-and-default-priors" class="section level2" number="6.1">
+<h2><span class="header-section-number">6.1</span> Reference, objective, uninformative, and default priors</h2>
+<p>The most straightforward way to come up with a prior that can work in
+a wide range of situations is to use the <em>principle of indifference</em>. This
+is the approach that we used when we were coming up with our very first
+prior for the coin flip example. Our reasoning was roughly as follows:</p>
+<ul>
+<li><p>If we don’t know what the coin bias is (just that it is some value
+between 0 and 1), then we have no reason for predicting that any
+particular outcome (i.e., number of heads after a particular number of
+flips) will occur more often than any other particular outcome.</p></li>
+<li><p>If we flip the coin <span class="math inline">\(n\)</span> times, then there are <span class="math inline">\(n + 1\)</span> possible
+outcomes. Therefore, we assign a probability of <span class="math inline">\(\frac{1}{n+1}\)</span> to each
+outcome.</p></li>
+<li><p>The prior that fits with this prediction is a uniform prior from 0 to 1.</p></li>
+</ul>
+<p>The idea here is that in coming up with the prior we’re trying to make as
+few assumptions as possible. Coming up with priors that make as few
+assumptions as possible is not always straightforward. There are a number
+of technical difficulties that can arise when choosing priors that
+<em>seemingly</em> don’t make any assumptions. Some of these issues arise when,
+for example, choosing a prior that is non-informative when a question is
+asked one way (for example, asking about the <em>bias</em> of the coin) but then
+doesn’t turn out to be non-informative when the question is asked in
+a different, but equivalent way (for example, asking about the <em>log odds</em>
+of obtaining heads).</p>
+<p>Because of these technical difficulties, people have come up with rules
+for choosing priors that make as few assumptions as possible. Once such
+rule if Jeffrey’s rule. A detailed treatment is Jeffrey’s rule is outside
+the scope of this course, but it is interesting to note that Jeffrey’s
+rule relies on the <em>realm of possible events</em> (the same thing that caused
+our worries about <em>p</em>-values being impacted by different sampling rules).</p>
+</div>
+<div id="default-priors-for-effect-sizes" class="section level2" number="6.2">
+<h2><span class="header-section-number">6.2</span> Default priors for effect sizes</h2>
+<p>Another method for defining <strong>objective</strong> priors that has been
+particularly popular within psychology has been to use <strong>default priors</strong>.
+The most prominent example of this approach has been the use of <strong>default
+priors</strong> for effect sizes—the so-called <em>default Bayesian t-test</em>
+<a href="http://pcl.missouri.edu/sites/default/files/Rouder.bf_.pdf">(Rouder et al,
+2009)</a>.</p>
+<p>The <em>default Bayesian t-test</em> can be used anywhere where a regular
+frequentist <em>t</em>-test can be used. For the default Bayes <em>t</em>-test, the data
+are modelled in terms of the effect size. That is, a <em>non-central d</em> or
+<em>non-central d2</em> likelihood is used (depending on whether the data are
+from one-sample/paired data or independent samples). These are the
+likelihood’s that we defined near the end of the previous section.
+However, what really characterises this approach is the prior that is
+employed. The default Bayes <em>t</em>-test uses a <strong>Cauchy</strong> prior. A <strong>Cauchy</strong>
+distribution is similar in shape to a standard normal distribution (panel
+A below), however it has far fatter tails (panel B below).</p>
+<p><img src="06-prior-I_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p>For a more in-depth discussion of Cauchy priors, a recent paper by
+<a href="https://osf.io/5geqt/download">Schmalz et al, 2021</a> is highly
+recommended. We’ll learn about them by exploring some of their properties
+using <code>bayesplay</code>. As you can see from the plots above, compared to
+a normal distribution, the Cauchy has far less mass in the middle of the
+distribution. For the Cauchy distribution, 50% of the distribution lies
+between -1 and +1 while for the normal distribution 68% of the
+distribution lies between -1 and +1.</p>
+<p>We can define a <strong>Cauchy</strong> prior using the <code>prior</code> function from
+<code>bayesplay</code> and setting the <strong>family</strong> to <strong>cauchy</strong>. Two other values can
+also be set. The first is <strong>location</strong> which determines the centre of the
+distribution. This has a default value of 0. The second is <strong>scale</strong> which
+can change how wide or narrow the distribution is. The original paper by
+Rouder et al (2009) set this value to 1. However, now a value of
+<span class="math inline">\(\frac{1}{\sqrt{2}}\approx0.707\)</span> is more typical, and this is the default
+value in their R package (called <code>BayesFactor</code>).</p>
+<p>Let us define a Cauchy prior with a location of 0, and a scale of 1.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="choosing-priors-part-i.html#cb20-1" aria-hidden="true" tabindex="-1"></a>standard_cauchy <span class="ot">&lt;-</span> <span class="fu">prior</span>(</span>
+<span id="cb20-2"><a href="choosing-priors-part-i.html#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="st">&quot;cauchy&quot;</span>,</span>
+<span id="cb20-3"><a href="choosing-priors-part-i.html#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">location =</span> <span class="dv">0</span>,</span>
+<span id="cb20-4"><a href="choosing-priors-part-i.html#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">scale =</span> <span class="dv">1</span></span>
+<span id="cb20-5"><a href="choosing-priors-part-i.html#cb20-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p>And now we’ll define a Cauchy prior with a location of 0, and a scale of
+<span class="math inline">\(\frac{1}{\sqrt{2}}\)</span>.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="choosing-priors-part-i.html#cb21-1" aria-hidden="true" tabindex="-1"></a>medium_cauchy <span class="ot">&lt;-</span> <span class="fu">prior</span>(</span>
+<span id="cb21-2"><a href="choosing-priors-part-i.html#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="st">&quot;cauchy&quot;</span>,</span>
+<span id="cb21-3"><a href="choosing-priors-part-i.html#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">location =</span> <span class="dv">0</span>,</span>
+<span id="cb21-4"><a href="choosing-priors-part-i.html#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">scale =</span> <span class="dv">1</span> <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="dv">2</span>)</span>
+<span id="cb21-5"><a href="choosing-priors-part-i.html#cb21-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p>With both priors defined we can plot them above each other.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="choosing-priors-part-i.html#cb22-1" aria-hidden="true" tabindex="-1"></a>standard_cauchy_plot <span class="ot">&lt;-</span> <span class="fu">plot</span>(standard_cauchy) <span class="sc">+</span></span>
+<span id="cb22-2"><a href="choosing-priors-part-i.html#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="dv">14</span>) <span class="sc">+</span></span>
+<span id="cb22-3"><a href="choosing-priors-part-i.html#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>)) <span class="sc">+</span></span>
+<span id="cb22-4"><a href="choosing-priors-part-i.html#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">&quot;Cauchy(0, 1)&quot;</span>)</span>
+<span id="cb22-5"><a href="choosing-priors-part-i.html#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-6"><a href="choosing-priors-part-i.html#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="choosing-priors-part-i.html#cb22-7" aria-hidden="true" tabindex="-1"></a>medium_cauchy_plot <span class="ot">&lt;-</span> <span class="fu">plot</span>(medium_cauchy) <span class="sc">+</span></span>
+<span id="cb22-8"><a href="choosing-priors-part-i.html#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="dv">14</span>) <span class="sc">+</span></span>
+<span id="cb22-9"><a href="choosing-priors-part-i.html#cb22-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>)) <span class="sc">+</span></span>
+<span id="cb22-10"><a href="choosing-priors-part-i.html#cb22-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">&quot;Cauchy(0, 0.707)&quot;</span>)</span>
+<span id="cb22-11"><a href="choosing-priors-part-i.html#cb22-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-12"><a href="choosing-priors-part-i.html#cb22-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-13"><a href="choosing-priors-part-i.html#cb22-13" aria-hidden="true" tabindex="-1"></a>standard_cauchy_plot <span class="sc">/</span> medium_cauchy_plot</span></code></pre></div>
+<p><img src="06-prior-I_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Although the motivation behind the default Bayes <em>t</em>-test is to come up
+with objective priors, Rouder et al (2009) also note that re-scaling the
+prior to be wider or narrower, depending on the range of predicted effect
+sizes, can be a way to <em>tune</em> the prior to the particulars of the
+experiment. As mentioned earlier, the divide between <strong>objective</strong> and
+<strong>subjective</strong> priors is a blurry one.</p>
+<p>One of these Cauchy priors is going to represent our <em>alternative
+hypotheses</em>, but we also need a prior to represent our <em>null hypothesis</em>.
+To keep things simple we’ll just use a point hypothesis at zero.</p>
+<p>Now that we’ve decided on the priors we’re going to use, we need to get to
+the most important bit! The data. We’ll analyse the data from the previous
+section. We’ll do both the one-sample, and the two-sample case. This means
+that we can use the likelihoods that we defined in the previous section,
+and we just need to add the priors.</p>
+<p>In the first one sample case, we found a <em>d</em> of 0.23 with a sample size
+of 80. For our alternative hypothesis, we’ll use the narrower Cauchy
+distribution. That is, a Cauchy with a location of 0 and a scale of 0.707.
+And for the null hypothesis we’ll use a point at 0.</p>
+<p>I’ll use the <a href="https://bayesplay.mindsci.net">bayesplay web-app</a> to define
+the model. The setting’s are just as follows.</p>
+<p>First the likelihood:</p>
+<p><img src="https://raw.githubusercontent.com/ljcolling/bayes2022/main/_site/bp_likelihood.png" /></p>
+<p>Then the alternative prior:</p>
+<p><img src="https://raw.githubusercontent.com/ljcolling/bayes2022/main/_site/bp_prior_alt.png" /></p>
+<p>And then the null prior:</p>
+<p><img src="https://raw.githubusercontent.com/ljcolling/bayes2022/main/_site/bp_prior_null.png" /></p>
+<p>With these values entered, I can generate the R code. This code is shown
+below.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="choosing-priors-part-i.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># define likelihood</span></span>
+<span id="cb23-2"><a href="choosing-priors-part-i.html#cb23-2" aria-hidden="true" tabindex="-1"></a>data_model <span class="ot">&lt;-</span> <span class="fu">likelihood</span>(<span class="at">family =</span> <span class="st">&quot;noncentral_d&quot;</span>, <span class="at">d =</span> <span class="fl">0.23</span>, <span class="at">n =</span> <span class="dv">80</span>)</span>
+<span id="cb23-3"><a href="choosing-priors-part-i.html#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="choosing-priors-part-i.html#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co"># define alternative prior</span></span>
+<span id="cb23-5"><a href="choosing-priors-part-i.html#cb23-5" aria-hidden="true" tabindex="-1"></a>alt_prior <span class="ot">&lt;-</span> <span class="fu">prior</span>(<span class="at">family =</span> <span class="st">&quot;cauchy&quot;</span>, <span class="at">location =</span> <span class="dv">0</span>, <span class="at">scale =</span> <span class="fl">0.707</span>)</span>
+<span id="cb23-6"><a href="choosing-priors-part-i.html#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-7"><a href="choosing-priors-part-i.html#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="co"># define null prior</span></span>
+<span id="cb23-8"><a href="choosing-priors-part-i.html#cb23-8" aria-hidden="true" tabindex="-1"></a>null_prior <span class="ot">&lt;-</span> <span class="fu">prior</span>(<span class="at">family =</span> <span class="st">&quot;point&quot;</span>, <span class="at">point =</span> <span class="dv">0</span>)</span>
+<span id="cb23-9"><a href="choosing-priors-part-i.html#cb23-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-10"><a href="choosing-priors-part-i.html#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="co"># weight likelihood by prior</span></span>
+<span id="cb23-11"><a href="choosing-priors-part-i.html#cb23-11" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> data_model <span class="sc">*</span> alt_prior</span>
+<span id="cb23-12"><a href="choosing-priors-part-i.html#cb23-12" aria-hidden="true" tabindex="-1"></a>m0 <span class="ot">&lt;-</span> data_model <span class="sc">*</span> null_prior</span>
+<span id="cb23-13"><a href="choosing-priors-part-i.html#cb23-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-14"><a href="choosing-priors-part-i.html#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="co"># take the intergal of each weighted likelihood</span></span>
+<span id="cb23-15"><a href="choosing-priors-part-i.html#cb23-15" aria-hidden="true" tabindex="-1"></a><span class="co"># and divide them</span></span>
+<span id="cb23-16"><a href="choosing-priors-part-i.html#cb23-16" aria-hidden="true" tabindex="-1"></a>bf <span class="ot">&lt;-</span> <span class="fu">integral</span>(m1) <span class="sc">/</span> <span class="fu">integral</span>(m0)</span>
+<span id="cb23-17"><a href="choosing-priors-part-i.html#cb23-17" aria-hidden="true" tabindex="-1"></a>bf</span></code></pre></div>
+<pre><code>## 0.9064552</code></pre>
+<p>And now we can give a bit of a description of our result.</p>
+<p>The Bayes factor is 0.91. This means that the
+data are 0.91 times more likely under our alternative hypothesis
+relative to our null hypothesis.</p>
+<p>With the one-sample case out of the way, we can now turn our attention to
+the two sample case. We’ll use the same priors as before, but now we’ll
+use the <strong>noncentral_d2</strong> likelihood that we used to model this data in
+the previous section. Because we’re using the same priors as before, we
+can just update our likelihood from the previous chunk of code, and keep
+everything else the same. For this new likelihood, we’ll have a <em>d</em> of
+0.99 and sample sizes of 13 and 12.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="choosing-priors-part-i.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># define likelihood</span></span>
+<span id="cb25-2"><a href="choosing-priors-part-i.html#cb25-2" aria-hidden="true" tabindex="-1"></a>data_model <span class="ot">&lt;-</span> <span class="fu">likelihood</span>(</span>
+<span id="cb25-3"><a href="choosing-priors-part-i.html#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="st">&quot;noncentral_d2&quot;</span>,</span>
+<span id="cb25-4"><a href="choosing-priors-part-i.html#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">d =</span> <span class="fl">0.99</span>,</span>
+<span id="cb25-5"><a href="choosing-priors-part-i.html#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">n1 =</span> <span class="dv">13</span>,</span>
+<span id="cb25-6"><a href="choosing-priors-part-i.html#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">n2 =</span> <span class="dv">12</span></span>
+<span id="cb25-7"><a href="choosing-priors-part-i.html#cb25-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb25-8"><a href="choosing-priors-part-i.html#cb25-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-9"><a href="choosing-priors-part-i.html#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="co"># define alternative prior</span></span>
+<span id="cb25-10"><a href="choosing-priors-part-i.html#cb25-10" aria-hidden="true" tabindex="-1"></a>alt_prior <span class="ot">&lt;-</span> <span class="fu">prior</span>(<span class="at">family =</span> <span class="st">&quot;cauchy&quot;</span>, <span class="at">location =</span> <span class="dv">0</span>, <span class="at">scale =</span> <span class="fl">0.707</span>)</span>
+<span id="cb25-11"><a href="choosing-priors-part-i.html#cb25-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-12"><a href="choosing-priors-part-i.html#cb25-12" aria-hidden="true" tabindex="-1"></a><span class="co"># define null prior</span></span>
+<span id="cb25-13"><a href="choosing-priors-part-i.html#cb25-13" aria-hidden="true" tabindex="-1"></a>null_prior <span class="ot">&lt;-</span> <span class="fu">prior</span>(<span class="at">family =</span> <span class="st">&quot;point&quot;</span>, <span class="at">point =</span> <span class="dv">0</span>)</span>
+<span id="cb25-14"><a href="choosing-priors-part-i.html#cb25-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-15"><a href="choosing-priors-part-i.html#cb25-15" aria-hidden="true" tabindex="-1"></a><span class="co"># weight likelihood by prior</span></span>
+<span id="cb25-16"><a href="choosing-priors-part-i.html#cb25-16" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> data_model <span class="sc">*</span> alt_prior</span>
+<span id="cb25-17"><a href="choosing-priors-part-i.html#cb25-17" aria-hidden="true" tabindex="-1"></a>m0 <span class="ot">&lt;-</span> data_model <span class="sc">*</span> null_prior</span>
+<span id="cb25-18"><a href="choosing-priors-part-i.html#cb25-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-19"><a href="choosing-priors-part-i.html#cb25-19" aria-hidden="true" tabindex="-1"></a><span class="co"># take the intergal of each weighted likelihood</span></span>
+<span id="cb25-20"><a href="choosing-priors-part-i.html#cb25-20" aria-hidden="true" tabindex="-1"></a><span class="co"># and divide them</span></span>
+<span id="cb25-21"><a href="choosing-priors-part-i.html#cb25-21" aria-hidden="true" tabindex="-1"></a>bf <span class="ot">&lt;-</span> <span class="fu">integral</span>(m1) <span class="sc">/</span> <span class="fu">integral</span>(m0)</span>
+<span id="cb25-22"><a href="choosing-priors-part-i.html#cb25-22" aria-hidden="true" tabindex="-1"></a>bf</span></code></pre></div>
+<pre><code>## 2.976933</code></pre>
+<p>And now a description of our result.</p>
+<p>The Bayes factor is 2.98. This means that the
+data are 2.98 times more likely under our alternative hypothesis
+relative to our null hypothesis.</p>
+</div>
+<div id="interpreting-our-bayes-factors" class="section level2" number="6.3">
+<h2><span class="header-section-number">6.3</span> Interpreting our Bayes factors</h2>
+<p>Now that we have both Bayes factors let’s think a little bit about what
+they actually mean. What the Bayes factors did was compare two hypotheses.
+The first hypothesis (our null hypothesis) said that the effect
+size—that is, the difference in, for example, the accuracy of
+remembering words in the two conditions—was 0. The second hypothesis
+said that the effect size was <strong>not</strong> 0. But more specifically, it said
+the effect size was <strong>not</strong> 0 in the specific way as described by the
+specific Cauchy prior that we used.</p>
+<p>This Cauchy prior says that we think that if there is an effect, that it
+is probably somewhere between about -2.2 and 2.2 (that is, 80% of the
+prior distribution lies between these values. <a href="https://osf.io/5geqt/download">Schmalz et al,
+2021</a> provides a handy table that tells you
+the 50% and 80% bounds for Cauchy priors of different scales (labelled
+JASP scale factor on the table).</p>
+<p><img src="https://raw.githubusercontent.com/ljcolling/bayes2022/main/_site/xenia_table.png" /></p>
+<p>However, if you’re comfortable with <code>R</code> then you can work it out yourself.
+For example, the code below calculates how much of the defined prior is
+between -2 and 2.</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="choosing-priors-part-i.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># define the prior</span></span>
+<span id="cb27-2"><a href="choosing-priors-part-i.html#cb27-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">prior</span>(<span class="st">&quot;cauchy&quot;</span>, <span class="dv">0</span>, .<span class="dv">707</span>)</span>
+<span id="cb27-3"><a href="choosing-priors-part-i.html#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="choosing-priors-part-i.html#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co"># work out how much of it is between -2 and 2</span></span>
+<span id="cb27-5"><a href="choosing-priors-part-i.html#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="fu">integrate</span>(<span class="fu">Vectorize</span>(p<span class="sc">$</span>prior_function), <span class="sc">-</span><span class="fl">2.2</span>, <span class="fl">2.2</span>)<span class="sc">$</span>value</span></code></pre></div>
+<pre><code>## [1] 0.8020498</code></pre>
+<p>The Bayes factor calculation sets up two hypotheses about what we think
+about the effect size in the case that there is no effect (the null) and
+in the case that we think there is an effect (the alternative) and tells
+us under which of these two scenarios we’d be more likely to observe our
+data.</p>
+<p>Note, however, that the two hypotheses that we compared are only two out
+of a possible infinite set of hypotheses. I might, for example, think that
+if there is an effect then it is <strong>not</strong> zero in a different way. I might,
+for example, think that if there is an effect then it will be greater then
+0 in a specific way as described by my prior. That is, I might one to
+perform a one-sided test rather than a two-sided (or two-tailed in
+frequentist terms) test.</p>
+<p>To do this, all I would need to do is update my prior. In the web-app
+I can do this by toggling the limit switches and setting the lower limit
+to 0. As you can see the Cauchy prior is now cut in half so that it only
+contains values greater than 0.</p>
+<p><img src="https://raw.githubusercontent.com/ljcolling/bayes2022/main/_site/truncate.png" /></p>
+<p>If we were to generate the <code>R</code> code, we’d see that the alternative prior
+is now defined as follows:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="choosing-priors-part-i.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># define alternative prior</span></span>
+<span id="cb29-2"><a href="choosing-priors-part-i.html#cb29-2" aria-hidden="true" tabindex="-1"></a>alt_prior <span class="ot">&lt;-</span> <span class="fu">prior</span>(</span>
+<span id="cb29-3"><a href="choosing-priors-part-i.html#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="st">&quot;cauchy&quot;</span>,</span>
+<span id="cb29-4"><a href="choosing-priors-part-i.html#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">location =</span> <span class="dv">0</span>,</span>
+<span id="cb29-5"><a href="choosing-priors-part-i.html#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">scale =</span> <span class="fl">0.707</span>,</span>
+<span id="cb29-6"><a href="choosing-priors-part-i.html#cb29-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">range =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="cn">Inf</span>)</span>
+<span id="cb29-7"><a href="choosing-priors-part-i.html#cb29-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p>In fact, I could test any arbitrary sets of hypotheses I want. In the next
+section, on informed or subjective priors we’ll see how we can compare any
+arbitrary set of hypotheses we want.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="moving-beyond-coin-flips-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="choosing-priors-part-ii.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": [["bayes_notes.pdf", "pdf"]],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

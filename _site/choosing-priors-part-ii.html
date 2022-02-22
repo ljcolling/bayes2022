@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 7 Choosing priors: Part II | Advanced Statistical Methods</title>
+  <meta name="description" content="An introduction to Bayesian Statistics" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 7 Choosing priors: Part II | Advanced Statistical Methods" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="An introduction to Bayesian Statistics" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 7 Choosing priors: Part II | Advanced Statistical Methods" />
+  
+  <meta name="twitter:description" content="An introduction to Bayesian Statistics" />
+  
+
+<meta name="author" content="Dr Lincoln Colling" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="choosing-priors-part-i.html"/>
+
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Bayesian Stats</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#how-to-use-this-book"><i class="fa fa-check"></i>How to use this book</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#outline"><i class="fa fa-check"></i>Outline</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="null-hypothesis-significance-testing.html"><a href="null-hypothesis-significance-testing.html"><i class="fa fa-check"></i><b>1</b> Null-hypothesis significance testing</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="null-hypothesis-significance-testing.html"><a href="null-hypothesis-significance-testing.html#probability"><i class="fa fa-check"></i><b>1.1</b> Probability</a></li>
+<li class="chapter" data-level="1.2" data-path="null-hypothesis-significance-testing.html"><a href="null-hypothesis-significance-testing.html#probability-and-p-values"><i class="fa fa-check"></i><b>1.2</b> Probability and <em>p</em> values</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="null-hypothesis-significance-testing.html"><a href="null-hypothesis-significance-testing.html#understanding-the-p-through-simulation"><i class="fa fa-check"></i><b>1.2.1</b> Understanding the <em>p</em> through simulation</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="null-hypothesis-significance-testing.html"><a href="null-hypothesis-significance-testing.html#summary"><i class="fa fa-check"></i><b>1.3</b> Summary</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="null-hypothesis-significance-testing.html"><a href="null-hypothesis-significance-testing.html#a-short-note-on-confidence-intervals"><i class="fa fa-check"></i><b>1.3.1</b> A short note on confidence intervals</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="criticisms-of-p-values.html"><a href="criticisms-of-p-values.html"><i class="fa fa-check"></i><b>2</b> Criticisms of <em>p</em> values</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="criticisms-of-p-values.html"><a href="criticisms-of-p-values.html#same-measurements-from-different-devices"><i class="fa fa-check"></i><b>2.1</b> Same measurements from different devices</a></li>
+<li class="chapter" data-level="2.2" data-path="criticisms-of-p-values.html"><a href="criticisms-of-p-values.html#the-universe-of-possible-events"><i class="fa fa-check"></i><b>2.2</b> The universe of possible events</a></li>
+<li class="chapter" data-level="2.3" data-path="criticisms-of-p-values.html"><a href="criticisms-of-p-values.html#summary-1"><i class="fa fa-check"></i><b>2.3</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="an-alternative-to-p-values.html"><a href="an-alternative-to-p-values.html"><i class="fa fa-check"></i><b>3</b> An alternative to <em>p</em> values</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="an-alternative-to-p-values.html"><a href="an-alternative-to-p-values.html#doing-inference-with-likelihoods"><i class="fa fa-check"></i><b>3.1</b> Doing inference with likelihoods</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="an-alternative-to-p-values.html"><a href="an-alternative-to-p-values.html#a-brief-detour-back-to-sampling-rules"><i class="fa fa-check"></i><b>3.1.1</b> A brief detour back to sampling rules</a></li>
+<li class="chapter" data-level="3.1.2" data-path="an-alternative-to-p-values.html"><a href="an-alternative-to-p-values.html#the-likelihood-ratio"><i class="fa fa-check"></i><b>3.1.2</b> The likelihood ratio</a></li>
+<li class="chapter" data-level="3.1.3" data-path="an-alternative-to-p-values.html"><a href="an-alternative-to-p-values.html#a-note-about-likelihood-functions-and-probability-distributions"><i class="fa fa-check"></i><b>3.1.3</b> A note about likelihood functions and probability distributions</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="an-alternative-to-p-values.html"><a href="an-alternative-to-p-values.html#testing-more-complex-hypotheses"><i class="fa fa-check"></i><b>3.2</b> Testing more complex hypotheses</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="an-alternative-to-p-values.html"><a href="an-alternative-to-p-values.html#theres-more-than-one-way-to-average"><i class="fa fa-check"></i><b>3.2.1</b> There’s more than one way to average</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="the-bayes-factor.html"><a href="the-bayes-factor.html"><i class="fa fa-check"></i><b>4</b> The Bayes factor</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="the-bayes-factor.html"><a href="the-bayes-factor.html#computing-bayes-factors-with-bayesplay"><i class="fa fa-check"></i><b>4.1</b> Computing Bayes factors with <code>bayesplay</code></a></li>
+<li class="chapter" data-level="4.2" data-path="the-bayes-factor.html"><a href="the-bayes-factor.html#computing-bayes-factors-with-bayesplay-web"><i class="fa fa-check"></i><b>4.2</b> Computing Bayes factors with Bayesplay-Web</a></li>
+<li class="chapter" data-level="4.3" data-path="the-bayes-factor.html"><a href="the-bayes-factor.html#moving-beyond-coin-flips"><i class="fa fa-check"></i><b>4.3</b> Moving beyond coin flips</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="moving-beyond-coin-flips-1.html"><a href="moving-beyond-coin-flips-1.html"><i class="fa fa-check"></i><b>5</b> Moving beyond coin flips</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="moving-beyond-coin-flips-1.html"><a href="moving-beyond-coin-flips-1.html#choosing-a-likelihood"><i class="fa fa-check"></i><b>5.1</b> Choosing a likelihood</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="moving-beyond-coin-flips-1.html"><a href="moving-beyond-coin-flips-1.html#the-variance-of-likelihoods"><i class="fa fa-check"></i><b>5.1.1</b> The variance of likelihoods</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="moving-beyond-coin-flips-1.html"><a href="moving-beyond-coin-flips-1.html#inferences-about-raw-means"><i class="fa fa-check"></i><b>5.2</b> Inferences about raw means</a></li>
+<li class="chapter" data-level="5.3" data-path="moving-beyond-coin-flips-1.html"><a href="moving-beyond-coin-flips-1.html#inferences-about-effect-sizes"><i class="fa fa-check"></i><b>5.3</b> Inferences about effect sizes</a></li>
+<li class="chapter" data-level="5.4" data-path="moving-beyond-coin-flips-1.html"><a href="moving-beyond-coin-flips-1.html#inferences-about-t-values"><i class="fa fa-check"></i><b>5.4</b> Inferences about <em>t</em> values</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="choosing-priors-part-i.html"><a href="choosing-priors-part-i.html"><i class="fa fa-check"></i><b>6</b> Choosing priors: Part I</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="choosing-priors-part-i.html"><a href="choosing-priors-part-i.html#reference-objective-uninformative-and-default-priors"><i class="fa fa-check"></i><b>6.1</b> Reference, objective, uninformative, and default priors</a></li>
+<li class="chapter" data-level="6.2" data-path="choosing-priors-part-i.html"><a href="choosing-priors-part-i.html#default-priors-for-effect-sizes"><i class="fa fa-check"></i><b>6.2</b> Default priors for effect sizes</a></li>
+<li class="chapter" data-level="6.3" data-path="choosing-priors-part-i.html"><a href="choosing-priors-part-i.html#interpreting-our-bayes-factors"><i class="fa fa-check"></i><b>6.3</b> Interpreting our Bayes factors</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="choosing-priors-part-ii.html"><a href="choosing-priors-part-ii.html"><i class="fa fa-check"></i><b>7</b> Choosing priors: Part II</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="choosing-priors-part-ii.html"><a href="choosing-priors-part-ii.html#examples-of-representing-predictions"><i class="fa fa-check"></i><b>7.1</b> Examples of representing predictions</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="choosing-priors-part-ii.html"><a href="choosing-priors-part-ii.html#representing-predictions-with-a-uniform-prior"><i class="fa fa-check"></i><b>7.1.1</b> Representing predictions with a uniform prior</a></li>
+<li class="chapter" data-level="7.1.2" data-path="choosing-priors-part-ii.html"><a href="choosing-priors-part-ii.html#representing-predictions-with-a-half-normal-prior"><i class="fa fa-check"></i><b>7.1.2</b> Representing predictions with a half-normal prior</a></li>
+<li class="chapter" data-level="7.1.3" data-path="choosing-priors-part-ii.html"><a href="choosing-priors-part-ii.html#representing-predictions-with-the-normal-prior"><i class="fa fa-check"></i><b>7.1.3</b> Representing predictions with the normal prior</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="choosing-priors-part-ii.html"><a href="choosing-priors-part-ii.html#how-do-i-know-what-my-theory-predicts"><i class="fa fa-check"></i><b>7.2</b> How do I know what my theory predicts</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="./">Lincoln Colling</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Advanced Statistical Methods</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="choosing-priors-part-ii" class="section level1" number="7">
+<h1><span class="header-section-number">Chapter 7</span> Choosing priors: Part II</h1>
+<p><a href="data:text/x-markdown;base64,LS0tCnRpdGxlOiAiUHJpb3JzOiBQYXJ0IDIiCm91dHB1dDogaHRtbF9kb2N1bWVudAotLS0KCmBgYHtyIHNldHVwLCBlY2hvPUZBTFNFLCBtZXNzYWdlID0gRkFMU0UsIHdhcm5pbmcgPSBGQUxTRX0Ka25pdHI6Om9wdHNfY2h1bmskc2V0KGVjaG8gPSBGQUxTRSwgbWVzc2FnZSA9IEZBTFNFLCB3YXJuaW5nID0gRkFMU0UpCnN1cHByZXNzTWVzc2FnZXMoZXhwciA9IHsKICBpZiAoInhmdW4iICVpbiUgcm93Lm5hbWVzKGluc3RhbGxlZC5wYWNrYWdlcygpKSA9PSBGQUxTRSkgewogICAgaW5zdGFsbC5wYWNrYWdlcygieGZ1biIpCiAgfQoKICBkaXNwbGF5X21hcmtkb3duIDw8LSBrbml0cjo6YXNpc19vdXRwdXQKICBkaXNwbGF5X2h0bWwgPDwtIGtuaXRyOjphc2lzX291dHB1dAoKICB4ZnVuOjpwa2dfYXR0YWNoKAogICAgYygKICAgICAgInRpZHl2ZXJzZSIsCiAgICAgICJwb2xzcGxpbmUiLAogICAgICAicGF0Y2h3b3JrIiwKICAgICAgIm1hZ3JpdHRyIiwKICAgICAgImJheWVzcGxheSIsCiAgICAgICJrbml0ciIsCiAgICAgICJicm9vbSIsCiAgICAgICJiYXllc3BsYXkiCiAgICApLAogICAgaW5zdGFsbCA9IFRSVUUKICApCn0pCgp0YWJsZV9mb3JtYXQgPC0gImh0bWwiCmBgYAojIENob29zaW5nIHByaW9yczogUGFydCBJSQoKQWx0aG91Z2ggdGhlIG1ldGhvZCBvZiB1c2luZyBkZWZhdWx0IHByaW9ycyBpcyBlYXN5IHRvIHVzZSBzb21lIGhhdmUKcXVlc3Rpb25lZCB3aGV0aGVyIGl0IHJlYWxseSBtYWtlcyBzZW5zZSB0byB0YWxrIG9mICoqZGVmYXVsdCoqCmh5cG90aGVzZXMuIFRoZSByZWFsIHBvd2VyIG9mIEJheWVzIGZhY3RvcnMgY29tZXMgZnJvbSAqZGlyZWN0bHkgdGVzdGluZwp0aGVvcmllcyosIGFuZCBhcyBbRGllbmVzCigyMDE5KV0oaHR0cHM6Ly9kb2kub3JnLzEwLjExNzcvMjUxNTI0NTkxOTg3Njk2MCkgcG9pbnRzIG91dCwgInRoZXJlIGlzIG5vCnN1Y2ggdGhpbmcgYXMgYSBkZWZhdWx0IHRoZW9yeSwgc28gdGhlcmUgY2Fubm90IGJlIGEgZGVmYXVsdCIgYWx0ZXJuYXRpdmUKaHlwb3RoZXNpcy4gRGllbmVzIGluc3RlYWQgcmVjb21tZW5kcyBmb3JtdWxhdGluZyBwcmlvcnMgZm9yIG91ciBzcGVjaWZpYwpzaXR1YXRpb24gYXQgaGFuZC4gVGhhdCBpcywgZm9ybXVsYXRpbmcgcHJpb3JzIHRoYXQgYWN0dWFsbHkgbWF0Y2ggb3VyCnNjaWVudGlmaWMgdGhlb3JpZXMgYWJvdXQgaG93IHRoZSB3b3JsZCB3b3Jrcy4KClRoZSBzZWNvbmQgc2V0IG9mIHByaW9ycyB0aGF0IHdlIGRldmVsb3BlZCBmb3IgdGhlIGNvaW4gZmxpcCBleGFtcGxlcwpyZXByZXNlbnRzIGEgY2FzZSBvZiBkb2luZyB0aGlzLiBJbnN0ZWFkIG9mIHNheWluZyB0aGF0IG91ciBhbHRlcm5hdGl2ZQpoeXBvdGhlc2lzIHNob3VsZCByZXByZXNlbnQgZWFjaCBvdXRjb21lIGFzIGJlaW5nIGVxdWFsbHkgbGlrZWx5IHdlIGluc3RlYWQKY2FtZSB1cCB3aXRoIGEgdGhlb3J5IG9mIGhvdyBiaWFzZWQgY29pbnMgYXJlIGxpa2VseSB0byBiZWhhdmUuIEluIGZhY3QsIHdlCmNhbWUgdXAgd2l0aCBhIGZldyB0aGVvcmllcy4gT25lIHRoZW9yeSwgZm9yIGV4YW1wbGUsIHNhaWQgdGhhdCBiaWFzZWQgY29pbnMKd291bGQgc2hvdyBoZWFkcyBtb3JlIG9mdGVuLiBBbmQgYW5vdGhlciB0aGVvcnkgc2FpZCB0aGF0IGJpYXNlZCBjb2lucyB3b3VsZApiZWhhdmUgc2ltaWxhcmx5IHRvIGZhaXIgY29pbnM7IGhvd2V2ZXIsIHRoZXkgd291bGQgc2hvdyBoZWFkcyBvciB0YWlscwpzbGlnaHRseSBsZXNzIG9mdGVuIHRoYW4gd291bGQgYmUgZXhwZWN0ZWQgZnJvbSBhIGZhaXIgY29pbi4gV2Ugd2VyZSBhYmxlIHRvCmNvbWUgdXAgd2l0aCBwcmlvcnMgdGhhdCBkaXJlY3RseSByZXByZXNlbnRlZCB0aGVzZSB0aGVvcmllcyBhbmQgd2Ugd2VyZSBhYmxlCnRvIGNvbXB1dGUgQmF5ZXMgZmFjdG9ycyBjb21wYXJpbmcgdGhlc2UgdGhlb3JpZXMgd2l0aCBvdXIgZmFpciBjb2luIHRoZW9yeQoodGhhdCB0aGUgYmlhcyBpcyBleGFjdGx5IDAuNSkuCgpPZiBjb3Vyc2UgdXNpbmcgdGhlc2Uga2luZHMgb2YgcHJpb3JzIGlzIGZhciBtb3JlIGRpZmZpY3VsdCB0aGFuIHVzaW5nCmRlZmF1bHQgcHJpb3JzIGJlY2F1c2UgaXQgZm9yY2VzIHVzIHRvIHRoaW5rIGFib3V0IHdoYXQgb3VyIHNjaWVudGlmaWMKdGhlb3JpZXMgcHJlZGljdC4gSG93ZXZlciwgYXMgc2NpZW50aXN0cywgd2UgcHJvYmFibHkgc2hvdWxkIGJlIHRoaW5raW5nCmFib3V0IHdoYXQgb3VyIHRoZW9yaWVzIHByZWRpY3QhIEJ1dCBrbm93aW5nIHdoYXQgb3VyIHNjaWVudGlmaWMgdGhlb3JpZXMKcHJlZGljdCBpcyBhIHZlcnkgZGlmZmljdWx0IHRhc2sgYW5kLCBhcyBwc3ljaG9sb2d5IHJlc2VhcmNoZXJzIHdlIGFyZSBub3QKd2VsbCB0cmFpbmVkIHRvIHRoaW5rIGluIHRlcm1zIG9mIHF1YW50aXRhdGl2ZSBwcmVkaWN0aW9ucy4gVGhpcyBpcwpsaWtlbHkgYW4gYXJ0ZWZhY3Qgb2YgdGhlIGRvbWluYW5jZSBvZiAqbnVsbC1oeXBvdGhlc2lzIHNpZ25pZmljYW5jZQp0ZXN0aW5nKiBpbiBwc3ljaG9sb2d5LCBiZWNhdXNlIHRoZXNlIGtpbmRzIG9mIHN0YXRpc3RpY2FsIHByb2NlZHVyZXMKZW5jb3VyYWdlIHRoaW5raW5nIGluIHRlcm1zIG9mICpkZWZhdWx0KiBoeXBvdGhlc2VzIChzZWUgW0NvbGxpbmcgJiBTesWxY3MsCjIwMjBdKGh0dHBzOi8vbGluay5zcHJpbmdlci5jb20vY29udGVudC9wZGYvMTAuMTAwNy9zMTMxNjQtMDE4LTA0MjEtNC5wZGYpKS4KVGhlcmVmb3JlLCBhZG9wdGluZyBCYXllc2lhbiBtZXRob2RzIGNhbiByZXF1aXJlIGEgYmlnIGNoYW5nZSBpbiBob3cgd2UKdGhpbmsgYWJvdXQgKip0aGVvcnkqKiBpbiBwc3ljaG9sb2d5LiAKClRoZSBhaW0gb2YgdGhpcyBzZWN0aW9uIGlzIG5vdCB0byB0ZWFjaCB5b3UgaG93IHRvIGRvIGdvb2QgKip0aGVvcnkqKi4gSW5zdGVhZCwKdGhlIGFpbSBpcyB0byBnaXZlIHlvdSB0aGUgdG9vbHMgdG8gdGVzdCB0aGVvcmllcyBvbmNlIHlvdSd2ZSBjb21lIHVwIHdpdGgKdGhlbS4gVGhlIGhvcGUgaXMgdGhhdCBvbmNlIHlvdSBoYXZlIHRoZSB0b29scywgdGhlbiBjb21lIHVwIHdpdGggdGhlb3JpZXMgdGhhdAphcmUgdGVzdGFibGUgd2l0aCB0aG9zZSB0b29scy4gVG8gZG8gdGhpcywgd2UnbGwgbG9vayBhdCBzb21lIGV4YW1wbGVzIG9mIGhvdwp0byByZXByZXNlbnQgYW5kIHRoZW4gdGVzdCB0aGVvcmllcyB3aXRoIEJheWVzIGZhY3RvcnMuIEZvbGxvd2luZyB0aGlzLCB3ZSdsbApjb3ZlciBzb21lIGhldXJpc3RpY3MgZm9yIGNvbWluZyB1cCB3aXRoIHByZWRpY3Rpb25zIGlmIHdlJ3JlIHVuc3VyZSB3aGF0Cm91ciB0aGVvcmllcyBwcmVkaWN0LgoKIyMgRXhhbXBsZXMgb2YgcmVwcmVzZW50aW5nIHByZWRpY3Rpb25zCgojIyMgUmVwcmVzZW50aW5nIHByZWRpY3Rpb25zIHdpdGggYSB1bmlmb3JtIHByaW9yCgpUaGUgbW9zdCBzdHJhaWdodGZvcndhcmQgd2F5IHRvIHJlcHJlc2VudCB0aGUgcHJlZGljdGlvbnMgb2YgYSB0aGVvcnkgaXMKd2l0aCBhIHVuaWZvcm0gcHJpb3IuIEEgdW5pZm9ybSBwcmlvciBlc3NlbnRpYWxseSByZXByZXNlbnRzIHRoZSBpZGVhCnRoYXQsIGlmIHRoZXJlIGlzIGFuIGVmZmVjdCwgdGhlbiBpdCB3aWxsIGJlIHNvbWUgdmFsdWUgYmV0d2VlbiBhIGRlZmluZWQKbWluaW11bSBhbmQgYSBkZWZpbmVkIG1heGltdW0sIHdpdGggYWxsIGVmZmVjdHMgYmVpbmcgZXF1YWxseSBwcm9iYWJsZS4KCkhlcmUgaXMgYW4gZXhhbXBsZSB0YWtlbiBmcm9tIFtEaWVuZXMKKDIwMTQpXShodHRwczovL3d3dy5mcm9udGllcnNpbi5vcmcvYXJ0aWNsZXMvMTAuMzM4OS9mcHN5Zy4yMDE0LjAwNzgxL2Z1bGwpLgpJbiB0aGlzIGV4YW1wbGUgZXhwZXJpbWVudCwgbmVnYXRpdmUgbW9vZCB3YXMgKnByZWRpY3RlZCB0byByZWR1Y2UKbGVhcm5pbmcgb24gYSB0YXNrKi4gTGVhcm5pbmcgd2FzIG1lYXN1cmVkIHVzaW5nIGEgdHdvLWFsdGVybmF0aXZlIGZvcmNlZApjaG9pY2UgbWVhc3VyZSAoY2hhbmNlIHBlcmZvcm1hbmNlIHdvdWxkIGJlIDUwJSkuIEl0IHdhcyBmb3VuZCB0aGF0LCBpbgp0aGUgKm5ldXRyYWwgbW9vZCBjb25kaXRpb24qIHBlcmZvcm1hbmNlIG9uIHRoZSB0YXNrIHdhcyBhdCA3MCUuIElmCipuZWdhdGl2ZSBtb29kKiByZWR1Y2VkIGxlYXJuaW5nLCB0aGUgcG9wdWxhdGlvbiBtZWFuIG9mIHRoaXMgY29uZGl0aW9uCndvdWxkIGhhdmUgdG8gbGllIHNvbWV3aGVyZSBiZXR3ZWVuIGNoYW5jZSBwZXJmb3JtYW5jZSAoNTAlKSBhbmQKcGVyZm9ybWFuY2Ugb24gdGhlIG5ldXRyYWwgY29uZGl0aW9uICg3MCUpLiBUaGVyZWZvcmUsIHRoZSBkaWZmZXJlbmNlCmJldHdlZW4gY29uZGl0aW9ucyB3b3VsZCBoYXZlIHRvIGJlIGJldHdlZW4gMCUgYW5kIDIwJS4gCgpXZSBjb3VsZCByZXByZXNlbnQgdGhpcyBhcyBhIHVuaWZvcm0gcHJpb3Igd2l0aCBhIG1pbmltdW0gb2YgMCBhbmQKYSBtYXhpbXVtIG9mIDIwLiBUaGUgY29kZSBiZWxvdyBkb2VzIGp1c3QgdGhhdC4KCmBgYHtyfQojfCBlY2hvID0gVFJVRSwgaW5jbHVkZSA9IFRSVUUKCm1vb2RfdGhlb3J5IDwtIHByaW9yKGZhbWlseSA9ICJ1bmlmb3JtIiwgbWluID0gMCwgbWF4ID0gMjApCgpwbG90KG1vb2RfdGhlb3J5KSArCiAgdGhlbWVfbWluaW1hbCgxNCkgKwogIGxhYnMoeCA9ICJtZWFuIGRpZmZlcmVuY2UiLCB5ID0gInByb2JhYmlsaXR5IikKYGBgCgpOb3cgd2hhdCBkbyB0aGUgZGF0YSBzYXk/IFRoZSByZXN1bHRzIHJlcG9ydCBhIG1lYW4gb2YgNjUlIGluIHRoZSBuZWdhdGl2ZQptb29kIGNvbmRpdGlvbiAobWVhbiBkaWZmZXJlbmNlIG9mIDUlKSB3aXRoIGEgc3RhbmRhcmQgZXJyb3IgKHN0YW5kYXJkCmRldmlhdGlvbiBvZiB0aGUgbWVhbiBkaWZmZXJlbmNlKSBvZiAxMC4gV2UgY2FuIHJlcHJlc2VudCB0aGlzIGRhdGEgd2l0aAp0aGUgY29kZSBiZWxvdy4gRm9sbG93aW5nIERpZW5lcyAoMjAxNCksIHdlJ2xsIHVzZSBhICpub3JtYWwqIGxpa2VsaWhvb2QuIAoKYGBge3J9CiN8IGVjaG8gPSBUUlVFLCBpbmNsdWRlID0gVFJVRQoKZGF0YV9tb2RlbCA8LSBsaWtlbGlob29kKGZhbWlseSA9ICJub3JtYWwiLCBtZWFuID0gNSwgc2QgPSAxMCkKCnBsb3QoZGF0YV9tb2RlbCkgKwogIHRoZW1lX21pbmltYWwoMTQpICsKICBsYWJzKHggPSAibWVhbiBkaWZmZXJlbmNlIiwgeSA9ICJsaWtlbGlob29kIikKYGBgCgpGaW5hbGx5LCB3ZSdsbCB1c2UgYSBudWxsIHByaW9yIG9mIGEgcG9pbnQgYXQgMCB0byByZXByZXNlbnQgb3VyICpubyBlZmZlY3QqCmh5cG90aGVzaXMuIAoKYGBge3J9CiN8IGVjaG8gPSBUUlVFLCBpbmNsdWRlID0gVFJVRQoKbnVsbF90aGVvcnkgPC0gcHJpb3IoZmFtaWx5ID0gInBvaW50IiwgcG9pbnQgPSAwKQoKcGxvdChudWxsX3RoZW9yeSkgKwogIHRoZW1lX21pbmltYWwoMTQpICsKICBsYWJzKHggPSAibWVhbiBkaWZmZXJlbmNlIiwgeSA9ICJwcm9iYWJpbGl0eSIpCmBgYAoKCldpdGggYWxsIHRoZSBwYXJ0cyBpbiBwbGFjZSwgd2UgY2FuIG5vdyBjb21wdXRlIHRoZSBCYXllcyBmYWN0b3IuCgpgYGB7cn0KI3wgZWNobyA9IFRSVUUsIGluY2x1ZGUgPSBUUlVFCgptb29kX2V2aWRlbmNlIDwtIGludGVncmFsKGRhdGFfbW9kZWwgKiBtb29kX3RoZW9yeSkKbnVsbF9ldmlkZW5jZSA8LSBpbnRlZ3JhbChkYXRhX21vZGVsICogbnVsbF90aGVvcnkpCgpiZiA8LSBtb29kX2V2aWRlbmNlIC8gbnVsbF9ldmlkZW5jZQpgYGAKClRoZSByZXN1bHRpbmcgQmF5ZXMgZmFjdG9yIGlzIGJhcmVseSBkaWZmZXJlbnQgdG8gMS4gVGhlcmVmb3JlLCB0aGUKcmVzdWx0cyBkb24ndCByZWFsbHkgZ2l2ZSB1cyBhIHN0cm9uZyByZWFzb24gZm9yIGZhdm91cmluZyBvbmUgdGhlb3J5IG92ZXIKdGhlIG90aGVyLiAKClNvbWV0aW1lcyBpdCBpcyB1c2VmdWwgdG8gaGF2ZSB2ZXJiYWwgbGFiZWxzIGZvciB0aGUgc3RyZW5ndGggb2YgZXZpZGVuY2UuCldhZ2VubWFrZXJzIGV0IGFsICgyMDE3KSBzdWdnZXN0cyBzb21lIHZlcmJhbCBsYWJlbHMgZm9yIHN0cmVuZ3RoIG9mCmV2aWRlbmNlLCBhbmQgd2UgY2FuIGdldCB0aGUgdmVyYmFsIGxhYmVsIGZvciB0aGUgY29tcHV0ZWQgQmF5ZXMgZmFjdG9yIGJ5CnVzaW5nIHRoZSBgc3VtbWFyeWAgZnVuY3Rpb24sIGFzIHNob3duIGJlbG93LgoKYGBge3J9CiN8IGVjaG8gPSBUUlVFLCBpbmNsdWRlID0gVFJVRQoKc3VtbWFyeShiZikKYGBgCgojIyMgUmVwcmVzZW50aW5nIHByZWRpY3Rpb25zIHdpdGggYSBoYWxmLW5vcm1hbCBwcmlvcgoKQSBoYWxmIG5vcm1hbCBkaXN0cmlidXRpb24gaXMgYW5vdGhlciB1c2VmdWwgd2F5IHRvIHJlcHJlc2VudCBwcmVkaWN0aW9ucyBmb3IKdGhlb3JpZXMuIFRvIGNvbWUgdXAgd2l0aCBwcmVkaWN0aW9ucyBmb3IgdGhlIHRoZW9yeSwgd2UnbGwgdXNlIHRoZSByZXN1bHRzCmZyb20gYW4gZWFybGllciBleHBlcmltZW50IHRvIHJlcHJlc2VudCB0aGUgcHJlZGljdGlvbnMgb2YgdGhlIGN1cnJlbnQKZXhwZXJpbWVudC4KCkhlcmUgaXMgYW4gZXhhbXBsZSB0YWtlbiBmcm9tIFtEaWVuZXMgYW5kIE1jbGF0Y2hpZQooMjAxOCldKGh0dHBzOi8vbGluay5zcHJpbmdlci5jb20vYXJ0aWNsZS8xMC4zNzU4L3MxMzQyMy0wMTctMTI2Ni16KS4gSW4gYQpzdHVkeSBieSBXaWxsaWFtcyBhbmQgQmFyZ2ggKDIwMDgpLCBwZW9wbGUgd2VyZSBhc2sgdG8gZmVlbCBhIGhvdCBvciBjb2xkCnRoZXJhcGV1dGljIHBhY2sgYW5kIHRoZW4gY2hvb3NlIGEgdHJlYXQgZm9yIHRoZW1zZWx2ZXMgb3IgZm9yIGEgZnJpZW5kLiBPZgp0aG9zZSBwYXJ0aWNpcGFudHMgZXhwb3NlZCB0byBhIGNvbGQgcGFjaywgNzUlIGNob3NlIGEgdHJlYXQgZm9yIHRoZW1zZWx2ZXMKd2hlcmUgb25seSA0NSUgY2hvc2UgdGhlIHRyZWF0IGZvciB0aGVpciBmcmllbmQuIFdlIGNhbiBleHByZXNzIHRoaXMgZGlmZmVyZW5jZQphcyBhbiBPZGRzIFJhdGlvIChPUikuIFRoaXMgZ2l2ZXMgYW4gT1Igb2YgMy41Miwgd2hpY2ggY29udmVydGVkIGludG8gTG9nIE9kZHMKKExvZyBPUikgaXMgYXBwcm94aW1hdGVseSAxLjI2LiBXZSB0YWtlIHRoZSBuYXR1cmFsIGxvZyBvZiB0aGUgb2RkcyByYXRpbywKYmVjYXVzZSB0aGUgbmF0dXJhbCBsb2cgb2YgdGhlIG9kZHMgcmF0aW8gaXMgYXBwcm94aW1hdGVseSBub3JtYWxseQpkaXN0cmlidXRlZCwgd2hpY2ggbWVhbnMgdGhhdCB3ZSBjYW4gbW9kZWwgaXQgd2l0aCBhICpub3JtYWwqIGxpa2VsaWhvb2QuCgpBZnRlciB0aGUgb3JpZ2luYWwgc3R1ZHksIEx5bm90dCBldCBhbCAoMjAxNCkgYXR0ZW1wdGVkIGEgcmVwbGljYXRpb24uIEJlZm9yZQp3ZSBnZXQgdG8gdGhlIGRhdGEgdGhhdCBMeW5vdHQgZXQgYWwgKDIwMTQpIG9idGFpbmVkLCBsZXQncyB0aGluayBhYm91dCBhIHBvc3NpYmxlCnByZWRpY3Rpb24uIAoKSWYgdGhlIG9yaWdpbmFsIHN0dWR5IHJlcG9ydGVkIGEgdHJ1ZSBlZmZlY3QsIHRoZW4gdGhlIHJlcGxpY2F0aW9uIHN0dWR5CnNob3VsZCBmaW5kIGFuIGVmZmVjdCBvZiByb3VnaGx5IHRoZSBzYW1lIG9yZGVyIG9mIG1hZ25pdHVkZS4gTWF5YmUKc21hbGxlciwgbWF5YmUgbGFyZ2VyLCBidXQgbm90IHJhZGljYWxseSBkaWZmZXJlbnQuCgpGdXJ0aGVybW9yZSwgaXQncyBhbHNvIGZhaXIgdG8gYXNzdW1lIHRoYXQgcmVwb3J0ZWQgZWZmZWN0cyBhcmUgdXN1YWxseSBsYXJnZXIKdGhhbiB0aGUgdHJ1ZSBlZmZlY3QsIGJlY2F1c2UgbGFyZ2VyIGVmZmVjdHMgYXJlIG1vcmUgbGlrZWx5IHRvIGdldCBwdWJsaXNoZWQuClNvIHRoZSB0cnVlIGVmZmVjdCBpcyBtb3JlIGxpa2VseSB0byBiZSBzbWFsbGVyIHRoZW4gdGhlIHJlcG9ydGVkIGVmZmVjdCwgYW5kCmxlc3MgbGlrZWx5IHRvIGJlIGxhcmdlci4gSG93IG1pZ2h0IHdlIHJlcHJlc2VudCB0aGlzIGlkZWE/IE9uZSB3YXkgaXMgd2l0aCBhCmhhbGYgbm9ybWFsIGRpc3RyaWJ1dGlvbiBzY2FsZWQgYWNjb3JkaW5nIHRvIHRoZSBvcmlnaW5hbCBmaW5kaW5nLiBUaGF0IGlzLAp3aXRoIGEgbm9ybWFsIGRpc3RyaWJ1dGlvbiBjZW50cmVkIGF0IDAsIGFuZCB3aXRoIGEgc3RhbmRhcmQgZGV2aWF0aW9uIG9mIDEuMjYKKHRoYXQgaXMsIHRoZSBtYWduaXR1ZGUgb2YgdGhlIG9yaWdpbmFsIGVmZmVjdCkuIEZ1cnRoZXJtb3JlLCB3ZSdsbCBsaW1pdCB0aGUKZGlzdHJpYnV0aW9uIHRvIGJlIGJldHdlZW4gdGhlIHZhbHVlcyBvZiAkMCQgYW5kICQrXGluZnR5JCAoYmVjYXVzZSB3ZSBoYXZlIGEKZGlyZWN0aW9uYWwgaHlwb3RoZXNpcykuCgpgYGB7cn0KI3wgZWNobyA9IFRSVUUsIGluY2x1ZGUgPSBUUlVFCgp0aGVvcnlfbW9kZWwgPC0gcHJpb3IoCiAgZmFtaWx5ID0gIm5vcm1hbCIsCiAgbWVhbiA9IDAsCiAgc2QgPSAxLjI2LAogIHJhbmdlID0gYygwLCBJbmYpCikKCnBsb3QodGhlb3J5X21vZGVsKSArCiAgdGhlbWVfbWluaW1hbCgxNCkKYGBgCgpCeSBkZWZpbmluZyB0aGUgcHJpb3IgaW4gdGhpcyB3YXksIHdlJ3JlIHNheWluZyB0aGF0IH42OCUgb2YgdGhlIHBsYXVzaWJsZQplZmZlY3RzIGxpZSBiZXR3ZWVuIDAgYW5kIDEuMjYuIEFuZCB+OTUlIG9mIHBsYXVzaWJsZSB0aGUgZWZmZWN0cyBsaWUgc29tZXdoZXJlCmJldHdlZW4gMCBhbmQgdHdpY2UgdGhlIHJlcG9ydGVkIG9yaWdpbmFsIGVmZmVjdCAob2YgMS4yNikuIFRoYXQgaXMsIHdlIHByZWRpY3QKdGhlIGVmZmVjdCB0byBiZSBzb21ld2hlcmUgaW4gdGhlIHNhbWUgcmFuZ2UgYXMgdGhlIG9yaWdpbmFsIHN0dWR5LCBidXQgbW9yZQpwcm9iYWJseSBzbWFsbGVyIHRoYW4gdGhlIGVmZmVjdCBvcmlnaW5hbGx5IHJlcG9ydGVkLgoKTm93IHRoYXQgd2UgaGF2ZSBvdXIgcHJlZGljdGlvbnMsIHdlIGNhbiBsb29rIGF0IHRoZSByZXN1bHRzIG9mIEx5bm90dCBldCBhbCdzCnJlcGxpY2F0aW9uIGF0dGVtcHQuIFRoZWlyIHJlc3VsdHMgc2hvd2VkIGEgTG9nIE9SIG9mIC0wLjI2LCB3aXRoIGEgc3RhbmRhcmQKZXJyb3Igb2YgMC4xNC4gKE5vdGUsIHRoYXQgdHlwaWNhbGx5LCBzdHVkaWVzIGRvbid0IHJlcG9ydCB0aGUgc3RhbmRhcmQgZXJyb3IKb2YgdGhlIExvZyBPUiwgYnV0IHJhdGhlciByZXBvcnQgdGhlIDk1JSBjb25maWRlbmNlIGludGVydmFsIG9mIHRoZSBPUi4KSG93ZXZlciwgaXQncyBwb3NzaWJsZSB0byBjb21wdXRlIHRoZSBzdGFuZGFyZCBlcnJvciBvZiB0aGUgTG9nIE9SIGZyb20gdGhlIDk1JQpjb25maWRlbmNlIGludGVydmFsLCBhcyBzaG93biBiZWxvdykuIEFzIG1lbnRpb25lZCBhYm92ZSwgYmVjYXVzZSBMb2cgT1IKYXBwcm94aW1hdGVseSBmb2xsb3dzIGEgbm9ybWFsIGRpc3RyaWJ1dGlvbiwgd2UgY2FuIG1vZGVsIGl0IHVzaW5nIHRoZSAqbm9ybWFsKgpsaWtlbGlob29kLCBhcyBzaG93biBiZWxvdy4gCgpgYGB7cn0KI3wgZWNobyA9IFRSVUUsIGluY2x1ZGUgPSBUUlVFCgojIEZvciBjb21wbGV0ZW5lc3MsIHdlJ2xsIHdvcmsgb3V0IHRoZSBsbiBPUiBhbmQKIyB0aGUgc3RhbmRhcmQgZXJyb3IgZnJvbSB0aGUgcmVwb3J0ZWQgY29uZmlkZW5jZQojIGludGVydmFsCgpyZXBvcnRlZF9vcl9jaSA8LSBjKDAuNTgsIDEuMDIpCgpsb2dfb3JfY2kgPC0gbG9nKHJlcG9ydGVkX29yX2NpKQpsb2dfb3IgPC0gbWVhbihsb2dfb3JfY2kpCmxvZ19vcl9jaV93aWR0aCA8LSBhYnMobG9nX29yX2NpWzFdIC0gbG9nX29yKQpsb2dfb3Jfc2UgPC0gbG9nX29yX2NpX3dpZHRoIC8gMS45NgoKZGF0YV9tb2RlbCA8LSBsaWtlbGlob29kKAogIGZhbWlseSA9ICJub3JtYWwiLAogIG1lYW4gPSBsb2dfb3IsCiAgc2QgPSBsb2dfb3Jfc2UKKQoKcGxvdChkYXRhX21vZGVsKSArCiAgdGhlbWVfbWluaW1hbCgxNCkKYGBgCgpGaW5hbGx5LCBmb3Igb3VyIG51bGwgaHlwb3RoZXNpcywgd2UnbGwganVzdCB1c2UgYSBwb2ludCBhdCAwLiBXaXRoIGFsbCB0aGUKYml0J3MgaW4gcGxhY2UsIHdlIGNhbiBjb21wdXRlIHRoZSBCYXllcyBmYWN0b3IuIFRoZSBjb2RlIGJlbG93IGlzIGdlbmVyYXRlZAp1c2luZyB0aGUgd2ViLWFwcC4gSG93ZXZlciwgSSd2ZSBqdXN0IHJlbW92ZWQgdGhlIGZpbmFsIGxpbmVzIHRoYXQgZ2VuZXJhdGUgdGhlCnBsb3RzLiBZb3UgY2FuIGFjY2VzcyB0aGUgd2ViLWFwcCdzIGFkdmFuY2VkIG91dHB1dCBhdCB0aGUgW2ZvbGxvd2luZwpsaW5rXShodHRwczovL2JheWVzcGxheS5jb2xsaW5nLm5ldC5uei9hZHZhbmNlZD9tb2RlbD0lN0IlMjJsaWtlbGlob29kRGVmJTIyJTNBJTdCJTIyZGlzdHJpYnV0aW9uJTIyJTNBJTIybm9ybWFsJTIyJTJDJTIycGFyYW1ldGVycyUyMiUzQSU3QiUyMm1lYW4lMjIlM0EtMC4yNjI0NjIzJTJDJTIyc2QlMjIlM0EwLjE0NDAxMjclN0QlN0QlMkMlMjJhbHRwcmlvckRlZiUyMiUzQSU3QiUyMmRpc3RyaWJ1dGlvbiUyMiUzQSUyMm5vcm1hbCUyMiUyQyUyMnBhcmFtZXRlcnMlMjIlM0ElN0IlMjJtZWFuJTIyJTNBMCUyQyUyMnNkJTIyJTNBMS4yNiUyQyUyMm1pbiUyMiUzQTAlMkMlMjJtYXglMjIlM0FudWxsJTdEJTdEJTJDJTIybnVsbHByaW9yRGVmJTIyJTNBJTdCJTIyZGlzdHJpYnV0aW9uJTIyJTNBJTIycG9pbnQlMjIlMkMlMjJwYXJhbWV0ZXJzJTIyJTNBJTdCJTIycG9pbnQlMjIlM0EwJTdEJTdEJTdEKS4KCmBgYHtyfQojfCBlY2hvID0gVFJVRSwgaW5jbHVkZSA9IFRSVUUKCiMgZGVmaW5lIGxpa2VsaWhvb2QKZGF0YV9tb2RlbCA8LSBsaWtlbGlob29kKGZhbWlseSA9ICJub3JtYWwiLCBtZWFuID0gLTAuMjYyNDYyMywgc2QgPSAwLjE0NDAxMjcpCgojIGRlZmluZSBhbHRlcm5hdGl2ZSBwcmlvcgphbHRfcHJpb3IgPC0gcHJpb3IoZmFtaWx5ID0gIm5vcm1hbCIsIG1lYW4gPSAwLCBzZCA9IDEuMjYsIHJhbmdlID0gYygwLCBJbmYpKQoKIyBkZWZpbmUgbnVsbCBwcmlvcgpudWxsX3ByaW9yIDwtIHByaW9yKGZhbWlseSA9ICJwb2ludCIsIHBvaW50ID0gMCkKCiMgd2VpZ2h0IGxpa2VsaWhvb2QgYnkgcHJpb3IKbTEgPC0gZGF0YV9tb2RlbCAqIGFsdF9wcmlvcgptMCA8LSBkYXRhX21vZGVsICogbnVsbF9wcmlvcgoKIyB0YWtlIHRoZSBpbnRlcmdhbCBvZiBlYWNoIHdlaWdodGVkIGxpa2VsaWhvb2QKIyBhbmQgZGl2aWRlIHRoZW0KYmYgPC0gaW50ZWdyYWwobTEpIC8gaW50ZWdyYWwobTApCgojIGdldCBhIHZlcmJhbCBkZXNjcmlwdGlvbiBvZiB0aGUgQmF5ZXMgZmFjdG9yCnN1bW1hcnkoYmYpCgpgYGAKClRoZSByZXN1bHRzIHNob3csIHN0cm9uZyBldmlkZW5jZSBmb3IgdGhlIG51bGwgaHlwb3RoZXNpcyBvdmVyIHRoZQphbHRlcm5hdGl2ZSBoeXBvdGhlc2lzLiBUaGUgcmVzdWx0cyBhcmUgJFxmcmFjezF9ezAuMDQxMX1cYXBwcm94MjQkIHRpbWVzCm1vcmUgbGlrZWx5IHVuZGVyIG91ciBudWxsIGh5cG90aGVzaXMgdGhhbiBvdXIgYWx0ZXJuYXRpdmUgaHlwb3RoZXNpcy4KCiMjIyBSZXByZXNlbnRpbmcgcHJlZGljdGlvbnMgd2l0aCB0aGUgbm9ybWFsIHByaW9yCgpJbiB0aGUgcHJlY2VkaW5nIHR3byBleGFtcGxlcywgd2UgaGFkIGRpcmVjdGlvbmFsIGh5cG90aGVzZXMuIFRoaXMgbWVhbnQKdGhhdCBhbGwgb3VyIHByaW9ycyB3ZXJlIHRydW5jYXRlZCBhdCBvbmUgZW5kIGF0IDAuIEJ1dCBzb21ldGltZXMgd2UgZG9uJ3QKaGF2ZSBkaXJlY3Rpb25hbCBoeXBvdGhlc2VzLiBJbnN0ZWFkLCB3ZSBtaWdodCBoYXZlIG5vbi1kaXJlY3Rpb25hbApoeXBvdGhlc2VzLiBJZiB3ZSBoYXZlIG5vbi1kaXJlY3Rpb25hbCBoeXBvdGhlc2VzIHRoZW4gd2UgY2FuIHVzZSBhICpmdWxsKgpub3JtYWwgZGlzdHJpYnV0aW9uLCByYXRoZXIgdGhhbiBvbmUgdGhhdCdzIGJlZW4gbGltaXRlZCB0byBiZSBiZXR3ZWVuICQwJAphbmQgJCtcaW5mdHkkLiAKCkZ1cnRoZXJtb3JlLCBpdCBpcyBhbHNvIG5vdCBuZWNlc3NhcnkgdG8gaGF2ZSBub3JtYWwgZGlzdHJpYnV0aW9ucyBjZW50cmVkCmF0IDAuIFdlIG1pZ2h0IHVzZSBhIG5vcm1hbCBkaXN0cmlidXRpb24gY2VudHJlZCBhdCBzb21lIG90aGVyIHZhbHVlIHRvCnJlcHJlc2VudCB0aGUgaWRlYSB0aGF0IHRoZSBlZmZlY3QgaXMgcm91Z2hseSB3aXRoIGluIGEgY2VydGFpbiByYW5nZSBidXQgd2l0aApzbWFsbGVyIGVmZmVjdHMgYmVpbmcgbW9yZSBwcm9iYWJsZSB0aGFuIGxhcmdlciBlZmZlY3RzLiBUbyBzZWUgaG93IHRoaXMgd29ya3MsCndlJ2xsIGdvIHRocm91Z2ggYW4gZXhhbXBsZSBpbiBbRGllbmVzCigyMDE5KV0oaHR0cHM6Ly9kb2kub3JnLzEwLjExNzcvMjUxNTI0NTkxOTg3Njk2MCkuCgpGdSBldCBhbCAoMjAxMykgd2VyZSBpbnRlcmVzdGVkIGluIHdoZXRoZXIgdGhlcmUgYXJlIGRpZmZlcmVuY2VzIGluIGxlYXJuaW5nCmdsb2JhbCBhbmQgbG9jYWwgc3RydWN0dXJlIGJldHdlZW4gcGVvcGxlIGluIENoaW5hIGFuZCB0aGUgVUssIGFuZCBhIHJlYWN0aW9uCnRpbWUgdGFzayB3YXMgdXNlZCB0byBhc3Nlc3MgdGhpcy4gVGhlIHJlc3VsdHMgc2hvd2VkIHRoYXQgd2hlbiBpdCBjYW1lIHRvCipnbG9iYWwgc3RydWN0dXJlKiwgcGVvcGxlIGluIENoaW5hIGhhZCBzdXBlcmlvciBwZXJmb3JtYW5jZSByZWxhdGl2ZSB0byBwZW9wbGUKaW4gdGhlIFVLLiBUaGUgZGlmZmVyZW5jZSBiZXR3ZWVuIHRoZSB0d28gZ3JvdXBzIHdhcyA1MCBtcyAod2l0aCBhIHN0YW5kYXJkCmVycm9yIG9mIDE0IG1zKS4gSG93ZXZlciwgZm9yICpsb2NhbCBzdHJ1Y3R1cmUqIGxlYXJuaW5nLCB0aGUgZGlmZmVyZW5jZSB3YXMKb25seSAxNSBtcyAoc3RhbmRhcmQgZXJyb3Igb2YgMTMgbXMpLiAKCkZ1IGV0IGFsICgyMDEzKSB3YW50ZWQgdG8gdGVzdCB0aGUgdGhlb3J5IHRoYXQgcGVvcGxlIGluIENoaW5hIHNpbXBseSBzY29yZWQKaGlnaGVyIG9uIHRoZSBsZWFybmluZyB0YXNrIChpcnJlc3BlY3RpdmUgb2YgZ2xvYmFsIG9yIGxvY2FsIGZlYXR1cmVzKQpiZWNhdXNlIG9mIGhpZ2hlciBtb3RpdmF0aW9uIGxldmVscy4gSWYgbW90aXZhdGlvbiBsZXZlbHMgd2VyZSB0aGUgb25seQpjYXVzZSBvZiB0aGUgZGlmZmVyZW5jZXMgdGhlbiB0aGUgZ3JvdXAgZGlmZmVyZW5jZSBpbiB0aGUgZ2xvYmFsIHRhc2sgYW5kIHRoZQpncm91cCBkaWZmZXJlbmNlIGluIHRoZSBsb2NhbCB0YXNrIHNob3VsZCBiZSB0aGUgc2FtZS4KCkFzIGEgcmVzdWx0LCB3ZSBjb3VsZCB1c2UgdGhlIHJlc3VsdHMgZnJvbSB0aGUgZ2xvYmFsIHRhc2sgKG1lYW4gZGlmZmVyZW5jZSBvZgo1MCB3aXRoIGFuIHN0YW5kYXJkIGVycm9yIG9mIDE0KSB0byByZXByZXNlbnQgb3VyIHByZWRpY3Rpb25zIGFib3V0IHRoZSBsb2NhbAp0YXNrLiBUaGF0IGlzLCB3ZSBjYW4gdXNlIGEgbm9ybWFsIHByaW9yIHdpdGggYSBtZWFuIG9mIDUwIGFuZCBhIHN0YW5kYXJkCmRldmlhdGlvbiBvZiAxNCwgYXMgc2hvd24gYmVsb3cuCgpgYGB7cn0KI3wgZWNobyA9IFRSVUUsIGluY2x1ZGUgPSBUUlVFCgptb3RpdmF0aW9uX3RoZW9yeSA8LSBwcmlvcigKICBmYW1pbHkgPSAibm9ybWFsIiwKICBtZWFuID0gNTAsCiAgc2QgPSAxNAopCgpwbG90KG1vdGl2YXRpb25fdGhlb3J5KSArCiAgdGhlbWVfbWluaW1hbCgxNCkKCmBgYAoKQW5kIHdlIGNhbiB1c2UgYSBub3JtYWwgbGlrZWxpaG9vZCB0byByZXByZXNlbnQgdGhlIGRhdGEgZnJvbSB0aGUgbG9jYWwKdGFzay4KCmBgYHtyfQojfCBlY2hvID0gVFJVRSwgaW5jbHVkZSA9IFRSVUUKCmRhdGFfbW9kZWwgPC0gbGlrZWxpaG9vZCgKICBmYW1pbHkgPSAibm9ybWFsIiwKICBtZWFuID0gMTUsCiAgc2QgPSAxMwopCmBgYAoKT25jZSBhZ2Fpbiwgd2UgY2FuIHVzZSBhIG51bGwgbW9kZWwgd2l0aCBhIHBvaW50IGF0IDAuCgpCZWZvcmUgd2UgY29tcHV0ZSB0aGUgQmF5ZXMgZmFjdG9yLCBsZXQncyBmaXJzdCB0aGluayBhYm91dCB3aGF0IHdlJ3JlCmNvbXBhcmluZy4gV2UgaGF2ZSBvbmUgdGhlb3J5IHRoYXQgc2F5czogIlBlb3BsZSBpbiBDaGluYSBzY29yZSBiZXR0ZXIgb24KYSBsZWFybmluZyB0YXNrIG9mIGxvY2FsIGZlYXR1cmVzIGJ5IGFib3V0IHRoZSBzYW1lIGFtb3VudCBhcyB0aGV5Cm91dHBlcmZvcm0gcGVvcGxlIGluIHRoZSBVSyBvbiBhIGxlYXJuaW5nIHRhc2sgb2YgZ2xvYmFsIGZlYXR1cmVzIi4gQW5kCmFub3RoZXIgdGhlb3J5IHRoYXQgc2F5czogIlBlb3BsZSBpbiBDaGluYSBhbmQgcGVvcGxlIGluIHRoZSBVSyBzY29yZSB0aGUKc2FtZSBvbiBhIGxlYXJuaW5nIHRhc2sgb2YgbG9jYWwgZmVhdHVyZXMuIiBUaGUgQmF5ZXMgZmFjdG9yIHRoYXQgd2UKY29tcHV0ZSBpcyBnb2luZyB0byB0ZWxsIHVzIHdoaWNoIG9mICoqdGhlc2Ugc3BlY2lmaWMgdHdvKiogaHlwb3RoZXNlcyBpcwpiZXR0ZXIgc3VwcG9ydGVkIGJ5IHRoZSBkYXRhLgoKYGBge3J9CiN8IGVjaG8gPSBUUlVFLCBpbmNsdWRlID0gVFJVRQoKbW90aXZhdGlvbl9tb2RlbCA8LSBkYXRhX21vZGVsICogbW90aXZhdGlvbl90aGVvcnkKbnVsbF9tb2RlbCA8LSBkYXRhX21vZGVsICogcHJpb3IoZmFtaWx5ID0gInBvaW50IiwgMCkKCm1vdGl2YXRpb25fZXZpZGVuY2UgPC0gaW50ZWdyYWwobW90aXZhdGlvbl9tb2RlbCkKbnVsbF9ldmlkZW5jZSA8LSBpbnRlZ3JhbChudWxsX21vZGVsKQoKYmYgPC0gbW90aXZhdGlvbl9ldmlkZW5jZSAvIG51bGxfZXZpZGVuY2UKCnN1bW1hcnkoYmYpCmBgYAoKVGhlIHJlc3VsdHMgc2hvdyBtb2RlcmF0ZSBldmlkZW5jZSBpbiBmYXZvdXIgb2YgdGhlIG51bGwgdGhlb3J5LiBUaGF0IGlzLApyZWxhdGl2ZSB0byBvdXIgc3BlY2lmaWMgbW90aXZhdGlvbiB0aGVvcnksIHRoZSBudWxsIHRoZW9yeSBpcyBiZXR0ZXIKc3VwcG9ydGVkIGJ5IHRoZSBkYXRhLiBUaGUgQmF5ZXMgZmFjdG9ycyBhcmUgYWx3YXlzIHNwZWNpZmljIHRvIHRoZSBleGFjdAp0d28gaHlwb3RoZXNlcyB0aGF0IHdlJ3JlIGNvbXBhcmluZy4gCgpJZiB3ZSB3ZXJlIHRvIGNvbXBhcmUgZGlmZmVyZW50IGh5cG90aGVzZXMgdGhlbiB0aGUgQmF5ZXMgZmFjdG9yIHdvdWxkIGJlCmRpZmZlcmVudC4gU29tZSBwZW9wbGUgZmluZCB0aGlzIHdvcnJ5aW5nLCBidXQgb2YgY291cnNlIGl0IGhhcyB0byBiZSB0aGUKY2FzZSEgQ29tcGFyaW5nIGRpZmZlcmVudCBoeXBvdGhlc2VzIG1lYW5zIGFza2luZyBkaWZmZXJlbnQgcXVlc3Rpb25zIGFuZAp0aGVyZWZvcmUgd2Ugc2hvdWxkbid0IGJlIHN1cnByaXNlZCBpZiB3ZSBnZXQgZGlmZmVyZW50IGFuc3dlcnMuCgojIyBIb3cgZG8gSSBrbm93IHdoYXQgbXkgdGhlb3J5IHByZWRpY3RzCgpBZ2Fpbiwga25vd2luZyB3aGF0IG91ciB0aGVvcmllcyBwcmVkaWN0IGNhbiBiZSBhIGRpZmZpY3VsdCB0YXNrLiBUaGVyZWZvcmUsCltEaWVuZXMgKDIwMTkpXShodHRwczovL2RvaS5vcmcvMTAuMTE3Ny8yNTE1MjQ1OTE5ODc2OTYwKSBoYXMgY29tZSB1cCB3aXRoIHNvbWUKaGV1cmlzdGljcyBmb3IgdGhpbmtpbmcgYWJvdXQgd2hhdCBvdXIgdGhlb3JpZXMgcHJlZGljdC4gVGhpcyBwYXBlciBjYW4gYmUgYQp1c2VmdWwgcmVzb3VyY2UgZm9yIHlvdSB0byB0dXJuIGJhY2sgdG8gYXMgeW91IGNvbWUgdXAgd2l0aCB5b3VyIG93biBzdHVkaWVzLAphbmQgZGV2ZWxvcCBhbmQgdGVzdCB5b3VyIG93biB0aGVvcmllcy4KCkEga2V5IGFzcGVjdCBvZiB0aGUgaGV1cmlzdGljcyB0aGF0IERpZW5lcyAoMjAxOSkgb3V0bGluZXMgaXMgdGhpbmtpbmcgYWJvdXQKdGhlICoqbWF4aW11bSBwb3NzaWJsZSBlZmZlY3QqKiB0aGF0IGNhbiBiZSBmb3VuZCBiZXR3ZWVuIGNvbmRpdGlvbnMgb3IgZ3JvdXBzLgpPbmNlIHdlIGtub3cgdGhpcyBtYXhpbXVtIHBvc3NpYmxlIGVmZmVjdCB3ZSBjYW4gdXNlIGEgKmhhbGYtbm9ybWFsKiBwcmlvcgpzY2FsZWQgYWNjb3JkaW5nIHRvIHRoaXMgbWF4aW11bS4gU3BlY2lmaWNhbGx5LCB0aGUgc3RhbmRhcmQgZGV2aWF0aW9uIG9mIHRoZQpwcmlvciBpcyBzZXQgdG8gaGFsZiB0aGUgbWF4aW11bS4gVGhpcyBtZWFucyB0aGF0IH45OCUgb2YgdGhlIHBsYXVzaWJsZSBlZmZlY3RzCndpbGwgbGllIGJldHdlZW4gMCBhbmQgdGhlIG1heGltdW0gcG9zc2libGUgZWZmZWN0LiAKCldlIGNhbiBnbyB0aHJvdWdoIGFuIGV4YW1wbGUgb2YgdGhpcyBoZXVyaXN0aWMgZnJvbSBEaWVuZXMgKDIwMTkpLiBJbiB0aGUKZXhhbXBsZSBzdHVkeSwgYnkgQmFsemFyaW5pLCBEaGFybWEsIE11aXNlLCBhbmQgS29odXQgKDIwMTkpLCByZWxhdGlvbnNoaXAKcXVhbGl0eSBmb3IgcG9seWFtb3JvdXMgYW5kIG1vbm9nYW1vdXMgcmVsYXRpb25zaGlwcyB3YXMgbWVhc3VyZWQgb24gYQpudXJ0dXJhbmNlIHNjYWxlIHdpdGggcmF0aW5nIGZyb20gMSB0byA3LiBJdCB3YXMgcHJlZGljdGVkIHRoZSBpbiAKcG9seWFtb3JvdXMgcmVsYXRpb25zaGlwcywgbnVydHVyYW5jZSBzY29yZXMgd291bGQgYmUgaGlnaGVyLgoKVGhlIG1vbm9nYW1vdXMgcGFydGljaXBhbnRzIHJhdGVkIHRoZWlyIHBhcnRuZXIncyBudXJ0dXJhbmNlIGFzIDUuODUuICBXaGlsZSAKdGhlIHBvbHlhbW9yb3VzIHBhcnRpY2lwYW50cyByYXRlZCB0aGVpciBwYXJ0bmVyJ3MgbnVydHVyYW5jZSBhcyA1LjgwLiBUaGlzCmdhdmUgYSBtZWFuIGRpZmZlcmVuY2Ugb2YgLTAuMDUsIGFuZCBhIHN0YW5kYXJkIGVycm9yIG9mIDAuMTEuCgpXaGF0IGlzIHRoZSBtYXhpbXVtIHBvc3NpYmxlIGRpZmZlcmVuY2UgYmV0d2VlbiB0aGUgdHdvIGdyb3Vwcz8gVGhlIHNjYWxlIHJ1bnMKZnJvbSAxIHRvIDcsIHNvIHRoZSBtYXhpbXVtIHBvc3NpYmxlIHNjb3JlIHRoZSBwb2x5YW1vcm91cyBncm91cCB3b3VsZCBiZSA3LgpJZiB0aGlzIGdyb3VwIGhhZCBhIG1lYW4gb2YgNywgdGhlbiB0aGUgZ3JvdXAgZGlmZmVyZW5jZSB3b3VsZCBiZSAxLjE1LiBVc2luZwp0aGUgaGV1cmlzdGljLCB3ZSBjYW4gdXNlIGEgaGFsZi1ub3JtYWwgcHJpb3Igd2l0aCBhIG1lYW4gb2YgMCBhbmQgYSAKc3RhbmRhcmQgZGV2aWF0aW9uIG9mICRcZnJhY3sxLjE1fXsyfSQuIFB1dHRpbmcgdGhpcyB0b2dldGhlciB3aXRoIGEgbnVsbApoeXBvdGhlc2VzIG9mIGEgcG9pbnQgYSAwLCBhbmQgb3VyIGRhdGEgbW9kZWwgd2l0aCBhIG5vcm1hbCBsaWtlbGlob29kIG9mIGEgCm1lYW4gb2YgLTAuMDUgKHdpdGggYSBzdGFuZGFyZCBlcnJvciBvZiAwLjExKSwgd2UgZ2V0IHRoZSBmb2xsb3dpbmcgcmVzdWx0LgoKYGBge3J9CiN8IGVjaG8gPSBUUlVFLCBpbmNsdWRlID0gVFJVRQoKIyBkZWZpbmUgbGlrZWxpaG9vZApkYXRhX21vZGVsIDwtIGxpa2VsaWhvb2QoCiAgZmFtaWx5ID0gIm5vcm1hbCIsCiAgbWVhbiA9IC0wLjA1LAogIHNkID0gMC4xMQopCgojIGRlZmluZSBhbHRlcm5hdGl2ZSBwcmlvcgphbHRfcHJpb3IgPC0gcHJpb3IoCiAgZmFtaWx5ID0gIm5vcm1hbCIsCiAgbWVhbiA9IDAsCiAgc2QgPSAwLjU4LCByYW5nZSA9IGMoMCwgSW5mKQopCgojIGRlZmluZSBudWxsIHByaW9yCm51bGxfcHJpb3IgPC0gcHJpb3IoZmFtaWx5ID0gInBvaW50IiwgcG9pbnQgPSAwKQoKIyB3ZWlnaHQgbGlrZWxpaG9vZCBieSBwcmlvcgptMSA8LSBkYXRhX21vZGVsICogYWx0X3ByaW9yCm0wIDwtIGRhdGFfbW9kZWwgKiBudWxsX3ByaW9yCgojIHRha2UgdGhlIGludGVyZ2FsIG9mIGVhY2ggd2VpZ2h0ZWQgbGlrZWxpaG9vZAojIGFuZCBkaXZpZGUgdGhlbQpiZiA8LSBpbnRlZ3JhbChtMSkgLyBpbnRlZ3JhbChtMCkKCiMgZ2V0IGEgdmVyYmFsIGRlc2NyaXB0aW9uIG9mIHRoZSBCYXllcyBmYWN0b3IKc3VtbWFyeShiZikKYGBgCgoKCgoK" download="07-prior-II.Rmd"><img src="https://img.shields.io/badge/.Rmd-Download-blue"></a>
+<a href="https://colab.research.google.com/github/ljcolling/bayes2022/blob/main/_notebooks/07-prior-II.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" /></a></p>
+<p>Although the method of using default priors is easy to use some have
+questioned whether it really makes sense to talk of <strong>default</strong>
+hypotheses. The real power of Bayes factors comes from <em>directly testing
+theories</em>, and as <a href="https://doi.org/10.1177/2515245919876960">Dienes
+(2019)</a> points out, “there is no
+such thing as a default theory, so there cannot be a default” alternative
+hypothesis. Dienes instead recommends formulating priors for our specific
+situation at hand. That is, formulating priors that actually match our
+scientific theories about how the world works.</p>
+<p>The second set of priors that we developed for the coin flip examples
+represents a case of doing this. Instead of saying that our alternative
+hypothesis should represent each outcome as being equally likely we instead
+came up with a theory of how biased coins are likely to behave. In fact, we
+came up with a few theories. One theory, for example, said that biased coins
+would show heads more often. And another theory said that biased coins would
+behave similarly to fair coins; however, they would show heads or tails
+slightly less often than would be expected from a fair coin. We were able to
+come up with priors that directly represented these theories and we were able
+to compute Bayes factors comparing these theories with our fair coin theory
+(that the bias is exactly 0.5).</p>
+<p>Of course using these kinds of priors is far more difficult than using
+default priors because it forces us to think about what our scientific
+theories predict. However, as scientists, we probably should be thinking
+about what our theories predict! But knowing what our scientific theories
+predict is a very difficult task and, as psychology researchers we are not
+well trained to think in terms of quantitative predictions. This is
+likely an artefact of the dominance of <em>null-hypothesis significance
+testing</em> in psychology, because these kinds of statistical procedures
+encourage thinking in terms of <em>default</em> hypotheses (see <a href="https://link.springer.com/content/pdf/10.1007/s13164-018-0421-4.pdf">Colling &amp; Szűcs,
+2020</a>).
+Therefore, adopting Bayesian methods can require a big change in how we
+think about <strong>theory</strong> in psychology.</p>
+<p>The aim of this section is not to teach you how to do good <strong>theory</strong>. Instead,
+the aim is to give you the tools to test theories once you’ve come up with
+them. The hope is that once you have the tools, then come up with theories that
+are testable with those tools. To do this, we’ll look at some examples of how
+to represent and then test theories with Bayes factors. Following this, we’ll
+cover some heuristics for coming up with predictions if we’re unsure what
+our theories predict.</p>
+<div id="examples-of-representing-predictions" class="section level2" number="7.1">
+<h2><span class="header-section-number">7.1</span> Examples of representing predictions</h2>
+<div id="representing-predictions-with-a-uniform-prior" class="section level3" number="7.1.1">
+<h3><span class="header-section-number">7.1.1</span> Representing predictions with a uniform prior</h3>
+<p>The most straightforward way to represent the predictions of a theory is
+with a uniform prior. A uniform prior essentially represents the idea
+that, if there is an effect, then it will be some value between a defined
+minimum and a defined maximum, with all effects being equally probable.</p>
+<p>Here is an example taken from <a href="https://www.frontiersin.org/articles/10.3389/fpsyg.2014.00781/full">Dienes
+(2014)</a>.
+In this example experiment, negative mood was <em>predicted to reduce
+learning on a task</em>. Learning was measured using a two-alternative forced
+choice measure (chance performance would be 50%). It was found that, in
+the <em>neutral mood condition</em> performance on the task was at 70%. If
+<em>negative mood</em> reduced learning, the population mean of this condition
+would have to lie somewhere between chance performance (50%) and
+performance on the neutral condition (70%). Therefore, the difference
+between conditions would have to be between 0% and 20%.</p>
+<p>We could represent this as a uniform prior with a minimum of 0 and
+a maximum of 20. The code below does just that.</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="choosing-priors-part-ii.html#cb30-1" aria-hidden="true" tabindex="-1"></a>mood_theory <span class="ot">&lt;-</span> <span class="fu">prior</span>(<span class="at">family =</span> <span class="st">&quot;uniform&quot;</span>, <span class="at">min =</span> <span class="dv">0</span>, <span class="at">max =</span> <span class="dv">20</span>)</span>
+<span id="cb30-2"><a href="choosing-priors-part-ii.html#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="choosing-priors-part-ii.html#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mood_theory) <span class="sc">+</span></span>
+<span id="cb30-4"><a href="choosing-priors-part-ii.html#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="dv">14</span>) <span class="sc">+</span></span>
+<span id="cb30-5"><a href="choosing-priors-part-ii.html#cb30-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;mean difference&quot;</span>, <span class="at">y =</span> <span class="st">&quot;probability&quot;</span>)</span></code></pre></div>
+<p><img src="07-prior-II_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p>Now what do the data say? The results report a mean of 65% in the negative
+mood condition (mean difference of 5%) with a standard error (standard
+deviation of the mean difference) of 10. We can represent this data with
+the code below. Following Dienes (2014), we’ll use a <em>normal</em> likelihood.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="choosing-priors-part-ii.html#cb31-1" aria-hidden="true" tabindex="-1"></a>data_model <span class="ot">&lt;-</span> <span class="fu">likelihood</span>(<span class="at">family =</span> <span class="st">&quot;normal&quot;</span>, <span class="at">mean =</span> <span class="dv">5</span>, <span class="at">sd =</span> <span class="dv">10</span>)</span>
+<span id="cb31-2"><a href="choosing-priors-part-ii.html#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="choosing-priors-part-ii.html#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(data_model) <span class="sc">+</span></span>
+<span id="cb31-4"><a href="choosing-priors-part-ii.html#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="dv">14</span>) <span class="sc">+</span></span>
+<span id="cb31-5"><a href="choosing-priors-part-ii.html#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;mean difference&quot;</span>, <span class="at">y =</span> <span class="st">&quot;likelihood&quot;</span>)</span></code></pre></div>
+<p><img src="07-prior-II_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>Finally, we’ll use a null prior of a point at 0 to represent our <em>no effect</em>
+hypothesis.</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="choosing-priors-part-ii.html#cb32-1" aria-hidden="true" tabindex="-1"></a>null_theory <span class="ot">&lt;-</span> <span class="fu">prior</span>(<span class="at">family =</span> <span class="st">&quot;point&quot;</span>, <span class="at">point =</span> <span class="dv">0</span>)</span>
+<span id="cb32-2"><a href="choosing-priors-part-ii.html#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="choosing-priors-part-ii.html#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(null_theory) <span class="sc">+</span></span>
+<span id="cb32-4"><a href="choosing-priors-part-ii.html#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="dv">14</span>) <span class="sc">+</span></span>
+<span id="cb32-5"><a href="choosing-priors-part-ii.html#cb32-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;mean difference&quot;</span>, <span class="at">y =</span> <span class="st">&quot;probability&quot;</span>)</span></code></pre></div>
+<p><img src="07-prior-II_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>With all the parts in place, we can now compute the Bayes factor.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="choosing-priors-part-ii.html#cb33-1" aria-hidden="true" tabindex="-1"></a>mood_evidence <span class="ot">&lt;-</span> <span class="fu">integral</span>(data_model <span class="sc">*</span> mood_theory)</span>
+<span id="cb33-2"><a href="choosing-priors-part-ii.html#cb33-2" aria-hidden="true" tabindex="-1"></a>null_evidence <span class="ot">&lt;-</span> <span class="fu">integral</span>(data_model <span class="sc">*</span> null_theory)</span>
+<span id="cb33-3"><a href="choosing-priors-part-ii.html#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-4"><a href="choosing-priors-part-ii.html#cb33-4" aria-hidden="true" tabindex="-1"></a>bf <span class="ot">&lt;-</span> mood_evidence <span class="sc">/</span> null_evidence</span></code></pre></div>
+<p>The resulting Bayes factor is barely different to 1. Therefore, the
+results don’t really give us a strong reason for favouring one theory over
+the other.</p>
+<p>Sometimes it is useful to have verbal labels for the strength of evidence.
+Wagenmakers et al (2017) suggests some verbal labels for strength of
+evidence, and we can get the verbal label for the computed Bayes factor by
+using the <code>summary</code> function, as shown below.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="choosing-priors-part-ii.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(bf)</span></code></pre></div>
+<pre><code>## Bayes factor
+## Using the levels from Wagenmakers et al (2017)
+##  A BF of 0.8871 indicates:
+##  Anecdotal evidence</code></pre>
+</div>
+<div id="representing-predictions-with-a-half-normal-prior" class="section level3" number="7.1.2">
+<h3><span class="header-section-number">7.1.2</span> Representing predictions with a half-normal prior</h3>
+<p>A half normal distribution is another useful way to represent predictions for
+theories. To come up with predictions for the theory, we’ll use the results
+from an earlier experiment to represent the predictions of the current
+experiment.</p>
+<p>Here is an example taken from <a href="https://link.springer.com/article/10.3758/s13423-017-1266-z">Dienes and Mclatchie
+(2018)</a>. In a
+study by Williams and Bargh (2008), people were ask to feel a hot or cold
+therapeutic pack and then choose a treat for themselves or for a friend. Of
+those participants exposed to a cold pack, 75% chose a treat for themselves
+where only 45% chose the treat for their friend. We can express this difference
+as an Odds Ratio (OR). This gives an OR of 3.52, which converted into Log Odds
+(Log OR) is approximately 1.26. We take the natural log of the odds ratio,
+because the natural log of the odds ratio is approximately normally
+distributed, which means that we can model it with a <em>normal</em> likelihood.</p>
+<p>After the original study, Lynott et al (2014) attempted a replication. Before
+we get to the data that Lynott et al (2014) obtained, let’s think about a possible
+prediction.</p>
+<p>If the original study reported a true effect, then the replication study
+should find an effect of roughly the same order of magnitude. Maybe
+smaller, maybe larger, but not radically different.</p>
+<p>Furthermore, it’s also fair to assume that reported effects are usually larger
+than the true effect, because larger effects are more likely to get published.
+So the true effect is more likely to be smaller then the reported effect, and
+less likely to be larger. How might we represent this idea? One way is with a
+half normal distribution scaled according to the original finding. That is,
+with a normal distribution centred at 0, and with a standard deviation of 1.26
+(that is, the magnitude of the original effect). Furthermore, we’ll limit the
+distribution to be between the values of <span class="math inline">\(0\)</span> and <span class="math inline">\(+\infty\)</span> (because we have a
+directional hypothesis).</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="choosing-priors-part-ii.html#cb36-1" aria-hidden="true" tabindex="-1"></a>theory_model <span class="ot">&lt;-</span> <span class="fu">prior</span>(</span>
+<span id="cb36-2"><a href="choosing-priors-part-ii.html#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="st">&quot;normal&quot;</span>,</span>
+<span id="cb36-3"><a href="choosing-priors-part-ii.html#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">mean =</span> <span class="dv">0</span>,</span>
+<span id="cb36-4"><a href="choosing-priors-part-ii.html#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd =</span> <span class="fl">1.26</span>,</span>
+<span id="cb36-5"><a href="choosing-priors-part-ii.html#cb36-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">range =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="cn">Inf</span>)</span>
+<span id="cb36-6"><a href="choosing-priors-part-ii.html#cb36-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb36-7"><a href="choosing-priors-part-ii.html#cb36-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-8"><a href="choosing-priors-part-ii.html#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(theory_model) <span class="sc">+</span></span>
+<span id="cb36-9"><a href="choosing-priors-part-ii.html#cb36-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="dv">14</span>)</span></code></pre></div>
+<p><img src="07-prior-II_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>By defining the prior in this way, we’re saying that ~68% of the plausible
+effects lie between 0 and 1.26. And ~95% of plausible the effects lie somewhere
+between 0 and twice the reported original effect (of 1.26). That is, we predict
+the effect to be somewhere in the same range as the original study, but more
+probably smaller than the effect originally reported.</p>
+<p>Now that we have our predictions, we can look at the results of Lynott et al’s
+replication attempt. Their results showed a Log OR of -0.26, with a standard
+error of 0.14. (Note, that typically, studies don’t report the standard error
+of the Log OR, but rather report the 95% confidence interval of the OR.
+However, it’s possible to compute the standard error of the Log OR from the 95%
+confidence interval, as shown below). As mentioned above, because Log OR
+approximately follows a normal distribution, we can model it using the <em>normal</em>
+likelihood, as shown below.</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="choosing-priors-part-ii.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For completeness, we&#39;ll work out the ln OR and</span></span>
+<span id="cb37-2"><a href="choosing-priors-part-ii.html#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="co"># the standard error from the reported confidence</span></span>
+<span id="cb37-3"><a href="choosing-priors-part-ii.html#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="co"># interval</span></span>
+<span id="cb37-4"><a href="choosing-priors-part-ii.html#cb37-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-5"><a href="choosing-priors-part-ii.html#cb37-5" aria-hidden="true" tabindex="-1"></a>reported_or_ci <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.58</span>, <span class="fl">1.02</span>)</span>
+<span id="cb37-6"><a href="choosing-priors-part-ii.html#cb37-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-7"><a href="choosing-priors-part-ii.html#cb37-7" aria-hidden="true" tabindex="-1"></a>log_or_ci <span class="ot">&lt;-</span> <span class="fu">log</span>(reported_or_ci)</span>
+<span id="cb37-8"><a href="choosing-priors-part-ii.html#cb37-8" aria-hidden="true" tabindex="-1"></a>log_or <span class="ot">&lt;-</span> <span class="fu">mean</span>(log_or_ci)</span>
+<span id="cb37-9"><a href="choosing-priors-part-ii.html#cb37-9" aria-hidden="true" tabindex="-1"></a>log_or_ci_width <span class="ot">&lt;-</span> <span class="fu">abs</span>(log_or_ci[<span class="dv">1</span>] <span class="sc">-</span> log_or)</span>
+<span id="cb37-10"><a href="choosing-priors-part-ii.html#cb37-10" aria-hidden="true" tabindex="-1"></a>log_or_se <span class="ot">&lt;-</span> log_or_ci_width <span class="sc">/</span> <span class="fl">1.96</span></span>
+<span id="cb37-11"><a href="choosing-priors-part-ii.html#cb37-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-12"><a href="choosing-priors-part-ii.html#cb37-12" aria-hidden="true" tabindex="-1"></a>data_model <span class="ot">&lt;-</span> <span class="fu">likelihood</span>(</span>
+<span id="cb37-13"><a href="choosing-priors-part-ii.html#cb37-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="st">&quot;normal&quot;</span>,</span>
+<span id="cb37-14"><a href="choosing-priors-part-ii.html#cb37-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">mean =</span> log_or,</span>
+<span id="cb37-15"><a href="choosing-priors-part-ii.html#cb37-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd =</span> log_or_se</span>
+<span id="cb37-16"><a href="choosing-priors-part-ii.html#cb37-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb37-17"><a href="choosing-priors-part-ii.html#cb37-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-18"><a href="choosing-priors-part-ii.html#cb37-18" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(data_model) <span class="sc">+</span></span>
+<span id="cb37-19"><a href="choosing-priors-part-ii.html#cb37-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="dv">14</span>)</span></code></pre></div>
+<p><img src="07-prior-II_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>Finally, for our null hypothesis, we’ll just use a point at 0. With all the
+bit’s in place, we can compute the Bayes factor. The code below is generated
+using the web-app. However, I’ve just removed the final lines that generate the
+plots. You can access the web-app’s advanced output at the <a href="https://bayesplay.colling.net.nz/advanced?model=%7B%22likelihoodDef%22%3A%7B%22distribution%22%3A%22normal%22%2C%22parameters%22%3A%7B%22mean%22%3A-0.2624623%2C%22sd%22%3A0.1440127%7D%7D%2C%22altpriorDef%22%3A%7B%22distribution%22%3A%22normal%22%2C%22parameters%22%3A%7B%22mean%22%3A0%2C%22sd%22%3A1.26%2C%22min%22%3A0%2C%22max%22%3Anull%7D%7D%2C%22nullpriorDef%22%3A%7B%22distribution%22%3A%22point%22%2C%22parameters%22%3A%7B%22point%22%3A0%7D%7D%7D">following
+link</a>.</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="choosing-priors-part-ii.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># define likelihood</span></span>
+<span id="cb38-2"><a href="choosing-priors-part-ii.html#cb38-2" aria-hidden="true" tabindex="-1"></a>data_model <span class="ot">&lt;-</span> <span class="fu">likelihood</span>(<span class="at">family =</span> <span class="st">&quot;normal&quot;</span>, <span class="at">mean =</span> <span class="sc">-</span><span class="fl">0.2624623</span>, <span class="at">sd =</span> <span class="fl">0.1440127</span>)</span>
+<span id="cb38-3"><a href="choosing-priors-part-ii.html#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-4"><a href="choosing-priors-part-ii.html#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="co"># define alternative prior</span></span>
+<span id="cb38-5"><a href="choosing-priors-part-ii.html#cb38-5" aria-hidden="true" tabindex="-1"></a>alt_prior <span class="ot">&lt;-</span> <span class="fu">prior</span>(<span class="at">family =</span> <span class="st">&quot;normal&quot;</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="fl">1.26</span>, <span class="at">range =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="cn">Inf</span>))</span>
+<span id="cb38-6"><a href="choosing-priors-part-ii.html#cb38-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-7"><a href="choosing-priors-part-ii.html#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="co"># define null prior</span></span>
+<span id="cb38-8"><a href="choosing-priors-part-ii.html#cb38-8" aria-hidden="true" tabindex="-1"></a>null_prior <span class="ot">&lt;-</span> <span class="fu">prior</span>(<span class="at">family =</span> <span class="st">&quot;point&quot;</span>, <span class="at">point =</span> <span class="dv">0</span>)</span>
+<span id="cb38-9"><a href="choosing-priors-part-ii.html#cb38-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-10"><a href="choosing-priors-part-ii.html#cb38-10" aria-hidden="true" tabindex="-1"></a><span class="co"># weight likelihood by prior</span></span>
+<span id="cb38-11"><a href="choosing-priors-part-ii.html#cb38-11" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> data_model <span class="sc">*</span> alt_prior</span>
+<span id="cb38-12"><a href="choosing-priors-part-ii.html#cb38-12" aria-hidden="true" tabindex="-1"></a>m0 <span class="ot">&lt;-</span> data_model <span class="sc">*</span> null_prior</span>
+<span id="cb38-13"><a href="choosing-priors-part-ii.html#cb38-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-14"><a href="choosing-priors-part-ii.html#cb38-14" aria-hidden="true" tabindex="-1"></a><span class="co"># take the intergal of each weighted likelihood</span></span>
+<span id="cb38-15"><a href="choosing-priors-part-ii.html#cb38-15" aria-hidden="true" tabindex="-1"></a><span class="co"># and divide them</span></span>
+<span id="cb38-16"><a href="choosing-priors-part-ii.html#cb38-16" aria-hidden="true" tabindex="-1"></a>bf <span class="ot">&lt;-</span> <span class="fu">integral</span>(m1) <span class="sc">/</span> <span class="fu">integral</span>(m0)</span>
+<span id="cb38-17"><a href="choosing-priors-part-ii.html#cb38-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-18"><a href="choosing-priors-part-ii.html#cb38-18" aria-hidden="true" tabindex="-1"></a><span class="co"># get a verbal description of the Bayes factor</span></span>
+<span id="cb38-19"><a href="choosing-priors-part-ii.html#cb38-19" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(bf)</span></code></pre></div>
+<pre><code>## Bayes factor
+## Using the levels from Wagenmakers et al (2017)
+##  A BF of 0.0411 indicates:
+##  Strong evidence</code></pre>
+<p>The results show, strong evidence for the null hypothesis over the
+alternative hypothesis. The results are <span class="math inline">\(\frac{1}{0.0411}\approx24\)</span> times
+more likely under our null hypothesis than our alternative hypothesis.</p>
+</div>
+<div id="representing-predictions-with-the-normal-prior" class="section level3" number="7.1.3">
+<h3><span class="header-section-number">7.1.3</span> Representing predictions with the normal prior</h3>
+<p>In the preceding two examples, we had directional hypotheses. This meant
+that all our priors were truncated at one end at 0. But sometimes we don’t
+have directional hypotheses. Instead, we might have non-directional
+hypotheses. If we have non-directional hypotheses then we can use a <em>full</em>
+normal distribution, rather than one that’s been limited to be between <span class="math inline">\(0\)</span>
+and <span class="math inline">\(+\infty\)</span>.</p>
+<p>Furthermore, it is also not necessary to have normal distributions centred
+at 0. We might use a normal distribution centred at some other value to
+represent the idea that the effect is roughly with in a certain range but with
+smaller effects being more probable than larger effects. To see how this works,
+we’ll go through an example in <a href="https://doi.org/10.1177/2515245919876960">Dienes
+(2019)</a>.</p>
+<p>Fu et al (2013) were interested in whether there are differences in learning
+global and local structure between people in China and the UK, and a reaction
+time task was used to assess this. The results showed that when it came to
+<em>global structure</em>, people in China had superior performance relative to people
+in the UK. The difference between the two groups was 50 ms (with a standard
+error of 14 ms). However, for <em>local structure</em> learning, the difference was
+only 15 ms (standard error of 13 ms).</p>
+<p>Fu et al (2013) wanted to test the theory that people in China simply scored
+higher on the learning task (irrespective of global or local features)
+because of higher motivation levels. If motivation levels were the only
+cause of the differences then the group difference in the global task and the
+group difference in the local task should be the same.</p>
+<p>As a result, we could use the results from the global task (mean difference of
+50 with an standard error of 14) to represent our predictions about the local
+task. That is, we can use a normal prior with a mean of 50 and a standard
+deviation of 14, as shown below.</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="choosing-priors-part-ii.html#cb40-1" aria-hidden="true" tabindex="-1"></a>motivation_theory <span class="ot">&lt;-</span> <span class="fu">prior</span>(</span>
+<span id="cb40-2"><a href="choosing-priors-part-ii.html#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="st">&quot;normal&quot;</span>,</span>
+<span id="cb40-3"><a href="choosing-priors-part-ii.html#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">mean =</span> <span class="dv">50</span>,</span>
+<span id="cb40-4"><a href="choosing-priors-part-ii.html#cb40-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd =</span> <span class="dv">14</span></span>
+<span id="cb40-5"><a href="choosing-priors-part-ii.html#cb40-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb40-6"><a href="choosing-priors-part-ii.html#cb40-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-7"><a href="choosing-priors-part-ii.html#cb40-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(motivation_theory) <span class="sc">+</span></span>
+<span id="cb40-8"><a href="choosing-priors-part-ii.html#cb40-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="dv">14</span>)</span></code></pre></div>
+<p><img src="07-prior-II_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>And we can use a normal likelihood to represent the data from the local
+task.</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="choosing-priors-part-ii.html#cb41-1" aria-hidden="true" tabindex="-1"></a>data_model <span class="ot">&lt;-</span> <span class="fu">likelihood</span>(</span>
+<span id="cb41-2"><a href="choosing-priors-part-ii.html#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="st">&quot;normal&quot;</span>,</span>
+<span id="cb41-3"><a href="choosing-priors-part-ii.html#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">mean =</span> <span class="dv">15</span>,</span>
+<span id="cb41-4"><a href="choosing-priors-part-ii.html#cb41-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd =</span> <span class="dv">13</span></span>
+<span id="cb41-5"><a href="choosing-priors-part-ii.html#cb41-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p>Once again, we can use a null model with a point at 0.</p>
+<p>Before we compute the Bayes factor, let’s first think about what we’re
+comparing. We have one theory that says: “People in China score better on
+a learning task of local features by about the same amount as they
+outperform people in the UK on a learning task of global features”. And
+another theory that says: “People in China and people in the UK score the
+same on a learning task of local features.” The Bayes factor that we
+compute is going to tell us which of <strong>these specific two</strong> hypotheses is
+better supported by the data.</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="choosing-priors-part-ii.html#cb42-1" aria-hidden="true" tabindex="-1"></a>motivation_model <span class="ot">&lt;-</span> data_model <span class="sc">*</span> motivation_theory</span>
+<span id="cb42-2"><a href="choosing-priors-part-ii.html#cb42-2" aria-hidden="true" tabindex="-1"></a>null_model <span class="ot">&lt;-</span> data_model <span class="sc">*</span> <span class="fu">prior</span>(<span class="at">family =</span> <span class="st">&quot;point&quot;</span>, <span class="dv">0</span>)</span>
+<span id="cb42-3"><a href="choosing-priors-part-ii.html#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-4"><a href="choosing-priors-part-ii.html#cb42-4" aria-hidden="true" tabindex="-1"></a>motivation_evidence <span class="ot">&lt;-</span> <span class="fu">integral</span>(motivation_model)</span>
+<span id="cb42-5"><a href="choosing-priors-part-ii.html#cb42-5" aria-hidden="true" tabindex="-1"></a>null_evidence <span class="ot">&lt;-</span> <span class="fu">integral</span>(null_model)</span>
+<span id="cb42-6"><a href="choosing-priors-part-ii.html#cb42-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-7"><a href="choosing-priors-part-ii.html#cb42-7" aria-hidden="true" tabindex="-1"></a>bf <span class="ot">&lt;-</span> motivation_evidence <span class="sc">/</span> null_evidence</span>
+<span id="cb42-8"><a href="choosing-priors-part-ii.html#cb42-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-9"><a href="choosing-priors-part-ii.html#cb42-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(bf)</span></code></pre></div>
+<pre><code>## Bayes factor
+## Using the levels from Wagenmakers et al (2017)
+##  A BF of 0.2472 indicates:
+##  Moderate evidence</code></pre>
+<p>The results show moderate evidence in favour of the null theory. That is,
+relative to our specific motivation theory, the null theory is better
+supported by the data. The Bayes factors are always specific to the exact
+two hypotheses that we’re comparing.</p>
+<p>If we were to compare different hypotheses then the Bayes factor would be
+different. Some people find this worrying, but of course it has to be the
+case! Comparing different hypotheses means asking different questions and
+therefore we shouldn’t be surprised if we get different answers.</p>
+</div>
+</div>
+<div id="how-do-i-know-what-my-theory-predicts" class="section level2" number="7.2">
+<h2><span class="header-section-number">7.2</span> How do I know what my theory predicts</h2>
+<p>Again, knowing what our theories predict can be a difficult task. Therefore,
+<a href="https://doi.org/10.1177/2515245919876960">Dienes (2019)</a> has come up with some
+heuristics for thinking about what our theories predict. This paper can be a
+useful resource for you to turn back to as you come up with your own studies,
+and develop and test your own theories.</p>
+<p>A key aspect of the heuristics that Dienes (2019) outlines is thinking about
+the <strong>maximum possible effect</strong> that can be found between conditions or groups.
+Once we know this maximum possible effect we can use a <em>half-normal</em> prior
+scaled according to this maximum. Specifically, the standard deviation of the
+prior is set to half the maximum. This means that ~98% of the plausible effects
+will lie between 0 and the maximum possible effect.</p>
+<p>We can go through an example of this heuristic from Dienes (2019). In the
+example study, by Balzarini, Dharma, Muise, and Kohut (2019), relationship
+quality for polyamorous and monogamous relationships was measured on a
+nurturance scale with rating from 1 to 7. It was predicted the in
+polyamorous relationships, nurturance scores would be higher.</p>
+<p>The monogamous participants rated their partner’s nurturance as 5.85. While
+the polyamorous participants rated their partner’s nurturance as 5.80. This
+gave a mean difference of -0.05, and a standard error of 0.11.</p>
+<p>What is the maximum possible difference between the two groups? The scale runs
+from 1 to 7, so the maximum possible score the polyamorous group would be 7.
+If this group had a mean of 7, then the group difference would be 1.15. Using
+the heuristic, we can use a half-normal prior with a mean of 0 and a
+standard deviation of <span class="math inline">\(\frac{1.15}{2}\)</span>. Putting this together with a null
+hypotheses of a point a 0, and our data model with a normal likelihood of a
+mean of -0.05 (with a standard error of 0.11), we get the following result.</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="choosing-priors-part-ii.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># define likelihood</span></span>
+<span id="cb44-2"><a href="choosing-priors-part-ii.html#cb44-2" aria-hidden="true" tabindex="-1"></a>data_model <span class="ot">&lt;-</span> <span class="fu">likelihood</span>(</span>
+<span id="cb44-3"><a href="choosing-priors-part-ii.html#cb44-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="st">&quot;normal&quot;</span>,</span>
+<span id="cb44-4"><a href="choosing-priors-part-ii.html#cb44-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mean =</span> <span class="sc">-</span><span class="fl">0.05</span>,</span>
+<span id="cb44-5"><a href="choosing-priors-part-ii.html#cb44-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd =</span> <span class="fl">0.11</span></span>
+<span id="cb44-6"><a href="choosing-priors-part-ii.html#cb44-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb44-7"><a href="choosing-priors-part-ii.html#cb44-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-8"><a href="choosing-priors-part-ii.html#cb44-8" aria-hidden="true" tabindex="-1"></a><span class="co"># define alternative prior</span></span>
+<span id="cb44-9"><a href="choosing-priors-part-ii.html#cb44-9" aria-hidden="true" tabindex="-1"></a>alt_prior <span class="ot">&lt;-</span> <span class="fu">prior</span>(</span>
+<span id="cb44-10"><a href="choosing-priors-part-ii.html#cb44-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="st">&quot;normal&quot;</span>,</span>
+<span id="cb44-11"><a href="choosing-priors-part-ii.html#cb44-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">mean =</span> <span class="dv">0</span>,</span>
+<span id="cb44-12"><a href="choosing-priors-part-ii.html#cb44-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd =</span> <span class="fl">0.58</span>, <span class="at">range =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="cn">Inf</span>)</span>
+<span id="cb44-13"><a href="choosing-priors-part-ii.html#cb44-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb44-14"><a href="choosing-priors-part-ii.html#cb44-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-15"><a href="choosing-priors-part-ii.html#cb44-15" aria-hidden="true" tabindex="-1"></a><span class="co"># define null prior</span></span>
+<span id="cb44-16"><a href="choosing-priors-part-ii.html#cb44-16" aria-hidden="true" tabindex="-1"></a>null_prior <span class="ot">&lt;-</span> <span class="fu">prior</span>(<span class="at">family =</span> <span class="st">&quot;point&quot;</span>, <span class="at">point =</span> <span class="dv">0</span>)</span>
+<span id="cb44-17"><a href="choosing-priors-part-ii.html#cb44-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-18"><a href="choosing-priors-part-ii.html#cb44-18" aria-hidden="true" tabindex="-1"></a><span class="co"># weight likelihood by prior</span></span>
+<span id="cb44-19"><a href="choosing-priors-part-ii.html#cb44-19" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> data_model <span class="sc">*</span> alt_prior</span>
+<span id="cb44-20"><a href="choosing-priors-part-ii.html#cb44-20" aria-hidden="true" tabindex="-1"></a>m0 <span class="ot">&lt;-</span> data_model <span class="sc">*</span> null_prior</span>
+<span id="cb44-21"><a href="choosing-priors-part-ii.html#cb44-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-22"><a href="choosing-priors-part-ii.html#cb44-22" aria-hidden="true" tabindex="-1"></a><span class="co"># take the intergal of each weighted likelihood</span></span>
+<span id="cb44-23"><a href="choosing-priors-part-ii.html#cb44-23" aria-hidden="true" tabindex="-1"></a><span class="co"># and divide them</span></span>
+<span id="cb44-24"><a href="choosing-priors-part-ii.html#cb44-24" aria-hidden="true" tabindex="-1"></a>bf <span class="ot">&lt;-</span> <span class="fu">integral</span>(m1) <span class="sc">/</span> <span class="fu">integral</span>(m0)</span>
+<span id="cb44-25"><a href="choosing-priors-part-ii.html#cb44-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-26"><a href="choosing-priors-part-ii.html#cb44-26" aria-hidden="true" tabindex="-1"></a><span class="co"># get a verbal description of the Bayes factor</span></span>
+<span id="cb44-27"><a href="choosing-priors-part-ii.html#cb44-27" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(bf)</span></code></pre></div>
+<pre><code>## Bayes factor
+## Using the levels from Wagenmakers et al (2017)
+##  A BF of 0.1349 indicates:
+##  Moderate evidence</code></pre>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="choosing-priors-part-i.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": [["bayes_notes.pdf", "pdf"]],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

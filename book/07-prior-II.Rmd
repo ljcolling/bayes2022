@@ -184,7 +184,7 @@ less likely to be larger. How might we represent this idea? One way is with a
 half normal distribution scaled according to the original finding. That is,
 with a normal distribution centred at 0, and with a standard deviation of 1.26
 (that is, the magnitude of the original effect). Furthermore, we'll limit the
-distribution to be between the values of $0$ and $+\infin$ (because we have a
+distribution to be between the values of $0$ and $+\infty$ (because we have a
 directional hypothesis).
 
 ```{r}
@@ -282,7 +282,7 @@ that all our priors were truncated at one end at 0. But sometimes we don't
 have directional hypotheses. Instead, we might have non-directional
 hypotheses. If we have non-directional hypotheses then we can use a *full*
 normal distribution, rather than one that's been limited to be between $0$
-and $+\infin$. 
+and $+\infty$. 
 
 Furthermore, it is also not necessary to have normal distributions centred
 at 0. We might use a normal distribution centred at some other value to
