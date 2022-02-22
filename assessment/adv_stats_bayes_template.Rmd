@@ -1,0 +1,43 @@
+---
+title: "Advanced Statistical Methods"
+subtitle: "Bayesian Statistics"
+author: "Candiate Number: xxxx"
+date: "21/02/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, error = TRUE)
+
+if ("xfun" %in% row.names(installed.packages()) == FALSE) {
+  install.packages("xfun")
+}
+
+xfun::pkg_attach(
+  c(
+    "tidyverse",
+    "magrittr",
+    "bayesplay",
+    "knitr",
+    "effsize",
+    "bayesplay"
+  ),
+  install = TRUE
+)
+```
+
+## Part 1
+
+```{r load the data}
+# This code chunk will load the data into a tibble called df
+
+df <- readr::read_csv("https://files.mindsci.net/amas.csv",
+  show_col_type = FALSE
+)
+```
+
+
+
+## Part 2
+
+

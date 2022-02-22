@@ -1,0 +1,123 @@
+---
+title: "978C8: Advanced Statistical Methods in Psychology"
+subtitle: "Assignment 2"
+author: "Lincoln Colling"
+output:
+  tufte::tufte_html: default
+urlcolor: blue
+---
+
+# Part 1 
+
+A researcher was interested in whether there is a gender difference in
+maths anxiety scores. They predict women would have higher scores than
+men. They measure maths anxiety using the aMAS score (which assigns scores
+from 9 to 45). The data they find is available on `amas.csv` on canvas. The
+researcher expects to see this difference because previous studies have
+shown that on average there is a difference of 5.5 points between men and
+women. The researcher decides to analyse their data in several ways. 
+
+1.  With a uniform prior (on H1) ranging from the minimum possible difference
+    between the two groups to the maximum possible difference between the two
+    groups 
+
+2.  With a half-normal prior (on H1) centered at zero and scaled according
+    to the estimate (of 5.5) obtained from the previous literature. 
+
+3.  Using a "default" prior (on H1).
+
+For the null hypothesis (H0) they decide to use a point null at 0. Carry
+out the analyses as specified above. 
+
+For each analysis you should specify the likelihood and the priors and
+calculate the corresponding Bayes factors. Provide an interpretation of
+the results. You can include any plots you think are relevant, and you
+should include all the corresponding R code. 
+
+# Part 2 
+
+Choose one finding from the literature in an area of your interest. Pick a
+finding that has employed a frequentist test (for example, a *t*-test) and
+provide a Bayesian re-analysis of the result. You can choose any priors you
+think are appropriate. However, you should provide some explanation of your
+reasoning.
+
+Compare the results of the frequentist test to your Bayesian re-analysis.
+You can include any plots you think are relevant, and you should include
+all the corresponding R code. 
+
+
+# Some useful formulas
+
+## Calculate the effect size for the one sample case
+
+$$d = \frac{\mathrm{m}}{\mathrm{s}},$$
+
+where $\mathrm{m}$ is the mean of the sample, and $\mathrm{s}$ is the estimate
+of the population $\sigma$ that has been calculated from the sample.
+
+## Calculate the effect size for the two sample case
+
+
+$$d = \frac{\mathrm{m}_1 - \mathrm{m}_2}{\mathrm{s}_\mathrm{pooled}},$$
+
+where $\mathrm{s}_\mathrm{pooled}$ is given as follows:
+
+$$\mathrm{s}_\mathrm{pooled} = \sqrt{\frac{(\mathrm{n}_1 - 1)\mathrm{s}^2_1 + (\mathrm{n}_2 - 1)\mathrm{s}^2_2}{\mathrm{n}_1 + \mathrm{n}_2 - 2}},$$
+
+## Calculate the standard error (standard deviation of the mean)
+
+$$\mathrm{se} = \frac{\mathrm{s}}{\mathrm{\sqrt{n}}},$$
+
+Where $\mathrm{n}$ is the sample size.
+
+## Calculate the standard error for two groups
+
+$$\mathrm{se} = \mathrm{s}_\mathrm{pooled} \cdot{} \sqrt{\tfrac{1}{\mathrm{n}_1} + \tfrac{1}{\mathrm{n}_2}}$$
+
+## Calculate the standard error from a *t* value
+
+$$t=\frac{\mathrm{m}}{\mathrm{se}}$$
+
+# Some useful `R` functions 
+
+## Compute the mean of a vector of numbers `x`.
+
+```r
+mean(x)
+```
+
+## Compute the standard deviation of a vector of numbers `x`
+
+```r
+sd(x)
+```
+
+## Compute the effect size of the difference between groups
+
+If you have data arranged as follows:
+
+| Subject ID  | Group ID  | Value  |
+|-------------|---------- |--------|
+| 01          | group 1   | 4      |
+| 02          | group 2   | 7      |
+
+Where the data is in a tibble called `df`, the group id column is labelled `f`,
+and the column holding the values is labelled `x`, then the effect size can be
+computed with the `effsize` package as follows.
+
+```r
+effsize::cohen.d(df$x, df$f)$estimate
+```
+
+Remember to ensure that the package is installed before using it.
+
+# Assessment template
+
+You can download the assessment template using the link below. The template
+will ensure that all the data and the correct packages are loaded. You can
+submit the template when you submit the assessment; however, you don't have to
+use the template.
+
+[Download adv_stats_bayes_template.Rmd](data:text/x-markdown;base64,LS0tCnRpdGxlOiAiQWR2YW5jZWQgU3RhdGlzdGljYWwgTWV0aG9kcyIKc3VidGl0bGU6ICJCYXllc2lhbiBTdGF0aXN0aWNzIgphdXRob3I6ICJDYW5kaWF0ZSBOdW1iZXI6IHh4eHgiCmRhdGU6ICIyMS8wMi8yMDIyIgpvdXRwdXQ6IGh0bWxfZG9jdW1lbnQKLS0tCgpgYGB7ciBzZXR1cCwgaW5jbHVkZT1GQUxTRX0Ka25pdHI6Om9wdHNfY2h1bmskc2V0KGVjaG8gPSBUUlVFLCBlcnJvciA9IFRSVUUpCgppZiAoInhmdW4iICVpbiUgcm93Lm5hbWVzKGluc3RhbGxlZC5wYWNrYWdlcygpKSA9PSBGQUxTRSkgewogIGluc3RhbGwucGFja2FnZXMoInhmdW4iKQp9Cgp4ZnVuOjpwa2dfYXR0YWNoKAogIGMoCiAgICAidGlkeXZlcnNlIiwKICAgICJtYWdyaXR0ciIsCiAgICAiYmF5ZXNwbGF5IiwKICAgICJrbml0ciIsCiAgICAiZWZmc2l6ZSIsCiAgICAiYmF5ZXNwbGF5IgogICksCiAgaW5zdGFsbCA9IFRSVUUKKQpgYGAKCiMjIFBhcnQgMQoKYGBge3IgbG9hZCB0aGUgZGF0YX0KIyBUaGlzIGNvZGUgY2h1bmsgd2lsbCBsb2FkIHRoZSBkYXRhIGludG8gYSB0aWJibGUgY2FsbGVkIGRmCgpkZiA8LSByZWFkcjo6cmVhZF9jc3YoImh0dHBzOi8vZmlsZXMubWluZHNjaS5uZXQvYW1hcy5jc3YiLAogIHNob3dfY29sX3R5cGUgPSBGQUxTRQopCmBgYAoKCgojIyBQYXJ0IDIKCgo=){download="adv_stats_bayes_template.Rmd"}
+
