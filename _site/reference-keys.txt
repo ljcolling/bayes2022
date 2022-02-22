@@ -43,3 +43,6 @@ representing-predictions-with-a-uniform-prior
 representing-predictions-with-a-half-normal-prior
 representing-predictions-with-the-normal-prior
 how-do-i-know-what-my-theory-predicts
+final-thoughts-uncertainty-and-belief
+uncertainty-about-priors
+beliefs-are-updated-by-evidence
