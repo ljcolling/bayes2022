@@ -15,5 +15,5 @@ install.pacakges("bayesplay")
 
 Additionally, analyses can be performed with the **Bayesplay-Web** app,
 which is available at
-[bayesplay.mindsci.net](https://bayesplay.mindsci.net).
+[bayesplay.colling.net.nz](https://bayesplay.colling.net.nz).
 
